@@ -4,14 +4,14 @@
   <title>Aravind | Asset Operations</title>
 
   <!-- Inter Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* NOHEMI FONT (your uploaded files) */
+    /* NOHEMI - THINNER */
     @font-face {
       font-family: 'Nohemi';
-      src: url('Nohemi-Bold-BF6438cc577b524.woff') format('woff');
-      font-weight: 700;
+      src: url('Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');
+      font-weight: 500;
     }
 
     @font-face {
@@ -20,82 +20,63 @@
       font-weight: 600;
     }
 
-    @font-face {
-      font-family: 'Nohemi';
-      src: url('Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');
-      font-weight: 500;
-    }
-
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
       background: #ffffff;
       color: #111;
-      line-height: 1.75;
+      font-family: "Inter", -apple-system, sans-serif;
+      line-height: 1.8;
     }
 
-    /* HERO SECTION */
-    .hero {
-      background: #e9dff0;
-      margin: 40px;
-      border-radius: 20px;
+    .container {
+      max-width: 720px;
+      margin: auto;
       padding: 80px 20px;
     }
 
-    .hero-inner {
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .hero h1 {
+    h1 {
       font-family: 'Nohemi', sans-serif;
-      font-size: 56px;
-      font-weight: 700;
+      font-weight: 500; /* thinner */
+      font-size: 52px;
       line-height: 1.2;
-      color: #0f2a2a;
-      letter-spacing: -1px;
-    }
-
-    /* CONTENT */
-    .container {
-      max-width: 780px;
-      margin: auto;
-      padding: 40px 20px 80px;
+      letter-spacing: -0.8px;
+      margin-bottom: 20px;
     }
 
     .meta {
       color: #666;
       font-size: 14px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+    }
+
+    p {
+      font-size: 19px; /* bigger text */
+      color: #222;
+      margin-bottom: 22px;
     }
 
     h2 {
       font-family: 'Nohemi', sans-serif;
-      font-size: 24px;
-      margin-top: 50px;
-      color: #111;
-    }
-
-    p {
-      font-size: 17px;
-      color: #333;
-      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 26px;
+      margin-top: 60px;
+      margin-bottom: 10px;
     }
 
     ul {
-      padding-left: 20px;
-      margin-bottom: 20px;
-      color: #333;
+      padding-left: 22px;
+      margin-bottom: 22px;
     }
 
     li {
+      font-size: 18px;
       margin-bottom: 8px;
     }
 
     hr {
       border: none;
       height: 1px;
-      background: #e5e5e5;
+      background: #eee;
       margin: 40px 0;
     }
   </style>
@@ -103,18 +84,11 @@
 
 <body>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-inner">
-      <h1>
-        A Day in Asset Operations.<br>
-        What Actually Happens Behind the Scenes.
-      </h1>
-    </div>
-  </div>
-
-  <!-- ARTICLE -->
   <div class="container">
+
+    <h1>
+      A Day in Asset Operations — What Actually Happens Behind the Scenes
+    </h1>
 
     <div class="meta">
       By Aravind · Asset Operations Intern · Chennai
@@ -126,15 +100,41 @@
 
     <p>Behind every transaction is a structured operational layer that ensures money moves correctly, risks are managed, compliance is maintained, and every stakeholder stays aligned.</p>
 
+    <p>Working in asset operations has shown me that the real complexity of fintech lies not in what users see, but in everything that happens behind the scenes.</p>
+
     <hr>
 
-    <h2>Understanding the deal comes first</h2>
-    <p>Every transaction begins with clarity—stakeholders, fund flow, timelines, and obligations.</p>
+    <h2>It starts with understanding the deal, not executing it</h2>
 
-    <h2>Financial model creation</h2>
-    <p>Financial models help structure deals, validate returns, and ensure assumptions align with reality.</p>
+    <p>Before anything is processed, the first priority is clarity.</p>
 
-    <h2>Agreement initiation</h2>
+    <p>Every transaction is part of a broader deal structure:</p>
+
+    <ul>
+      <li>Who the stakeholders are</li>
+      <li>How funds are expected to flow</li>
+      <li>What the timelines look like</li>
+      <li>What obligations each party holds</li>
+    </ul>
+
+    <p>Execution without context is a risk. So the day begins by aligning on the structure.</p>
+
+    <h2>Financial models define the deal</h2>
+
+    <p>Financial modeling is not just about numbers—it defines how the deal works.</p>
+
+    <ul>
+      <li>Understanding returns</li>
+      <li>Structuring deals</li>
+      <li>Validating assumptions</li>
+    </ul>
+
+    <p>Even small inconsistencies can create larger operational issues later.</p>
+
+    <h2>Documentation makes everything enforceable</h2>
+
+    <p>Before funds move, documentation must be in place:</p>
+
     <ul>
       <li>Discounting Agreements</li>
       <li>Indemnity Bonds</li>
@@ -142,29 +142,63 @@
       <li>Term Sheets</li>
     </ul>
 
-    <h2>VBA creation and KYC</h2>
-    <p>Virtual Bank Accounts enable structured tracking of funds, while KYC ensures compliance.</p>
+    <p>These define responsibilities, risks, and expectations.</p>
 
-    <h2>Vendor & asset setup</h2>
+    <h2>VBA creation and KYC</h2>
+
+    <p>Virtual Bank Accounts (VBAs) enable structured tracking of funds.</p>
+
+    <p>KYC ensures all parties are verified and compliant.</p>
+
+    <h2>Backend setup</h2>
+
     <ul>
       <li>Vendor ID creation</li>
       <li>Asset card creation</li>
     </ul>
 
+    <p>This ensures every transaction is tracked properly across systems.</p>
+
     <h2>Fund flow coordination</h2>
-    <p>Ensuring correct allocation of funds and alignment with finance teams.</p>
+
+    <p>Execution involves aligning with finance teams and ensuring correct allocation of funds.</p>
+
+    <p>Precision is critical at this stage.</p>
 
     <h2>TDS and compliance</h2>
-    <p>Managing deductions and ensuring regulatory requirements are met.</p>
+
+    <p>Transactions must also meet regulatory requirements.</p>
+
+    <ul>
+      <li>Correct deductions</li>
+      <li>Compliance tracking</li>
+    </ul>
 
     <h2>Visibility and communication</h2>
-    <p>Providing stakeholders with clarity on balances, statements, and transactions.</p>
+
+    <p>Stakeholders require clarity on balances, statements, and transactions.</p>
+
+    <p>Providing this builds trust.</p>
+
+    <h2>Handling real-world challenges</h2>
+
+    <ul>
+      <li>Delays in approvals</li>
+      <li>Data mismatches</li>
+      <li>Missing documentation</li>
+    </ul>
+
+    <p>A key part of the role is navigating these without disruption.</p>
 
     <h2>What I’ve learned</h2>
-    <p>Asset operations sits at the intersection of finance, compliance, and execution—ensuring everything works seamlessly in the background.</p>
+
+    <p>Asset operations sits at the intersection of finance, compliance, and execution.</p>
+
+    <p>It requires structured thinking, attention to detail, and strong communication.</p>
 
     <h2>Closing perspective</h2>
-    <p>Fintech may feel instant on the surface, but behind it is a coordinated system of processes and decisions that make it work.</p>
+
+    <p>Fintech may feel instant to users, but behind it is a carefully coordinated system that makes it work.</p>
 
   </div>
 
