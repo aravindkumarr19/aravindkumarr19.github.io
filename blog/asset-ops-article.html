@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Day in Asset Operations — Aravind Kumar R</title>
+  <meta name="description" content="What actually happens behind the scenes in fintech asset operations — financial models, legal docs, fund flows, and compliance." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    @font-face { font-family:'Nohemi'; src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff'); font-weight:400; }
+    @font-face { font-family:'Nohemi'; src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff'); font-weight:500; }
+    @font-face { font-family:'Nohemi'; src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff'); font-weight:600; }
+
+    :root {
+      --teal:#0f2a2a; --lavender:#ede8f5; --lavender-deep:#d6cce8;
+      --white:#ffffff; --off:#f7f7f5; --muted:#666; --border:#e5e5e5;
+    }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',sans-serif; background:var(--white); color:#111; line-height:1.8; }
+    a { text-decoration:none; color:inherit; }
+
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      background:rgba(255,255,255,0.92); backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+      padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px;
+    }
+    .nav-logo { font-family:'Nohemi',sans-serif; font-weight:500; font-size:18px; color:var(--teal); }
+    .nav-links-right { display:flex; gap:24px; align-items:center; }
+    .nav-links-right a { font-size:14px; font-weight:500; color:var(--muted); transition:color 0.2s; }
+    .nav-links-right a:hover { color:var(--teal); }
+
+    /* HERO */
+    .hero {
+      background:var(--white);
+      padding:100px 24px 70px;
+      display:flex;
+      justify-content:center;
+    }
+    .hero-card {
+      position:relative;
+      background:var(--lavender);
+      border-radius:40px;
+      max-width:1100px; width:100%;
+      padding:90px 60px;
+      text-align:center;
+      overflow:visible;
+    }
+    .hero-card::before,.hero-card::after,.corner-tr,.corner-bl {
+      content:''; position:absolute; width:110px; height:110px;
+      background:var(--white); border-radius:50%;
+    }
+    .hero-card::before { top:-28px; left:-28px; }
+    .hero-card::after  { bottom:-28px; right:-28px; }
+    .corner-tr { top:-28px; right:-28px; }
+    .corner-bl { bottom:-28px; left:-28px; }
+
+    .hero h1 {
+      font-family:'Nohemi',sans-serif; font-weight:400;
+      font-size:52px; line-height:1.15; letter-spacing:-0.5px;
+      max-width:820px; margin:0 auto; color:var(--teal);
+      position:relative; z-index:1;
+    }
+
+    .container { max-width:760px; margin:auto; padding:60px 20px 100px; }
+    .meta { color:var(--muted); font-size:14px; margin-bottom:40px; text-align:center; display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
+    .meta-tag { background:var(--lavender); color:var(--teal); padding:4px 12px; border-radius:100px; font-size:12px; font-weight:600; }
+
+    p { font-size:18px; margin-bottom:22px; color:#444; }
+    h2 { font-family:'Nohemi',sans-serif; font-weight:500; font-size:34px; margin-top:60px; margin-bottom:12px; color:var(--teal); }
+    ul { padding-left:22px; margin-bottom:22px; }
+    li { font-size:18px; margin-bottom:8px; color:#444; }
+    hr { border:none; height:1px; background:#eee; margin:50px 0; }
+    strong { color:var(--teal); }
+
+    .back-link {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:14px; font-weight:500; color:var(--muted);
+      margin-bottom:40px; transition:color 0.2s;
+    }
+    .back-link:hover { color:var(--teal); }
+
+    footer {
+      background:var(--teal); padding:24px 40px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    footer p { font-size:13px; color:rgba(255,255,255,0.4); }
+    footer a { color:rgba(255,255,255,0.5); font-size:13px; }
+    footer a:hover { color:white; }
+
+    @media(max-width:768px) {
+      nav { padding:0 20px; }
+      .hero { padding:80px 16px 50px; }
+      .hero-card { padding:60px 28px; border-radius:24px; }
+      .hero-card::before,.hero-card::after,.corner-tr,.corner-bl { width:70px;height:70px; }
+      .hero-card::before { top:-18px;left:-18px; }
+      .hero-card::after  { bottom:-18px;right:-18px; }
+      .corner-tr { top:-18px;right:-18px; }
+      .corner-bl { bottom:-18px;left:-18px; }
+      .hero h1 { font-size:30px; }
+      .container { padding:40px 15px 70px; }
+      p,li { font-size:16px; }
+      h2 { font-size:24px; }
+      footer { flex-direction:column; gap:10px; text-align:center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-logo">Aravind Kumar R</div>
+    <div class="nav-links-right">
+      <a href="index.html">← All Writing</a>
+      <a href="../index.html">Portfolio</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-card">
+      <div class="corner-tr"></div>
+      <div class="corner-bl"></div>
+      <h1>A Day in Asset Operations — What Actually Happens Behind the Scenes</h1>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="meta">
+      <span>By Aravind Kumar R</span>
+      <span>·</span>
+      <span>Asset Operations Intern · BetterInvest</span>
+      <span>·</span>
+      <span>Chennai</span>
+      <span class="meta-tag">Fintech · Operations</span>
+    </div>
+
+    <p>Most people associate fintech with seamless apps, instant transactions, and clean user interfaces. The experience is deliberately frictionless — a few taps, and money moves. It feels almost effortless.</p>
+    <p>But what users experience is only the surface layer of a far more complex system.</p>
+    <p>Behind every transaction is a structured operational framework that ensures funds move correctly, risks are identified and contained, regulatory compliance is maintained, and every stakeholder across the chain remains aligned. This framework doesn't build itself — it's managed, monitored, and continuously refined by the people working in operations.</p>
+    <p>Working as an Asset Operations Intern has given me a firsthand look at this layer. And it has fundamentally changed how I think about fintech — not as a product, but as a precision system where the real complexity lives not in what users see, but in everything that happens before, during, and after each transaction.</p>
+
+    <hr>
+
+    <h2>It starts with understanding the deal, not executing it</h2>
+    <p>The first thing I learned in asset operations is that execution without context is a liability. Before a single transaction is processed, the priority is clarity — a complete understanding of the deal structure that governs it.</p>
+    <p>Every deal involves multiple dimensions that must be thoroughly mapped before operations can begin:</p>
+    <ul>
+      <li>Who the counterparties and stakeholders are, and what their respective roles entail</li>
+      <li>How funds are expected to flow — directionality, sequencing, and timing</li>
+      <li>What contractual obligations each party holds, and under what conditions they activate</li>
+      <li>What the risk exposure looks like at each stage of the transaction lifecycle</li>
+    </ul>
+    <p>Skipping this step creates downstream problems that are far more expensive to resolve than the time spent upfront understanding the structure. In practice, this means the morning often begins not with processing, but with reading — reviewing deal notes, aligning with stakeholders, and ensuring everyone is working from the same version of the truth.</p>
+
+    <h2>Financial models define the deal</h2>
+    <p>Financial modeling in an operations context is less about building valuation models from scratch and more about deeply understanding the ones that drive the deals you're executing. The model is the source of truth — it tells you what returns are expected, how the structure is designed to perform under different scenarios, and what assumptions are baked into the terms you're operationalizing.</p>
+    <p>On a day-to-day basis, this involves:</p>
+    <ul>
+      <li>Reviewing deal models to validate that operational inputs — disbursement amounts, timelines, allocation splits — are consistent with agreed terms</li>
+      <li>Identifying discrepancies between modeled assumptions and real-world data before they propagate into live transactions</li>
+      <li>Working cross-functionally with finance and structuring teams to flag anomalies early</li>
+    </ul>
+    <p>Even a small inconsistency — a misaligned repayment schedule, an incorrect IRR assumption, a miscalculated tranche — can cascade into significant operational and financial issues if not caught at this stage. Precision is not optional; it's the baseline expectation.</p>
+
+    <h2>Documentation makes everything enforceable</h2>
+    <p>In financial operations, if it isn't documented, it doesn't exist. Documentation is the foundation that makes every deal legally enforceable, operationally traceable, and audit-ready at any point in time.</p>
+    <p>Before funds move, a complete set of agreements must be in place and reviewed:</p>
+    <ul>
+      <li><strong>Discounting Agreements</strong> — outlining the terms under which receivables or instruments are discounted</li>
+      <li><strong>Indemnity Bonds</strong> — establishing liability protections and the conditions under which they apply</li>
+      <li><strong>Guarantee Agreements</strong> — defining the scope and limits of guarantees extended by each party</li>
+      <li><strong>Term Sheets</strong> — capturing the commercial terms agreed upon before formal documentation is finalized</li>
+    </ul>
+    <p>Managing this documentation isn't purely administrative work — it requires a working understanding of what each document is meant to protect, and what happens operationally if a clause is ambiguous, missing, or inconsistent with another agreement in the same deal.</p>
+
+    <h2>VBA creation and KYC</h2>
+    <p>Virtual Bank Accounts (VBAs) are one of the key operational tools in structured finance. Rather than routing all funds through a single account and reconciling later, VBAs allow each deal, counterparty, or asset to have a dedicated account structure — making fund tracking precise, automated, and auditable.</p>
+    <p>Alongside this, KYC (Know Your Customer) processes ensure that every counterparty, vendor, and stakeholder interacting with the platform is verified, documented, and compliant with regulatory requirements. This is not a one-time exercise — KYC data must be kept current, and any lapses can trigger compliance escalations or delay disbursements.</p>
+
+    <h2>Backend setup</h2>
+    <p>Before a deal can go live, the internal systems must reflect its structure accurately. This backend configuration work is foundational — it determines how every subsequent transaction, reconciliation, and report is generated.</p>
+    <ul>
+      <li><strong>Vendor ID creation</strong> — registering counterparties in the system with the correct entity details, bank information, and documentation links</li>
+      <li><strong>Asset card creation</strong> — building the operational record for each asset or deal, capturing key parameters that downstream systems will use to process and track activity</li>
+    </ul>
+
+    <h2>Fund flow coordination</h2>
+    <p>Fund flow is where the operational work becomes most visible — and most consequential. Once all the upstream preparation is complete, the actual movement of money must be orchestrated with precision.</p>
+    <p>This involves close coordination with internal finance teams to ensure disbursements are timed correctly, amounts match agreed terms, and allocation logic is applied consistently. It also means maintaining real-time awareness of incoming repayments, collections, and any deviations from expected schedules.</p>
+
+    <h2>TDS and compliance</h2>
+    <p>Every transaction in India's financial ecosystem carries a regulatory dimension, and in asset operations, TDS (Tax Deducted at Source) compliance is a recurring responsibility that runs parallel to every disbursement and collection.</p>
+    <p>This means ensuring that the correct TDS rates are applied based on instrument type, counterparty category, and applicable sections of the Income Tax Act — and that certificates and documentation are maintained and made available to counterparties within statutory timelines.</p>
+
+    <h2>Visibility and communication</h2>
+    <p>One of the more underappreciated aspects of asset operations is stakeholder communication. Investors, counterparties, and internal teams all rely on operations to provide accurate, timely information about the deals they're involved in.</p>
+    <p>Good communication in operations is not just about answering questions — it's about anticipating them, and proactively providing the clarity that prevents confusion from arising in the first place.</p>
+
+    <h2>Handling real-world challenges</h2>
+    <p>No operational day unfolds exactly as planned. The most common challenges encountered include:</p>
+    <ul>
+      <li><strong>Delays in approvals</strong> — internal or external bottlenecks that compress disbursement timelines</li>
+      <li><strong>Data mismatches</strong> — discrepancies between systems, counterparty records, or deal documents</li>
+      <li><strong>Missing or incomplete documentation</strong> — gaps that surface at critical moments and must be addressed without creating downstream delays</li>
+    </ul>
+
+    <h2>What I've learned</h2>
+    <p>Asset operations sits at the intersection of finance, compliance, technology, and execution. It demands a combination of skills that are rarely taught together — financial literacy, regulatory awareness, systems thinking, and meticulous attention to detail — all applied simultaneously in a fast-moving environment.</p>
+    <p>The role has taught me that operational excellence is not about following processes mechanically. It's about understanding why each process exists, what it's designed to protect against, and how to adapt when the situation requires judgment rather than just procedure.</p>
+
+    <h2>Closing perspective</h2>
+    <p>Fintech may feel instant to the people who use it — and that seamlessness is genuinely valuable. But it is the product of an enormous amount of careful, coordinated, unglamorous work happening in the background, every single day.</p>
+    <p>Asset operations is that background. It's the layer that makes the front end possible — the system of checks, structures, and people that ensures every transaction does exactly what it's supposed to do, every time.</p>
+
+    <hr>
+    <a href="index.html" class="back-link">← Back to all writing</a>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Aravind Kumar R</p>
+    <a href="../index.html">Portfolio →</a>
+  </footer>
+
+</body>
+</html>
