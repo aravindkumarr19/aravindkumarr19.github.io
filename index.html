@@ -7,92 +7,134 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #ffffff;
-      color: #111;
-      line-height: 1.7;
+    /* NOHEMI FONT (your uploaded files) */
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('Nohemi-Bold-BF6438cc577b524.woff') format('woff');
+      font-weight: 700;
     }
 
-    .container {
-      max-width: 750px;
-      margin: auto;
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff');
+      font-weight: 600;
+    }
+
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');
+      font-weight: 500;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+      background: #ffffff;
+      color: #111;
+      line-height: 1.75;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: #e9dff0;
+      margin: 40px;
+      border-radius: 20px;
       padding: 80px 20px;
     }
 
-    h1 {
-      font-size: 48px;
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-      margin-bottom: 20px;
+    .hero-inner {
+      max-width: 900px;
+      margin: auto;
     }
 
-    .highlight {
-      color: #2563eb;
-      font-weight: 600;
+    .hero h1 {
+      font-family: 'Nohemi', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #0f2a2a;
+      letter-spacing: -1px;
+    }
+
+    /* CONTENT */
+    .container {
+      max-width: 780px;
+      margin: auto;
+      padding: 40px 20px 80px;
     }
 
     .meta {
       color: #666;
-      margin-bottom: 30px;
       font-size: 14px;
-    }
-
-    hr {
-      border: none;
-      height: 1px;
-      background: #e5e5e5;
-      margin: 30px 0;
+      margin-bottom: 30px;
     }
 
     h2 {
-      margin-top: 40px;
-      font-size: 20px;
+      font-family: 'Nohemi', sans-serif;
+      font-size: 24px;
+      margin-top: 50px;
       color: #111;
     }
 
     p {
       font-size: 17px;
       color: #333;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     ul {
-      margin-bottom: 18px;
+      padding-left: 20px;
+      margin-bottom: 20px;
       color: #333;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #e5e5e5;
+      margin: 40px 0;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <h1>
-      A Day in <span class="highlight">Asset Operations</span> — What Actually Happens Behind the Scenes
-    </h1>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>
+        A Day in Asset Operations.<br>
+        What Actually Happens Behind the Scenes.
+      </h1>
+    </div>
+  </div>
+
+  <!-- ARTICLE -->
+  <div class="container">
 
     <div class="meta">
       By Aravind · Asset Operations Intern · Chennai
     </div>
 
-    <p>Most people think fintech is about apps, UI, and transactions.</p>
+    <p>Most people associate fintech with seamless apps, instant transactions, and clean user interfaces.</p>
 
-    <p>But behind every transaction, there’s a layer of operations that keeps everything running smoothly.</p>
+    <p>But what users experience is only the surface.</p>
 
-    <p>Working in asset operations, I’ve realized the real work is often invisible—but critical.</p>
+    <p>Behind every transaction is a structured operational layer that ensures money moves correctly, risks are managed, compliance is maintained, and every stakeholder stays aligned.</p>
 
     <hr>
 
-    <h2>1. It starts with understanding the deal</h2>
-    <p>Every day begins with understanding the structure, stakeholders, and fund flow behind a deal.</p>
+    <h2>Understanding the deal comes first</h2>
+    <p>Every transaction begins with clarity—stakeholders, fund flow, timelines, and obligations.</p>
 
-    <h2>2. Financial model creation</h2>
-    <p>Creating and validating financial models helps in structuring deals and understanding returns.</p>
+    <h2>Financial model creation</h2>
+    <p>Financial models help structure deals, validate returns, and ensure assumptions align with reality.</p>
 
-    <h2>3. Agreement initiation</h2>
-    <p>This includes:</p>
+    <h2>Agreement initiation</h2>
     <ul>
       <li>Discounting Agreements</li>
       <li>Indemnity Bonds</li>
@@ -100,27 +142,31 @@
       <li>Term Sheets</li>
     </ul>
 
-    <h2>4. VBA creation and KYC</h2>
-    <p>Setting up Virtual Bank Accounts (VBAs) and completing KYC ensures proper tracking and compliance.</p>
+    <h2>VBA creation and KYC</h2>
+    <p>Virtual Bank Accounts enable structured tracking of funds, while KYC ensures compliance.</p>
 
-    <h2>5. Vendor and asset setup</h2>
+    <h2>Vendor & asset setup</h2>
     <ul>
       <li>Vendor ID creation</li>
       <li>Asset card creation</li>
     </ul>
 
-    <h2>6. Fund flow coordination</h2>
-    <p>Coordinating with finance teams to allocate and track funds correctly.</p>
+    <h2>Fund flow coordination</h2>
+    <p>Ensuring correct allocation of funds and alignment with finance teams.</p>
 
-    <h2>7. TDS and compliance</h2>
-    <p>Ensuring TDS deductions and compliance requirements are handled properly.</p>
+    <h2>TDS and compliance</h2>
+    <p>Managing deductions and ensuring regulatory requirements are met.</p>
 
-    <h2>8. Visibility and communication</h2>
-    <p>Providing updates, statements, and clarity to stakeholders.</p>
+    <h2>Visibility and communication</h2>
+    <p>Providing stakeholders with clarity on balances, statements, and transactions.</p>
 
     <h2>What I’ve learned</h2>
-    <p>Asset operations sits at the intersection of finance, compliance, and coordination.</p>
+    <p>Asset operations sits at the intersection of finance, compliance, and execution—ensuring everything works seamlessly in the background.</p>
+
+    <h2>Closing perspective</h2>
+    <p>Fintech may feel instant on the surface, but behind it is a coordinated system of processes and decisions that make it work.</p>
 
   </div>
+
 </body>
 </html>
