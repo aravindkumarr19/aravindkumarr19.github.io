@@ -6,8 +6,10 @@
   <!-- Inter Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    /* NOHEMI - THINNER */
+    /* NOHEMI (THINNER LOOK) */
     @font-face {
       font-family: 'Nohemi';
       src: url('Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');
@@ -23,42 +25,53 @@
     body {
       margin: 0;
       background: #ffffff;
-      color: #111;
       font-family: "Inter", -apple-system, sans-serif;
+      color: #111;
       line-height: 1.8;
     }
 
-    .container {
-      max-width: 720px;
-      margin: auto;
-      padding: 80px 20px;
+    /* HERO SECTION */
+    .hero {
+      background: #e9dff0;
+      padding: 100px 20px;
+      text-align: center;
     }
 
-    h1 {
+    .hero h1 {
       font-family: 'Nohemi', sans-serif;
-      font-weight: 500; /* thinner */
-      font-size: 52px;
-      line-height: 1.2;
-      letter-spacing: -0.8px;
-      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 60px;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      max-width: 900px;
+      margin: auto;
+      color: #0f2a2a;
+    }
+
+    /* ARTICLE CONTAINER */
+    .container {
+      max-width: 760px;
+      margin: auto;
+      padding: 60px 20px;
     }
 
     .meta {
       color: #666;
       font-size: 14px;
       margin-bottom: 40px;
+      text-align: center;
     }
 
     p {
-      font-size: 19px; /* bigger text */
-      color: #222;
+      font-size: 19px;
       margin-bottom: 22px;
+      color: #222;
     }
 
     h2 {
       font-family: 'Nohemi', sans-serif;
       font-weight: 500;
-      font-size: 26px;
+      font-size: 28px;
       margin-top: 60px;
       margin-bottom: 10px;
     }
@@ -77,18 +90,45 @@
       border: none;
       height: 1px;
       background: #eee;
-      margin: 40px 0;
+      margin: 50px 0;
+    }
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 15px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .container {
+        padding: 40px 15px;
+      }
+
+      p {
+        font-size: 17px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
-
+  <!-- HERO -->
+  <div class="hero">
     <h1>
       A Day in Asset Operations — What Actually Happens Behind the Scenes
     </h1>
+  </div>
+
+  <!-- ARTICLE -->
+  <div class="container">
 
     <div class="meta">
       By Aravind · Asset Operations Intern · Chennai
@@ -100,7 +140,7 @@
 
     <p>Behind every transaction is a structured operational layer that ensures money moves correctly, risks are managed, compliance is maintained, and every stakeholder stays aligned.</p>
 
-    <p>Working in asset operations has shown me that the real complexity of fintech lies not in what users see, but in everything that happens behind the scenes.</p>
+    <p>Working in asset operations has given me a much closer look at this layer—and made me realize that the real complexity of fintech lies not in what users see, but in everything that happens behind the scenes.</p>
 
     <hr>
 
