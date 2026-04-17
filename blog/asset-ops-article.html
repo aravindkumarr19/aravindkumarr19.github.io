@@ -29,31 +29,6 @@
       box-shadow:0 0 8px rgba(0,200,83,0.5);
     }
 
-    /* ─── CUSTOM CURSOR ─── */
-    .cursor-dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--navy);
-      position:fixed;top:0;left:0;
-      pointer-events:none;z-index:9998;
-      transform:translate(-50%,-50%);
-      transition:transform 0.1s ease, background 0.2s;
-      will-change:transform;
-    }
-
-    .cursor-dot.hover{background:var(--green);}
-    @media(hover:none){.cursor-dot,.cursor-ring{display:none;}}
-
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:100;
-      background:rgba(255,255,255,0.92); backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border);
-      padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px;
-    }
-    .nav-logo { font-family:'Nohemi',sans-serif; font-weight:500; font-size:18px; color:var(--teal); }
-    .nav-links-right { display:flex; gap:24px; align-items:center; }
-    .nav-links-right a { font-size:14px; font-weight:500; color:var(--muted); transition:color 0.2s; }
-    .nav-links-right a:hover { color:var(--teal); }
-
     /* HERO */
     .hero {
       background:var(--white);
