@@ -51,21 +51,7 @@
       transition:transform 0.1s ease, background 0.2s;
       will-change:transform;
     }
-    .cursor-ring{
-      width:32px;height:32px;border-radius:50%;
-      border:1.5px solid var(--navy);
-      position:fixed;top:0;left:0;
-      pointer-events:none;z-index:9997;
-      transform:translate(-50%,-50%);
-      transition:width 0.3s ease,height 0.3s ease,border-color 0.2s,opacity 0.2s;
-      will-change:transform;
-      opacity:0.6;
-    }
-    .cursor-ring.hover{
-      width:48px;height:48px;
-      border-color:var(--green);
-      opacity:1;
-    }
+
     .cursor-dot.hover{background:var(--green);}
     @media(hover:none){.cursor-dot,.cursor-ring{display:none;}}
 
