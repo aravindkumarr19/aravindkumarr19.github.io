@@ -14,7 +14,7 @@
     :root{
       --navy:#1e3a5f; --navy2:#162d4a;
       --amber:#e8a020; --amber2:#f5b840;
-      --green:#00C853; --green2:#00E676;
+      --green:#1a7a4a; --green2:#2d9e6b;
       --black:#0d0d0d;
       --white:#ffffff; --ink:#111111; --ink2:#333333;
       --muted:#6b7280; --border:#e8e8e8;
@@ -26,10 +26,64 @@
     html{scroll-behavior:smooth;overscroll-behavior:none;}
     body{
       font-family:'Inter',sans-serif;background:#fff;color:var(--ink);
-      line-height:1.7;overflow-x:hidden;cursor:none;
+      line-height:1.7;overflow-x:hidden;
     }
-    @media(hover:none){body{cursor:auto;}}
     a{text-decoration:none;color:inherit;}
+
+    /* ─── INTRO OVERLAY ─── */
+    #introOverlay{
+      position:fixed;inset:0;
+      background:#0b1320;
+      z-index:10000;
+      display:flex;align-items:center;justify-content:center;
+      transform:translateY(0);
+      transition:transform 0.55s cubic-bezier(0.76,0,0.24,1);
+      will-change:transform;
+    }
+    #introOverlay.exit{transform:translateY(-100%);}
+    #introContent{
+      text-align:center;
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity 0.2s ease, transform 0.2s ease;
+    }
+    #introContent.show{opacity:1;transform:translateY(0);}
+    #introNum{
+      font-family:'Nohemi',sans-serif;
+      font-size:clamp(80px,13vw,150px);
+      color:#ffffff;
+      line-height:1;
+      letter-spacing:-4px;
+    }
+    #introLabel{
+      font-size:12px;font-weight:700;
+      letter-spacing:3px;text-transform:uppercase;
+      color:rgba(255,255,255,0.38);
+      margin-top:14px;
+    }
+    #introSkip{
+      position:absolute;bottom:32px;right:40px;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.15);
+      color:rgba(255,255,255,0.3);
+      font-family:'Inter',sans-serif;
+      font-size:11px;font-weight:600;
+      letter-spacing:1.5px;text-transform:uppercase;
+      padding:7px 16px;border-radius:4px;
+      cursor:pointer;
+      transition:border-color 0.2s,color 0.2s;
+    }
+    #introSkip:hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.6);}
+    #introDots{
+      position:absolute;bottom:38px;left:50%;transform:translateX(-50%);
+      display:flex;gap:7px;
+    }
+    .intro-dot{
+      width:5px;height:5px;border-radius:50%;
+      background:rgba(255,255,255,0.18);
+      transition:background 0.3s;
+    }
+    .intro-dot.active{background:rgba(255,255,255,0.75);}
 
     /* ─── SCROLL PROGRESS ─── */
     .scroll-progress{
@@ -38,22 +92,8 @@
       z-index:9999;width:0%;
       transition:width 0.05s linear;
       border-radius:0 2px 2px 0;
-      box-shadow:0 0 8px rgba(0,200,83,0.5);
+      box-shadow:0 0 8px rgba(26,122,74,0.4);
     }
-
-    /* ─── CUSTOM CURSOR ─── */
-    .cursor-dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--navy);
-      position:fixed;top:0;left:0;
-      pointer-events:none;z-index:9998;
-      transform:translate(-50%,-50%);
-      transition:transform 0.1s ease, background 0.2s;
-      will-change:transform;
-    }
-
-    .cursor-dot.hover{background:var(--green);}
-    @media(hover:none){.cursor-dot,.cursor-ring{display:none;}}
 
     /* ─── NAV ─── */
     nav{
@@ -145,14 +185,14 @@
     }
     .hero-pill:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px);}
     .pulse-dot{
-      width:6px;height:6px;border-radius:50%;background:#22c55e;
-      box-shadow:0 0 0 0 rgba(34,197,94,0.4);
+      width:6px;height:6px;border-radius:50%;background:#1a7a4a;
+      box-shadow:0 0 0 0 rgba(26,122,74,0.4);
       animation:pulse-ring 2s infinite;
     }
     @keyframes pulse-ring{
-      0%{box-shadow:0 0 0 0 rgba(34,197,94,0.4);}
-      70%{box-shadow:0 0 0 8px rgba(34,197,94,0);}
-      100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}
+      0%{box-shadow:0 0 0 0 rgba(26,122,74,0.4);}
+      70%{box-shadow:0 0 0 8px rgba(26,122,74,0);}
+      100%{box-shadow:0 0 0 0 rgba(26,122,74,0);}
     }
     .hero-h1{
       font-family:'Nohemi',sans-serif;font-weight:400;
@@ -193,7 +233,6 @@
     .btn-outline:hover::before{transform:scaleX(1);}
     .btn-outline:hover{color:#fff;transform:translateY(-3px);box-shadow:0 12px 32px rgba(30,58,95,0.2);}
 
-    /* Ripple */
     .ripple-effect{
       position:absolute;border-radius:50%;
       background:rgba(255,255,255,0.35);
@@ -201,9 +240,7 @@
       animation:ripple-anim 0.6s linear;
       pointer-events:none;
     }
-    @keyframes ripple-anim{
-      to{transform:scale(4);opacity:0;}
-    }
+    @keyframes ripple-anim{to{transform:scale(4);opacity:0;}}
 
     /* ─── STAT ITEMS ─── */
     .hero-stats{display:flex;flex-direction:column;gap:10px;}
@@ -523,7 +560,7 @@
     }
     .cta-card::after{
       content:'';position:absolute;right:20px;bottom:-50px;width:120px;height:120px;
-      border-radius:50%;background:rgba(0,200,83,0.08);
+      border-radius:50%;background:rgba(26,122,74,0.1);
       animation:ctaPulse 4s ease-in-out infinite 2s;
     }
     @keyframes ctaPulse{
@@ -573,7 +610,6 @@
     .stagger.visible>*:nth-child(6){transition-delay:0.34s;}
     .stagger.visible>*:nth-child(7){transition-delay:0.40s;}
 
-    /* ─── MAGNETIC BUTTON WRAPPER ─── */
     .magnetic-wrap{display:inline-block;position:relative;}
 
     /* ─── MOBILE TOUCH FEEDBACK ─── */
@@ -588,7 +624,6 @@
         transition:transform 0.1s ease;
       }
       .tag:active{transform:scale(0.95);}
-      /* no float on mobile */
       .stat-item{animation:none !important;}
       .stat-item:hover{transform:none !important;}
     }
@@ -614,6 +649,7 @@
       .lead-grid{grid-template-columns:1fr 1fr;}
       footer{padding:18px 24px;flex-direction:column;gap:8px;text-align:center;}
       #contact{padding:64px 24px;}
+      #introSkip{bottom:24px;right:24px;}
     }
     @media(max-width:520px){
       .hero-h1{font-size:32px;}
@@ -621,17 +657,28 @@
       .cert-grid,.skills-grid,.lead-grid{grid-template-columns:1fr;}
       .inv-facts{grid-template-columns:1fr 1fr;}
       .big-num{font-size:80px;}
+      #introNum{font-size:72px;letter-spacing:-2px;}
     }
   </style>
 </head>
 <body>
 
+<!-- ─── INTRO OVERLAY ─── -->
+<div id="introOverlay">
+  <div id="introContent">
+    <div id="introNum">0</div>
+    <div id="introLabel">Automations Built</div>
+  </div>
+  <div id="introDots">
+    <div class="intro-dot active" id="dot0"></div>
+    <div class="intro-dot" id="dot1"></div>
+    <div class="intro-dot" id="dot2"></div>
+  </div>
+  <button id="introSkip">Skip</button>
+</div>
+
 <!-- Scroll Progress -->
 <div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- Custom Cursor -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
 <nav id="nav">
   <div class="nav-logo">Aravind Kumar R</div>
@@ -866,7 +913,7 @@
           <rect x="7" y="13" width="10" height="14" rx="2" fill="#1e3a5f" opacity="0.18"/>
           <rect x="21" y="13" width="10" height="6" rx="2" fill="#e8a020" opacity="0.65"/>
           <rect x="21" y="21" width="10" height="6" rx="2" fill="#1e3a5f" opacity="0.35"/>
-          <circle cx="33" cy="7" r="5" fill="#22c55e"/>
+          <circle cx="33" cy="7" r="5" fill="#1a7a4a"/>
           <line x1="31" y1="7" x2="35" y2="7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
           <line x1="33" y1="5" x2="33" y2="9" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
@@ -1050,79 +1097,111 @@
 
 <script>
 /* ─────────────────────────────────────────
+   INTRO ANIMATION
+───────────────────────────────────────── */
+(function(){
+  const overlay   = document.getElementById('introOverlay');
+  const content   = document.getElementById('introContent');
+  const numEl     = document.getElementById('introNum');
+  const labelEl   = document.getElementById('introLabel');
+  const skipBtn   = document.getElementById('introSkip');
+  const dots      = [
+    document.getElementById('dot0'),
+    document.getElementById('dot1'),
+    document.getElementById('dot2')
+  ];
+
+  const stats = [
+    { target:7,    suffix:'+', label:'Automations Built'         },
+    { target:1300, suffix:'',  label:'Newsletter Subscribers'    },
+    { target:3,    suffix:'',  label:'Years of Equity Investing' }
+  ];
+
+  let done = false;
+
+  function exitIntro(){
+    if(done) return;
+    done = true;
+    overlay.classList.add('exit');
+    setTimeout(()=>{ overlay.style.display='none'; }, 580);
+  }
+
+  skipBtn.addEventListener('click', exitIntro);
+
+  function setDot(i){
+    dots.forEach((d,idx)=>{ d.classList.toggle('active', idx===i); });
+  }
+
+  function countUp(target, suffix, duration, cb){
+    const start = performance.now();
+    (function step(now){
+      if(done) return;
+      const p    = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      numEl.textContent = Math.round(ease * target).toLocaleString() + suffix;
+      if(p < 1){ requestAnimationFrame(step); }
+      else { setTimeout(cb, 220); }
+    })(start);
+  }
+
+  function showStat(i){
+    if(done) return;
+    if(i >= stats.length){ exitIntro(); return; }
+    const s = stats[i];
+    setDot(i);
+    labelEl.textContent  = s.label;
+    numEl.textContent    = '0' + s.suffix;
+    content.classList.remove('show');
+    setTimeout(()=>{
+      if(done) return;
+      content.classList.add('show');
+      countUp(s.target, s.suffix, 320, ()=>{
+        if(done) return;
+        content.classList.remove('show');
+        setTimeout(()=> showStat(i+1), 160);
+      });
+    }, 80);
+  }
+
+  // Small initial delay so fonts have loaded
+  setTimeout(()=> showStat(0), 180);
+})();
+
+/* ─────────────────────────────────────────
    SCROLL PROGRESS BAR
 ───────────────────────────────────────── */
 const progressBar = document.getElementById('scrollProgress');
 function updateProgress(){
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  const scrollTop  = window.scrollY;
+  const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+  const pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
   progressBar.style.width = pct + '%';
 }
 window.addEventListener('scroll', updateProgress, {passive:true});
 
 /* ─────────────────────────────────────────
-   CUSTOM CURSOR (desktop only)
-───────────────────────────────────────── */
-const dot   = document.getElementById('cursorDot');
-const ring  = document.getElementById('cursorRing');
-const isTouchDevice = () => window.matchMedia('(hover:none)').matches;
-
-let mouseX = 0, mouseY = 0;
-let ringX  = 0, ringY  = 0;
-
-if(!isTouchDevice()){
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    dot.style.left  = mouseX + 'px';
-    dot.style.top   = mouseY + 'px';
-  });
-
-  // Smooth ring follow with lerp
-  function animateCursor(){
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    ring.style.left = ringX + 'px';
-    ring.style.top  = ringY + 'px';
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
-  // Cursor hover states
-  const hoverEls = document.querySelectorAll('a,button,.tag,.stat-item,.exp-card,.auto-card,.proj-card,.cert-card,.skill-col,.lead-card,.info-card,.inv-fact');
-  hoverEls.forEach(el => {
-    el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
-    el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
-  });
-}
-
-/* ─────────────────────────────────────────
    NAV SCROLL
 ───────────────────────────────────────── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
+window.addEventListener('scroll', ()=> nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
 
 /* ─────────────────────────────────────────
    HAMBURGER
 ───────────────────────────────────────── */
 const hb = document.getElementById('hamburger');
 const mm = document.getElementById('mobileMenu');
-hb.addEventListener('click', () => { hb.classList.toggle('open'); mm.classList.toggle('open'); });
+hb.addEventListener('click', ()=>{ hb.classList.toggle('open'); mm.classList.toggle('open'); });
 function closeMenu(){ hb.classList.remove('open'); mm.classList.remove('open'); }
 
 /* ─────────────────────────────────────────
    SCROLL REVEAL
 ───────────────────────────────────────── */
-const ro = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      e.target.classList.add('visible');
-      ro.unobserve(e.target);
-    }
+const ro = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); }
   });
-}, { threshold:0.08 });
-document.querySelectorAll('.reveal,.reveal-left,.stagger,.divider').forEach(el => ro.observe(el));
+},{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-left,.stagger,.divider').forEach(el=> ro.observe(el));
 
 /* ─────────────────────────────────────────
    HERO STAT COUNTERS
@@ -1130,42 +1209,42 @@ document.querySelectorAll('.reveal,.reveal-left,.stagger,.divider').forEach(el =
 function animCount(el){
   const target = parseInt(el.dataset.target);
   const suffix = el.dataset.suffix || '';
-  const dur = 1800;
-  const start = performance.now();
+  const dur    = 1800;
+  const start  = performance.now();
   (function step(now){
-    const p = Math.min((now - start) / dur, 1);
+    const p    = Math.min((now - start) / dur, 1);
     const ease = 1 - Math.pow(1 - p, 4);
     el.textContent = Math.round(ease * target).toLocaleString() + suffix;
     if(p < 1) requestAnimationFrame(step);
   })(start);
 }
-const cObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting){ animCount(e.target); cObs.unobserve(e.target); } });
-}, {threshold:0.5});
-document.querySelectorAll('.stat-num[data-target]').forEach(el => cObs.observe(el));
+const cObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ animCount(e.target); cObs.unobserve(e.target); } });
+},{threshold:0.5});
+document.querySelectorAll('.stat-num[data-target]').forEach(el=> cObs.observe(el));
 
 /* Investing counter */
-const invEl = document.getElementById('inv-counter');
-const invObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
+const invEl  = document.getElementById('inv-counter');
+const invObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
     if(e.isIntersecting){
       let n = 0;
-      const iv = setInterval(() => { invEl.textContent = ++n; if(n >= 3) clearInterval(iv); }, 350);
+      const iv = setInterval(()=>{ invEl.textContent = ++n; if(n >= 3) clearInterval(iv); }, 350);
       invObs.unobserve(e.target);
     }
   });
-}, {threshold:0.5});
+},{threshold:0.5});
 if(invEl) invObs.observe(invEl);
 
 /* ─────────────────────────────────────────
    HERO PARALLAX (bg text)
 ───────────────────────────────────────── */
 const heroBg = document.getElementById('heroBgText');
+const isTouchDevice = ()=> window.matchMedia('(hover:none)').matches;
 if(!isTouchDevice() && heroBg){
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    heroBg.style.transform = `translateY(calc(-50% + ${scrollY * 0.25}px))`;
-  }, {passive:true});
+  window.addEventListener('scroll',()=>{
+    heroBg.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.25}px))`;
+  },{passive:true});
 }
 
 /* ─────────────────────────────────────────
@@ -1175,21 +1254,17 @@ if(!isTouchDevice()){
   const tiltCards = document.querySelectorAll(
     '.exp-card,.auto-card,.proj-card,.cert-card,.skill-col,.lead-card,.info-card,.inv-fact,.stat-item'
   );
-
-  tiltCards.forEach(card => {
-    card.addEventListener('mousemove', e => {
+  tiltCards.forEach(card=>{
+    card.addEventListener('mousemove', e=>{
       const rect  = card.getBoundingClientRect();
       const cx    = rect.left + rect.width  / 2;
       const cy    = rect.top  + rect.height / 2;
       const dx    = (e.clientX - cx) / (rect.width  / 2);
       const dy    = (e.clientY - cy) / (rect.height / 2);
-      const tiltX = dy * -6;
-      const tiltY = dx *  6;
-      card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(4px)`;
+      card.style.transform = `perspective(800px) rotateX(${dy * -6}deg) rotateY(${dx * 6}deg) translateZ(4px)`;
       card.style.transition = 'transform 0.05s linear';
     });
-
-    card.addEventListener('mouseleave', () => {
+    card.addEventListener('mouseleave', ()=>{
       card.style.transform = '';
       card.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s';
     });
@@ -1200,18 +1275,16 @@ if(!isTouchDevice()){
    MAGNETIC BUTTONS (desktop only)
 ───────────────────────────────────────── */
 if(!isTouchDevice()){
-  document.querySelectorAll('.magnetic-wrap').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const rect   = btn.getBoundingClientRect();
-      const cx     = rect.left + rect.width  / 2;
-      const cy     = rect.top  + rect.height / 2;
-      const dx     = (e.clientX - cx) * 0.28;
-      const dy     = (e.clientY - cy) * 0.28;
-      btn.style.transform = `translate(${dx}px, ${dy}px)`;
+  document.querySelectorAll('.magnetic-wrap').forEach(btn=>{
+    btn.addEventListener('mousemove', e=>{
+      const rect = btn.getBoundingClientRect();
+      const dx   = (e.clientX - rect.left - rect.width  / 2) * 0.28;
+      const dy   = (e.clientY - rect.top  - rect.height / 2) * 0.28;
+      btn.style.transform  = `translate(${dx}px, ${dy}px)`;
       btn.style.transition = 'transform 0.15s ease';
     });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
+    btn.addEventListener('mouseleave', ()=>{
+      btn.style.transform  = '';
       btn.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
     });
   });
@@ -1220,19 +1293,15 @@ if(!isTouchDevice()){
 /* ─────────────────────────────────────────
    BUTTON RIPPLE EFFECT
 ───────────────────────────────────────── */
-document.querySelectorAll('.btn-solid,.btn-outline,.cta-btn,.nav-btn').forEach(btn => {
+document.querySelectorAll('.btn-solid,.btn-outline,.cta-btn,.nav-btn').forEach(btn=>{
   btn.addEventListener('click', function(e){
     const rect   = this.getBoundingClientRect();
     const size   = Math.max(rect.width, rect.height) * 2;
-    const x      = e.clientX - rect.left - size / 2;
-    const y      = e.clientY - rect.top  - size / 2;
     const ripple = document.createElement('span');
     ripple.className = 'ripple-effect';
-    ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
-    this.style.position = 'relative';
-    this.style.overflow = 'hidden';
+    ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;`;
     this.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 700);
+    setTimeout(()=> ripple.remove(), 700);
   });
 });
 
@@ -1243,51 +1312,38 @@ const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 function scramble(el){
   const original = el.textContent;
   let iter = 0;
-  const iv = setInterval(() => {
-    el.textContent = original.split('').map((c, i) => {
+  const iv = setInterval(()=>{
+    el.textContent = original.split('').map((c,i)=>{
       if(i < iter) return original[i];
       if(c === ' ') return ' ';
       return chars[Math.floor(Math.random() * chars.length)];
     }).join('');
-    iter += 1;
+    iter++;
     if(iter > original.length) clearInterval(iv);
   }, 35);
 }
-
-const eyebrowObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      scramble(e.target);
-      eyebrowObs.unobserve(e.target);
-    }
-  });
-}, {threshold:0.5});
-document.querySelectorAll('.eyebrow').forEach(el => eyebrowObs.observe(el));
+const eyebrowObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ scramble(e.target); eyebrowObs.unobserve(e.target); } });
+},{threshold:0.5});
+document.querySelectorAll('.eyebrow').forEach(el=> eyebrowObs.observe(el));
 
 /* ─────────────────────────────────────────
-   MOBILE TOUCH RIPPLE FEEDBACK
+   MOBILE TOUCH FEEDBACK
 ───────────────────────────────────────── */
 if(isTouchDevice()){
-  document.querySelectorAll('.exp-card,.auto-card,.proj-card,.cert-card,.skill-col,.lead-card,.info-card,.stat-item,.c-link').forEach(card => {
-    card.addEventListener('touchstart', function(e){
-      this.style.transition = 'transform 0.1s ease, box-shadow 0.1s ease';
-    }, {passive:true});
-    card.addEventListener('touchend', function(){
-      this.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease';
-    }, {passive:true});
+  document.querySelectorAll('.exp-card,.auto-card,.proj-card,.cert-card,.skill-col,.lead-card,.info-card,.stat-item,.c-link').forEach(card=>{
+    card.addEventListener('touchstart', function(){ this.style.transition='transform 0.1s ease,box-shadow 0.1s ease'; },{passive:true});
+    card.addEventListener('touchend',   function(){ this.style.transition='transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s ease'; },{passive:true});
   });
 }
 
 /* ─────────────────────────────────────────
-   SMOOTH SCROLL FOR ANCHOR LINKS
+   SMOOTH SCROLL
 ───────────────────────────────────────── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
     const target = document.querySelector(a.getAttribute('href'));
-    if(target){
-      e.preventDefault();
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-    }
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
   });
 });
 </script>
