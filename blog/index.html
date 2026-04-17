@@ -31,20 +31,6 @@
     .nav-logo { font-family:'Nohemi',sans-serif; font-weight:500; font-size:18px; color:var(--teal); }
     .nav-back { font-size:14px; font-weight:500; color:var(--muted); display:flex; align-items:center; gap:6px; transition:color 0.2s; }
     .nav-back:hover { color:var(--teal); }
-       /* ─── CUSTOM CURSOR ─── */
-    .cursor-dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--navy);
-      position:fixed;top:0;left:0;
-      pointer-events:none;z-index:9998;
-      transform:translate(-50%,-50%);
-      transition:transform 0.1s ease, background 0.2s;
-      will-change:transform;
-    }
-
-    .cursor-dot.hover{background:var(--green);}
-    @media(hover:none){.cursor-dot,.cursor-ring{display:none;}}
-
 
     /* HERO */
     .blog-hero {
