@@ -13,130 +13,213 @@
     @font-face { font-family:'Nohemi'; src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff'); font-weight:600; }
 
     :root {
-      --teal:#0f2a2a; --green:#4caf50; --green-dark:#2e7d32;
-      --lavender:#ede8f5; --lavender-deep:#d6cce8;
-      --white:#ffffff; --off:#f7f7f5; --muted:#666; --border:#e5e5e5;
+      --green:      #1a7a4a;
+      --green2:     #2d9e6b;
+      --green-dim:  rgba(26,122,74,0.08);
+      --green-mid:  rgba(26,122,74,0.12);
+      --black:      #0d0d0d;
+      --ink:        #111111;
+      --ink2:       #333333;
+      --muted:      #6b7280;
+      --border:     #e8e8e8;
+      --bg:         #ffffff;
+      --bg2:        #fafafa;
+      --bg3:        #f4f8f6;
     }
+
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; }
-    body { font-family:'Inter',sans-serif; background:var(--white); color:#111; line-height:1.7; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--ink); line-height:1.7; }
     a { text-decoration:none; color:inherit; }
 
+    /* ── NAV ── */
     nav {
       position:fixed; top:0; left:0; right:0; z-index:100;
-      background:rgba(255,255,255,0.92); backdrop-filter:blur(12px);
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(14px);
       border-bottom:1px solid var(--border);
-      padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px;
+      padding:0 48px; display:flex; align-items:center; justify-content:space-between; height:64px;
     }
-    .nav-logo { font-family:'Nohemi',sans-serif; font-weight:500; font-size:18px; color:var(--teal); }
-    .nav-back { font-size:14px; font-weight:500; color:var(--muted); display:flex; align-items:center; gap:6px; transition:color 0.2s; }
-    .nav-back:hover { color:var(--teal); }
+    .nav-logo { font-family:'Nohemi',sans-serif; font-weight:500; font-size:18px; color:var(--black); }
+    .nav-back {
+      font-size:14px; font-weight:500; color:var(--muted);
+      display:flex; align-items:center; gap:6px;
+      transition:color 0.2s;
+    }
+    .nav-back:hover { color:var(--green); }
 
-    /* HERO */
+    /* ── HERO ── */
     .blog-hero {
-      padding:120px 40px 70px;
-      background:var(--white);
-      display:flex;
-      justify-content:center;
+      padding:110px 48px 64px;
+      background:var(--bg);
     }
-    .blog-hero-card {
-      position:relative;
-      background:var(--lavender);
-      border-radius:40px;
-      max-width:900px; width:100%;
-      padding:70px 70px;
-      text-align:center;
-      overflow:visible;
+    .blog-hero-inner {
+      max-width:900px;
+      margin:0 auto;
     }
-    .blog-hero-card::before,.blog-hero-card::after,.bh-tr,.bh-bl {
-      content:''; position:absolute; width:90px; height:90px;
-      background:var(--white); border-radius:50%;
+    .blog-eyebrow {
+      font-size:11px; font-weight:700; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--green);
+      margin-bottom:18px; display:inline-block;
     }
-    .blog-hero-card::before { top:-22px; left:-22px; }
-    .blog-hero-card::after  { bottom:-22px; right:-22px; }
-    .bh-tr { top:-22px; right:-22px; }
-    .bh-bl { bottom:-22px; left:-22px; }
-    .blog-hero-card h1 {
+    .blog-hero-inner h1 {
       font-family:'Nohemi',sans-serif; font-weight:400;
-      font-size:48px; color:var(--teal); letter-spacing:-0.8px;
-      line-height:1.15; margin-bottom:14px; position:relative; z-index:1;
+      font-size:clamp(36px,5vw,58px);
+      color:var(--black); letter-spacing:-1.5px;
+      line-height:1.1; margin-bottom:18px;
     }
-    .blog-hero-card p { font-size:16px; color:#3a5a5a; position:relative; z-index:1; }
+    .blog-hero-inner h1 em { font-style:normal; color:var(--green); }
+    .blog-hero-inner p {
+      font-size:17px; color:var(--muted); line-height:1.75;
+      max-width:520px;
+    }
+    .blog-hero-divider {
+      width:40px; height:2px; background:var(--green);
+      border-radius:2px; margin:28px 0;
+    }
 
-    /* NEWSLETTER BANNER */
+    /* ── NEWSLETTER BANNER ── */
+    .newsletter-wrap {
+      max-width:900px; margin:0 auto; padding:0 48px;
+    }
     .newsletter-banner {
-      max-width:900px; margin:50px auto 0; padding:0 40px;
-      background:var(--teal); border-radius:20px;
+      background:var(--bg3);
+      border:1px solid rgba(26,122,74,0.2);
+      border-radius:14px;
       padding:28px 36px;
       display:flex; align-items:center; justify-content:space-between; gap:20px;
       flex-wrap:wrap;
+      position:relative;
+      overflow:hidden;
     }
-    .nb-left h3 { font-family:'Nohemi',sans-serif; font-weight:500; font-size:20px; color:var(--white); margin-bottom:4px; }
-    .nb-left p { font-size:14px; color:rgba(255,255,255,0.65); }
+    .newsletter-banner::before {
+      content:'';
+      position:absolute; right:-40px; top:-40px;
+      width:160px; height:160px; border-radius:50%;
+      background:rgba(26,122,74,0.06);
+      pointer-events:none;
+    }
+    .nb-icon {
+      width:44px; height:44px; border-radius:10px;
+      background:var(--green-mid);
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; flex-shrink:0;
+    }
+    .nb-left { display:flex; align-items:center; gap:16px; }
+    .nb-text h3 {
+      font-family:'Nohemi',sans-serif; font-weight:500;
+      font-size:18px; color:var(--black); margin-bottom:3px;
+    }
+    .nb-text p { font-size:14px; color:var(--muted); }
     .nb-btn {
-      background:var(--white); color:var(--teal);
-      padding:11px 24px; border-radius:100px;
+      background:var(--green); color:#fff;
+      padding:11px 24px; border-radius:6px;
       font-size:14px; font-weight:600;
       white-space:nowrap;
-      transition:opacity 0.2s;
+      transition:background 0.2s, transform 0.2s, box-shadow 0.2s;
+      position:relative; z-index:1;
     }
-    .nb-btn:hover { opacity:0.9; }
+    .nb-btn:hover { background:var(--green2); transform:translateY(-2px); box-shadow:0 8px 20px rgba(26,122,74,0.2); }
 
-    /* ARTICLES */
+    /* ── ARTICLES ── */
     .articles-section {
-      max-width:900px; margin:70px auto 100px; padding:0 40px;
+      max-width:900px; margin:64px auto 100px; padding:0 48px;
     }
     .articles-label {
-      font-size:12px; font-weight:600; letter-spacing:2px;
-      text-transform:uppercase; color:var(--green-dark); margin-bottom:32px;
+      font-size:11px; font-weight:700; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--green);
+      margin-bottom:8px; display:block;
     }
+    .articles-title {
+      font-family:'Nohemi',sans-serif; font-weight:400;
+      font-size:28px; color:var(--black); letter-spacing:-0.5px;
+      margin-bottom:36px;
+    }
+
     .article-card {
-      display:grid; grid-template-columns:auto 1fr;
-      gap:28px; align-items:start;
-      padding:32px 0; border-bottom:1px solid var(--border);
+      display:grid; grid-template-columns:48px 1fr;
+      gap:24px; align-items:start;
+      padding:32px 0;
+      border-bottom:1px solid var(--border);
       transition:opacity 0.2s;
+      text-decoration:none;
+      color:inherit;
     }
-    .article-card:hover { opacity:0.8; }
     .article-card:last-child { border-bottom:none; }
+    .article-card:hover { opacity:1; }
+    .article-card:hover .article-title { color:var(--green); }
+    .article-card:hover .article-num { color:var(--green); }
+
     .article-num {
       font-family:'Nohemi',sans-serif; font-weight:400;
-      font-size:14px; color:var(--muted);
-      padding-top:4px; min-width:28px;
+      font-size:13px; color:var(--muted);
+      padding-top:5px;
+      transition:color 0.2s;
     }
-    .article-meta { font-size:12px; color:var(--muted); margin-bottom:8px; display:flex; gap:12px; }
+    .article-meta {
+      font-size:12px; color:var(--muted);
+      margin-bottom:10px; display:flex; gap:10px; align-items:center;
+    }
     .article-tag {
-      background:var(--lavender); color:var(--teal);
-      padding:2px 10px; border-radius:100px;
+      background:var(--bg3);
+      border:1px solid rgba(26,122,74,0.2);
+      color:var(--green);
+      padding:2px 10px; border-radius:4px;
       font-size:11px; font-weight:600;
     }
     .article-title {
       font-family:'Nohemi',sans-serif; font-weight:500;
-      font-size:22px; color:var(--teal); margin-bottom:10px;
-      line-height:1.25;
+      font-size:22px; color:var(--black); margin-bottom:10px;
+      line-height:1.25; letter-spacing:-0.3px;
+      transition:color 0.2s;
     }
-    .article-excerpt { font-size:15px; color:var(--muted); line-height:1.7; margin-bottom:14px; }
+    .article-excerpt {
+      font-size:15px; color:var(--muted); line-height:1.75; margin-bottom:16px;
+    }
     .article-link {
-      font-size:13px; font-weight:600; color:var(--teal);
-      border-bottom:1.5px solid var(--teal); padding-bottom:1px;
+      font-size:13px; font-weight:600; color:var(--green);
+      border-bottom:1.5px solid rgba(26,122,74,0.3);
+      padding-bottom:1px;
       display:inline-flex; align-items:center; gap:5px;
+      transition:gap 0.2s, border-color 0.2s;
+    }
+    .article-card:hover .article-link { gap:10px; border-color:var(--green); }
+
+    /* Placeholder card */
+    .article-card.placeholder {
+      opacity:0.35; pointer-events:none;
     }
 
+    /* ── FOOTER ── */
     footer {
-      background:var(--teal); padding:24px 40px;
+      border-top:1px solid var(--border);
+      padding:22px 48px;
       display:flex; justify-content:space-between; align-items:center;
+      background:var(--bg);
     }
-    footer p { font-size:13px; color:rgba(255,255,255,0.4); }
-    footer a { color:rgba(255,255,255,0.5); font-size:13px; }
-    footer a:hover { color:var(--white); }
+    footer p { font-size:12px; color:var(--muted); }
+    footer a { color:var(--muted); font-size:12px; transition:color 0.2s; }
+    footer a:hover { color:var(--green); }
 
-    @media(max-width:700px) {
+    /* ── REVEAL ANIMATIONS ── */
+    .fade-up {
+      opacity:0; transform:translateY(24px);
+      transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+    .fade-up.d1{transition-delay:0.05s;} .fade-up.d2{transition-delay:0.12s;}
+    .fade-up.d3{transition-delay:0.19s;} .fade-up.d4{transition-delay:0.26s;}
+    .fade-up.d5{transition-delay:0.33s;} .fade-up.d6{transition-delay:0.40s;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:700px){
       nav { padding:0 20px; }
-      .blog-hero { padding:90px 20px 50px; }
-      .blog-hero-card { padding:50px 24px; border-radius:24px; }
-      .blog-hero-card h1 { font-size:32px; }
-      .articles-section { padding:0 20px; margin-top:50px; }
-      .newsletter-banner { margin:40px 20px 0; padding:22px 22px; }
-      footer { flex-direction:column; gap:10px; text-align:center; }
+      .blog-hero { padding:90px 20px 48px; }
+      .newsletter-wrap { padding:0 20px; }
+      .articles-section { padding:0 20px; margin-top:48px; }
+      footer { padding:18px 20px; flex-direction:column; gap:8px; text-align:center; }
+      .blog-hero-inner h1 { font-size:32px; }
+      .article-card { grid-template-columns:36px 1fr; gap:16px; }
+      .article-title { font-size:19px; }
     }
   </style>
 </head>
@@ -147,29 +230,36 @@
     <a href="../index.html" class="nav-back">← Back to Portfolio</a>
   </nav>
 
+  <!-- HERO -->
   <div class="blog-hero">
-    <div class="blog-hero-card">
-      <div class="bh-tr"></div>
-      <div class="bh-bl"></div>
-      <h1>Writing & Perspectives</h1>
-      <p>Longform thinking on finance, operations, and markets · Editor of Capital Story newsletter</p>
+    <div class="blog-hero-inner">
+      <div class="blog-eyebrow fade-up d1">Writing & Perspectives</div>
+      <h1 class="fade-up d2">Thinking out loud<br>about <em>Finance & Operations</em></h1>
+      <div class="blog-hero-divider fade-up d3"></div>
+      <p class="fade-up d4">Longform articles on fintech, operations, and markets — plus the Capital Story newsletter, read by 1,300+ professionals on LinkedIn.</p>
     </div>
   </div>
 
-  <div style="max-width:900px;margin:50px auto 0;padding:0 40px;">
-    <div class="newsletter-banner">
+  <!-- NEWSLETTER BANNER -->
+  <div class="newsletter-wrap" style="padding-top:0;">
+    <div class="newsletter-banner fade-up d5">
       <div class="nb-left">
-        <h3>📰 Capital Story Newsletter</h3>
-        <p>Financial narratives for curious professionals · 1,300+ subscribers on LinkedIn</p>
+        <div class="nb-icon">📰</div>
+        <div class="nb-text">
+          <h3>Capital Story Newsletter</h3>
+          <p>Financial narratives for curious professionals · 1,300+ subscribers on LinkedIn</p>
+        </div>
       </div>
       <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7378470095842451456" target="_blank" class="nb-btn">Subscribe →</a>
     </div>
   </div>
 
+  <!-- ARTICLES -->
   <div class="articles-section">
-    <div class="articles-label">Published Articles</div>
+    <span class="articles-label fade-up">Published Articles</span>
+    <div class="articles-title fade-up">From the desk</div>
 
-    <a href="asset-ops-article.html" class="article-card">
+    <a href="asset-ops-article.html" class="article-card fade-up">
       <div class="article-num">01</div>
       <div>
         <div class="article-meta">
@@ -182,8 +272,7 @@
       </div>
     </a>
 
-    <!-- Placeholder for future articles -->
-    <div class="article-card" style="opacity:0.4;pointer-events:none;">
+    <div class="article-card placeholder">
       <div class="article-num">02</div>
       <div>
         <div class="article-meta"><span>Coming Soon</span><span class="article-tag">Markets</span></div>
@@ -198,6 +287,13 @@
     <p>© 2026 Aravind Kumar R</p>
     <a href="../index.html">← Portfolio</a>
   </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    },{threshold:0.1});
+    document.querySelectorAll('.fade-up').forEach(el=> obs.observe(el));
+  </script>
 
 </body>
 </html>
