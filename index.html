@@ -184,14 +184,16 @@
     .tool-chip:hover{background:var(--purple);color:#fff;}
 
     /* ─── PROJECTS ─── */
-    .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative;z-index:1;}
+    .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;position:relative;z-index:1;}
     .proj-card{border-radius:14px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);background:#fff;transition:all 0.35s;}
     .proj-card:hover{transform:translateY(-6px);box-shadow:0 16px 44px rgba(245,158,11,0.1);}
-    .proj-top{height:150px;display:flex;align-items:flex-end;padding:22px;position:relative;overflow:hidden;}
+    .proj-top{height:220px;display:flex;align-items:flex-end;padding:22px;position:relative;overflow:hidden;}
     .proj-top.rose{background:linear-gradient(135deg,#fce9e9,#fdd8d8);}
     .proj-top.sand{background:linear-gradient(135deg,#fdf4e3,#fce7c8);}
-    .proj-top.sage{background:linear-gradient(135deg,#e6f0eb,#d1e7dd);}
-    .proj-label-top{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,0.92);padding:5px 12px;border-radius:6px;}
+    .proj-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 0.5s ease;}
+    .proj-card:hover .proj-img{transform:scale(1.05);}
+    .proj-top-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.1) 60%,transparent 100%);z-index:1;}
+    .proj-label-top{position:relative;z-index:2;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,0.92);padding:5px 12px;border-radius:6px;}
     .proj-body{padding:22px;}
     .proj-title{font-family:'Nohemi',sans-serif;font-weight:500;font-size:18px;color:var(--black);margin-bottom:9px;}
     .proj-desc{font-size:14px;color:var(--muted);line-height:1.72;margin-bottom:16px;}
@@ -513,11 +515,15 @@
     <div class="section-header">
       <span class="eyebrow" style="color:#d97706;">Projects</span>
       <h2 class="sec-title">Beyond the Day Job</h2>
-      <p class="sec-sub">Building outside work — newsletters, cloud kitchen ops, and this site itself.</p>
+      <p class="sec-sub">Building outside work — newsletters and cloud kitchen operations.</p>
     </div>
     <div class="proj-grid reveal-stagger">
       <div class="proj-card">
-        <div class="proj-top rose"><span class="proj-label-top">Newsletter · Finance</span></div>
+        <div class="proj-top rose">
+          <img src="images/capital-story.jpg" alt="Capital Story Newsletter" class="proj-img" onerror="this.style.display='none'"/>
+          <div class="proj-top-overlay"></div>
+          <span class="proj-label-top">Newsletter · Finance</span>
+        </div>
         <div class="proj-body">
           <div class="proj-title">Capital Story</div>
           <div class="proj-desc">A financial newsletter covering markets, fintech, and economic narratives — written for curious professionals. 1,300+ active subscribers on LinkedIn.</div>
@@ -525,19 +531,15 @@
         </div>
       </div>
       <div class="proj-card">
-        <div class="proj-top sand"><span class="proj-label-top">Venture · Operations</span></div>
+        <div class="proj-top sand">
+          <img src="images/crave-collective.jpg" alt="Crave Collective" class="proj-img" onerror="this.style.display='none'"/>
+          <div class="proj-top-overlay"></div>
+          <span class="proj-label-top">Venture · Operations</span>
+        </div>
         <div class="proj-body">
           <div class="proj-title">Crave Collective</div>
           <div class="proj-desc">Cloud kitchen brand with a full operations tracker — supplier management, recipes, sales analytics, wastage, and subscriptions.</div>
           <a href="#" class="proj-link">In Progress →</a>
-        </div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-top sage"><span class="proj-label-top">Portfolio · Writing</span></div>
-        <div class="proj-body">
-          <div class="proj-title">This Website</div>
-          <div class="proj-desc">Built from scratch on GitHub Pages — custom Nohemi font, original design system, scroll animations, responsive layout.</div>
-          <a href="blog/index.html" class="proj-link">Read the Blog →</a>
         </div>
       </div>
     </div>
