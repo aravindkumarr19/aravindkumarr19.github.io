@@ -7,30 +7,35 @@
   <meta name="description" content="Financial writing by Aravind Kumar R — Capital Story newsletter and longform articles on fintech, operations, and markets." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
   <style>
     @font-face { font-family:'Nohemi'; src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff'); font-weight:400; }
     @font-face { font-family:'Nohemi'; src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff'); font-weight:500; }
     @font-face { font-family:'Nohemi'; src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff'); font-weight:600; }
 
     :root {
-      --green:#1a7a4a;--green2:#2d9e6b;
-      --blue:#3b82f6;--purple:#8b5cf6;--teal:#14b8a6;
-      --black:#0d0d0d;--ink:#111111;--ink2:#333333;
-      --muted:#6b7280;--border:#e8e8e8;--bg:#ffffff;
+      --green:#1a7a4a; --green2:#2d9e6b;
+      --blue:#3b82f6; --purple:#8b5cf6; --teal:#14b8a6;
+      --black:#0d0d0d; --ink:#111111; --ink2:#333333;
+      --muted:#6b7280; --border:#e8e8e8;
     }
 
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
-    body { font-family:'Inter',sans-serif; background:#fafbfc; color:var(--ink); line-height:1.7; }
+    html { scroll-behavior:auto; }
+    body { font-family:'Inter',sans-serif; background:#fafbfc; color:var(--ink); line-height:1.7; overflow-x:hidden; }
     a { text-decoration:none; color:inherit; }
 
     /* ── NAV ── */
     nav {
       position:fixed; top:0; left:0; right:0; z-index:100;
-      background:rgba(255,255,255,0.92); backdrop-filter:blur(16px);
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(16px);
       border-bottom:1px solid var(--border);
-      padding:0 48px; display:flex; align-items:center; justify-content:space-between; height:64px;
+      padding:0 48px; display:flex; align-items:center;
+      justify-content:space-between; height:64px;
+      transition:box-shadow 0.3s;
     }
+    nav.scrolled { box-shadow:0 2px 16px rgba(0,0,0,0.06); }
     .nav-logo { font-family:'Nohemi',sans-serif; font-weight:500; font-size:18px; color:var(--black); }
     .nav-back {
       font-size:14px; font-weight:600; color:var(--muted);
@@ -46,11 +51,7 @@
       background:#fff;
       border-bottom:1px solid var(--border);
     }
-    .blog-hero-inner {
-      max-width:900px;
-      margin:0 auto;
-      text-align:center;
-    }
+    .blog-hero-inner { max-width:900px; margin:0 auto; text-align:center; }
     .blog-eyebrow {
       font-size:12px; font-weight:700; letter-spacing:2.5px;
       text-transform:uppercase; color:var(--green);
@@ -68,34 +69,26 @@
       max-width:600px; margin:0 auto;
     }
 
-    /* Section cards */
+    /* ── SECTION CARDS ── */
     .section-card {
       background:#fff; border-radius:24px; padding:50px;
       box-shadow:0 4px 20px rgba(0,0,0,0.04);
-      transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+      transition:transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);
       position:relative; overflow:hidden; margin-bottom:60px;
     }
     .section-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+      content:''; position:absolute; inset:0;
       opacity:0.06; border-radius:24px; pointer-events:none;
     }
-    .section-card--green::before{background:linear-gradient(135deg,#1a7a4a,#2d9e6b);}
-    .section-card--blue::before{background:linear-gradient(135deg,#3b82f6,#60a5fa);}
-    .section-card--purple::before{background:linear-gradient(135deg,#8b5cf6,#a78bfa);}
-    .section-card:hover {
-      transform:translateY(-6px);
-      box-shadow:0 16px 48px rgba(0,0,0,0.08);
-    }
+    .section-card--green::before { background:linear-gradient(135deg,#1a7a4a,#2d9e6b); }
+    .section-card--blue::before  { background:linear-gradient(135deg,#3b82f6,#60a5fa); }
+    .section-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.08); }
 
-    /* ── NEWSLETTER BANNER ── */
-    .newsletter-wrap {
-      max-width:900px; margin:60px auto 0; padding:0 48px;
-    }
+    /* ── NEWSLETTER WRAP ── */
+    .newsletter-wrap { max-width:900px; margin:60px auto 0; padding:0 48px; }
 
     /* ── ARTICLES ── */
-    .articles-section {
-      max-width:900px; margin:0 auto 100px; padding:0 48px;
-    }
+    .articles-section { max-width:900px; margin:0 auto 100px; padding:0 48px; }
     .articles-label {
       font-size:12px; font-weight:700; letter-spacing:2.5px;
       text-transform:uppercase; color:var(--green);
@@ -106,7 +99,6 @@
       font-size:32px; color:var(--black); letter-spacing:-0.5px;
       margin-bottom:40px;
     }
-
     .article-card {
       display:grid; grid-template-columns:60px 1fr;
       gap:28px; align-items:start;
@@ -117,7 +109,6 @@
     .article-card:last-child { border-bottom:none; }
     .article-card:hover .article-title { color:var(--green); }
     .article-card:hover .article-num { color:var(--green); }
-
     .article-num {
       font-family:'Nohemi',sans-serif; font-weight:400;
       font-size:16px; color:var(--muted);
@@ -125,7 +116,8 @@
     }
     .article-meta {
       font-size:13px; color:var(--muted);
-      margin-bottom:12px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      margin-bottom:12px; display:flex; gap:12px;
+      align-items:center; flex-wrap:wrap;
     }
     .article-tag {
       background:rgba(26,122,74,0.08);
@@ -140,9 +132,7 @@
       line-height:1.3; letter-spacing:-0.3px;
       transition:color 0.2s;
     }
-    .article-excerpt {
-      font-size:16px; color:var(--muted); line-height:1.8; margin-bottom:18px;
-    }
+    .article-excerpt { font-size:16px; color:var(--muted); line-height:1.8; margin-bottom:18px; }
     .article-link {
       font-size:14px; font-weight:600; color:var(--green);
       border-bottom:2px solid var(--green);
@@ -151,17 +141,37 @@
       transition:gap 0.2s;
     }
     .article-card:hover .article-link { gap:12px; }
+    .article-card.placeholder { opacity:0.4; pointer-events:none; }
 
-    .article-card.placeholder {
-      opacity:0.4; pointer-events:none;
-    }
-
-    /* Diagrams */
     .section-diagram {
       position:absolute; right:40px; top:40px;
-      width:140px; height:140px;
-      opacity:0.1; pointer-events:none;
+      width:140px; height:140px; opacity:0.1; pointer-events:none;
     }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+      will-change:opacity,transform;
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* hero children stagger on load */
+    .hero-animate { opacity:0; transform:translateY(18px); }
+    .hero-animate.loaded {
+      opacity:1; transform:translateY(0);
+      transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    /* article list rows stagger */
+    .article-card {
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1);
+    }
+    .article-card.visible { opacity:1; transform:translateY(0); }
+    .article-card.placeholder.visible { opacity:0.4; }
 
     /* ── FOOTER ── */
     footer {
@@ -174,7 +184,6 @@
     footer a { color:var(--muted); font-size:13px; transition:color 0.2s; }
     footer a:hover { color:var(--green); }
 
-    /* ── RESPONSIVE ── */
     @media(max-width:700px){
       nav { padding:0 20px; }
       .blog-hero { padding:90px 20px 50px; }
@@ -190,7 +199,7 @@
 </head>
 <body>
 
-  <nav>
+  <nav id="nav">
     <div class="nav-logo">Aravind Kumar R</div>
     <a href="../index.html" class="nav-back">← Back to Portfolio</a>
   </nav>
@@ -198,15 +207,15 @@
   <!-- HERO -->
   <div class="blog-hero">
     <div class="blog-hero-inner">
-      <div class="blog-eyebrow">Writing & Perspectives</div>
-      <h1>Thinking out loud about <em>Finance & Operations</em></h1>
-      <p>Longform articles on fintech, operations, and markets — plus the Capital Story newsletter, read by 1,300+ professionals on LinkedIn.</p>
+      <div class="blog-eyebrow hero-animate">Writing & Perspectives</div>
+      <h1 class="hero-animate" style="transition-delay:0.08s;">Thinking out loud about <em>Finance & Operations</em></h1>
+      <p class="hero-animate" style="transition-delay:0.16s;">Longform articles on fintech, operations, and markets — plus the Capital Story newsletter, read by 1,300+ professionals on LinkedIn.</p>
     </div>
   </div>
 
   <!-- NEWSLETTER BANNER -->
   <div class="newsletter-wrap">
-    <div class="section-card section-card--green">
+    <div class="section-card section-card--green reveal">
       <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
         <rect x="30" y="40" width="80" height="60" rx="4" stroke="currentColor" stroke-width="2" opacity="0.3"/>
         <line x1="40" y1="55" x2="90" y2="55" stroke="currentColor" stroke-width="2" opacity="0.25"/>
@@ -217,7 +226,8 @@
         <div style="font-size:40px; margin-bottom:16px;">📰</div>
         <h3 style="font-family:'Nohemi',sans-serif; font-weight:500; font-size:26px; color:var(--black); margin-bottom:12px;">Capital Story Newsletter</h3>
         <p style="font-size:16px; color:var(--muted); margin-bottom:28px; line-height:1.75;">Financial narratives for curious professionals · 1,300+ subscribers on LinkedIn</p>
-        <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7378470095842451456" target="_blank" style="display:inline-flex; align-items:center; gap:10px; background:var(--green); color:#fff; padding:13px 28px; border-radius:8px; font-size:15px; font-weight:600; transition:all 0.2s;">
+        <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7378470095842451456" target="_blank"
+           style="display:inline-flex; align-items:center; gap:10px; background:var(--green); color:#fff; padding:13px 28px; border-radius:8px; font-size:15px; font-weight:600; transition:all 0.2s;">
           Subscribe on LinkedIn →
         </a>
       </div>
@@ -226,7 +236,7 @@
 
   <!-- ARTICLES -->
   <div class="articles-section">
-    <div class="section-card section-card--blue">
+    <div class="section-card section-card--blue reveal">
       <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
         <circle cx="70" cy="70" r="40" stroke="currentColor" stroke-width="2" opacity="0.3"/>
         <circle cx="70" cy="70" r="20" fill="currentColor" opacity="0.2"/>
@@ -257,6 +267,7 @@
             <div class="article-excerpt">Subscribe to Capital Story on LinkedIn to read the latest issues before they arrive here.</div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -265,6 +276,57 @@
     <p>© 2026 Aravind Kumar R</p>
     <a href="../index.html">← Portfolio</a>
   </footer>
+
+  <script>
+    /* ── LENIS ── */
+    const lenis = new Lenis({
+      duration: 0.95,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      smoothTouch: false,
+      touchMultiplier: 1.5,
+    });
+    (function raf(time){ lenis.raf(time); requestAnimationFrame(raf); })(0);
+
+    /* nav shadow */
+    lenis.on('scroll', ({ scroll }) => {
+      document.getElementById('nav').classList.toggle('scrolled', scroll > 10);
+    });
+
+    /* ── HERO load animation ── */
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.hero-animate').forEach((el, i) => {
+        setTimeout(() => el.classList.add('loaded'), 80 + i * 90);
+      });
+    });
+
+    /* ── SCROLL REVEAL ── */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* article rows stagger */
+    const rowIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const rows = entry.target.querySelectorAll('.article-card');
+          rows.forEach((row, i) => {
+            setTimeout(() => row.classList.add('visible'), i * 110);
+          });
+          rowIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.section-card').forEach(card => rowIO.observe(card));
+  </script>
 
 </body>
 </html>
