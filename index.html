@@ -15,19 +15,19 @@
       --green:#1a7a4a;--green2:#2d9e6b;
       --blue:#3b82f6;--purple:#8b5cf6;--yellow:#f59e0b;--pink:#ec4899;--teal:#14b8a6;
       --black:#0d0d0d;--ink:#111111;--ink2:#333333;
-      --muted:#6b7280;--border:#e8e8e8;--bg:#ffffff;
+      --muted:#6b7280;--border:#e2e8e4;--bg:#ffffff;
     }
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;overscroll-behavior:none;}
-    body{font-family:'Inter',sans-serif;background:#fafbfc;color:var(--ink);line-height:1.7;overflow-x:hidden;}
+    body{font-family:'Inter',sans-serif;background:#f2f5f3;color:var(--ink);line-height:1.7;overflow-x:hidden;}
     a{text-decoration:none;color:inherit;}
 
     /* ─── NAV ─── */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:200;
       height:64px;display:flex;align-items:center;justify-content:space-between;
-      padding:0 48px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
+      padding:0 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);
       border-bottom:1px solid var(--border);
     }
     .nav-logo{font-family:'Nohemi',sans-serif;font-weight:500;font-size:18px;color:var(--black);}
@@ -37,11 +37,8 @@
     .nav-center a:hover{color:var(--green);}
     .nav-center a:hover::after{width:100%;}
     .nav-right{display:flex;align-items:center;gap:12px;}
-    .nav-btn{
-      font-size:14px;font-weight:600;padding:10px 22px;border-radius:8px;
-      background:var(--green);color:#fff;transition:all 0.2s;
-    }
-    .nav-btn:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(26,122,74,0.2);}
+    .nav-btn{font-size:14px;font-weight:600;padding:10px 22px;border-radius:8px;background:var(--green);color:#fff;transition:all 0.2s;}
+    .nav-btn:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(26,122,74,0.25);}
     .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
     .hamburger span{display:block;width:22px;height:2px;background:var(--black);border-radius:2px;transition:all 0.3s;}
     .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
@@ -76,52 +73,39 @@
       background:var(--green);color:#fff;padding:14px 30px;border-radius:8px;
       font-size:15px;font-weight:600;transition:all 0.25s;display:inline-block;
     }
-    .btn-solid:hover{background:var(--green2);transform:translateY(-3px);box-shadow:0 12px 28px rgba(26,122,74,0.2);}
+    .btn-solid:hover{background:var(--green2);transform:translateY(-3px);box-shadow:0 12px 28px rgba(26,122,74,0.25);}
     .btn-outline{
       background:transparent;color:var(--green);border:2px solid var(--green);
       padding:14px 30px;border-radius:8px;font-size:15px;font-weight:600;
       transition:all 0.25s;display:inline-block;
     }
-    .btn-outline:hover{background:var(--green);color:#fff;transform:translateY(-3px);box-shadow:0 12px 28px rgba(26,122,74,0.15);}
+    .btn-outline:hover{background:var(--green);color:#fff;transform:translateY(-3px);box-shadow:0 12px 28px rgba(26,122,74,0.2);}
 
-    /* Photo container */
     .hero-photo{position:relative;}
-    .hero-photo img{
-      width:100%;max-width:380px;height:auto;border-radius:24px;
-      box-shadow:0 20px 60px rgba(0,0,0,0.1);
-      /* To remove photo later, just delete the img tag in HTML or set display:none here */
-    }
-    .hero-photo-frame{
-      position:absolute;top:-20px;right:-20px;width:180px;height:180px;
-      border-radius:50%;background:rgba(26,122,74,0.08);z-index:-1;
-    }
-    .hero-photo-accent{
-      position:absolute;bottom:-15px;left:-15px;width:140px;height:140px;
-      border-radius:50%;background:rgba(59,130,246,0.08);z-index:-1;
-    }
+    .hero-photo img{width:100%;max-width:380px;height:auto;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.12);}
+    .hero-photo-frame{position:absolute;top:-20px;right:-20px;width:180px;height:180px;border-radius:50%;background:rgba(26,122,74,0.1);z-index:-1;}
+    .hero-photo-accent{position:absolute;bottom:-15px;left:-15px;width:140px;height:140px;border-radius:50%;background:rgba(59,130,246,0.1);z-index:-1;}
 
-    /* ─── STATS ─── */
     .hero-stats{display:flex;gap:12px;margin-top:40px;}
-    .stat-item{
-      flex:1;background:#fff;border:1px solid var(--border);border-radius:12px;
-      padding:20px;transition:all 0.3s;
-    }
-    .stat-item:hover{transform:translateY(-4px);border-color:var(--green);box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    .stat-item{flex:1;background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;transition:all 0.3s;}
+    .stat-item:hover{transform:translateY(-4px);border-color:var(--green);box-shadow:0 8px 24px rgba(26,122,74,0.1);}
     .stat-num{font-family:'Nohemi',sans-serif;font-weight:500;font-size:32px;color:var(--green);line-height:1;margin-bottom:6px;}
     .stat-lbl{font-size:13px;color:var(--muted);font-weight:500;}
 
     /* ─── SECTION CARDS ─── */
     .page-wrap{max-width:1200px;margin:0 auto;padding:0 48px;}
     section{padding:100px 0;}
+
     .section-card{
       background:#fff;border-radius:24px;padding:60px;margin-bottom:80px;
-      box-shadow:0 4px 20px rgba(0,0,0,0.04);
+      box-shadow:0 4px 24px rgba(0,0,0,0.06);
       transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
       position:relative;overflow:hidden;
     }
+    /* Darkened colour overlays — pleasant, not heavy */
     .section-card::before{
       content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-      opacity:0.06;border-radius:24px;pointer-events:none;
+      opacity:0.13;border-radius:24px;pointer-events:none;
     }
     .section-card--green::before{background:linear-gradient(135deg,#1a7a4a,#2d9e6b);}
     .section-card--blue::before{background:linear-gradient(135deg,#3b82f6,#60a5fa);}
@@ -129,58 +113,37 @@
     .section-card--yellow::before{background:linear-gradient(135deg,#f59e0b,#fbbf24);}
     .section-card--pink::before{background:linear-gradient(135deg,#ec4899,#f472b6);}
     .section-card--teal::before{background:linear-gradient(135deg,#14b8a6,#2dd4bf);}
-    .section-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,0.08);}
+    .section-card--indigo::before{background:linear-gradient(135deg,#6366f1,#818cf8);}
+    .section-card--rose::before{background:linear-gradient(135deg,#f43f5e,#fb7185);}
+
+    .section-card:hover{transform:translateY(-6px);box-shadow:0 20px 56px rgba(0,0,0,0.1);}
 
     .section-header{margin-bottom:48px;position:relative;z-index:1;}
-    .eyebrow{
-      font-size:12px;font-weight:700;letter-spacing:2.5px;
-      text-transform:uppercase;color:var(--green);margin-bottom:12px;display:inline-block;
-    }
-    .sec-title{
-      font-family:'Nohemi',sans-serif;font-weight:400;
-      font-size:clamp(32px,4vw,48px);color:var(--black);
-      letter-spacing:-1px;line-height:1.15;margin-bottom:16px;
-    }
+    .eyebrow{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin-bottom:12px;display:inline-block;}
+    .sec-title{font-family:'Nohemi',sans-serif;font-weight:400;font-size:clamp(32px,4vw,48px);color:var(--black);letter-spacing:-1px;line-height:1.15;margin-bottom:16px;}
     .sec-sub{font-size:17px;color:var(--muted);max-width:600px;line-height:1.75;}
 
-    /* Artistic diagrams */
-    .section-diagram{
-      position:absolute;right:40px;top:40px;width:140px;height:140px;
-      opacity:0.12;pointer-events:none;
-    }
+    .section-diagram{position:absolute;right:40px;top:40px;width:140px;height:140px;opacity:0.18;pointer-events:none;}
 
     /* ─── ABOUT ─── */
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;position:relative;z-index:1;}
     .about-body p{font-size:17px;color:var(--ink2);margin-bottom:18px;line-height:1.85;}
     .about-body strong{color:var(--black);font-weight:600;}
     .tag-cloud{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
-    .tag{
-      background:rgba(26,122,74,0.08);border-radius:6px;padding:8px 16px;
-      font-size:13px;font-weight:600;color:var(--green);
-      transition:all 0.25s;
-    }
-    .tag:hover{background:var(--green);color:#fff;transform:translateY(-3px);box-shadow:0 6px 16px rgba(26,122,74,0.2);}
+    .tag{background:rgba(26,122,74,0.1);border-radius:6px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--green);transition:all 0.25s;}
+    .tag:hover{background:var(--green);color:#fff;transform:translateY(-3px);box-shadow:0 6px 16px rgba(26,122,74,0.25);}
     .info-cards{display:flex;flex-direction:column;gap:12px;}
-    .info-card{
-      border:1px solid var(--border);border-radius:10px;padding:16px 20px;
-      transition:all 0.25s;background:#fafbfc;
-    }
+    .info-card{border:1px solid var(--border);border-radius:10px;padding:16px 20px;transition:all 0.25s;background:rgba(255,255,255,0.7);}
     .info-card:hover{border-color:var(--green);background:#fff;transform:translateX(4px);}
     .ic-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:4px;}
     .ic-value{font-size:14px;font-weight:500;color:var(--ink2);}
 
     /* ─── EXPERIENCE ─── */
     .exp-list{display:flex;flex-direction:column;gap:20px;position:relative;z-index:1;}
-    .exp-card{
-      border:1px solid var(--border);border-radius:14px;background:#fafbfc;
-      padding:36px;transition:all 0.3s;position:relative;
-    }
-    .exp-card::before{
-      content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
-      background:var(--border);transition:all 0.3s;border-radius:14px 0 0 14px;
-    }
-    .exp-card:hover{background:#fff;box-shadow:0 12px 36px rgba(0,0,0,0.06);transform:translateX(6px);}
-    .exp-card:hover::before{background:var(--green);width:5px;}
+    .exp-card{border:1px solid rgba(59,130,246,0.15);border-radius:14px;background:rgba(255,255,255,0.75);padding:36px;transition:all 0.3s;position:relative;}
+    .exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:rgba(59,130,246,0.25);transition:all 0.3s;border-radius:14px 0 0 14px;}
+    .exp-card:hover{background:#fff;box-shadow:0 12px 36px rgba(59,130,246,0.1);transform:translateX(6px);}
+    .exp-card:hover::before{background:var(--blue);width:5px;}
     .exp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
     .exp-role{font-family:'Nohemi',sans-serif;font-weight:500;font-size:22px;color:var(--black);margin-bottom:6px;}
     .exp-co{font-size:14px;color:var(--muted);}
@@ -188,94 +151,111 @@
     .exp-badge.current{background:rgba(26,122,74,0.12);color:var(--green);}
     .exp-badge.done{background:#f1f5f9;color:var(--muted);}
     .exp-pts{list-style:none;display:flex;flex-direction:column;gap:10px;}
-    .exp-pts li{
-      font-size:15px;color:var(--ink2);padding-left:20px;position:relative;line-height:1.75;
-    }
-    .exp-pts li::before{
-      content:'';position:absolute;left:0;top:10px;width:6px;height:6px;
-      border-radius:50%;background:var(--green);opacity:0.5;
-    }
+    .exp-pts li{font-size:15px;color:var(--ink2);padding-left:20px;position:relative;line-height:1.75;}
+    .exp-pts li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--blue);opacity:0.5;}
     .exp-pts li:hover::before{opacity:1;transform:scale(1.3);}
 
     /* ─── AUTOMATIONS ─── */
     .auto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative;z-index:1;}
-    .auto-card{
-      border-radius:14px;padding:28px;background:#fafbfc;
-      border:1px solid var(--border);transition:all 0.3s;
-    }
-    .auto-card:hover{background:#fff;transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.06);}
+    .auto-card{border-radius:14px;padding:28px;background:rgba(255,255,255,0.7);border:1px solid rgba(139,92,246,0.15);transition:all 0.3s;}
+    .auto-card:hover{background:#fff;transform:translateY(-6px);box-shadow:0 12px 32px rgba(139,92,246,0.12);}
     .auto-card.wide{grid-column:span 2;}
     .card-icon{width:42px;height:42px;margin-bottom:16px;}
     .auto-title{font-family:'Nohemi',sans-serif;font-weight:500;font-size:17px;color:var(--black);margin-bottom:10px;}
     .auto-desc{font-size:15px;color:var(--ink2);line-height:1.75;margin-bottom:12px;}
-    .auto-impact{font-size:13px;font-weight:700;color:var(--green);}
+    .auto-impact{font-size:13px;font-weight:700;color:var(--purple);}
     .tool-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
-    .tool-chip{
-      font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;
-      background:rgba(26,122,74,0.08);color:var(--green);transition:all 0.2s;
-    }
-    .tool-chip:hover{background:var(--green);color:#fff;}
+    .tool-chip{font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;background:rgba(139,92,246,0.1);color:var(--purple);transition:all 0.2s;}
+    .tool-chip:hover{background:var(--purple);color:#fff;}
 
     /* ─── PROJECTS ─── */
     .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative;z-index:1;}
-    .proj-card{
-      border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#fff;
-      transition:all 0.35s;
-    }
-    .proj-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,0.08);}
+    .proj-card{border-radius:14px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);background:#fff;transition:all 0.35s;}
+    .proj-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(245,158,11,0.12);}
     .proj-top{height:160px;display:flex;align-items:flex-end;padding:24px;position:relative;overflow:hidden;}
     .proj-top.rose{background:linear-gradient(135deg,#fce9e9,#fdd8d8);}
     .proj-top.sand{background:linear-gradient(135deg,#fdf4e3,#fce7c8);}
     .proj-top.sage{background:linear-gradient(135deg,#e6f0eb,#d1e7dd);}
-    .proj-label-top{
-      font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-      color:var(--black);background:rgba(255,255,255,0.9);padding:5px 12px;
-      border-radius:6px;position:relative;z-index:1;
-    }
+    .proj-label-top{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,0.92);padding:5px 12px;border-radius:6px;position:relative;z-index:1;}
     .proj-body{padding:24px;}
     .proj-title{font-family:'Nohemi',sans-serif;font-weight:500;font-size:19px;color:var(--black);margin-bottom:10px;}
     .proj-desc{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:18px;}
-    .proj-link{
-      font-size:14px;font-weight:600;color:var(--green);
-      display:inline-flex;align-items:center;gap:6px;
-      border-bottom:2px solid var(--green);padding-bottom:2px;
-      transition:gap 0.25s;
-    }
+    .proj-link{font-size:14px;font-weight:600;color:var(--green);display:inline-flex;align-items:center;gap:6px;border-bottom:2px solid var(--green);padding-bottom:2px;transition:gap 0.25s;}
     .proj-link:hover{gap:12px;}
+
+    /* ─── MY IDOLS ─── */
+    .idols-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;z-index:1;}
+    .idol-card{
+      border-radius:18px;overflow:hidden;
+      border:1px solid rgba(255,255,255,0.4);
+      background:#fff;
+      transition:all 0.35s;
+      text-decoration:none;color:inherit;
+      display:block;
+      position:relative;
+    }
+    .idol-card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.12);}
+    .idol-card-top{
+      height:200px;
+      position:relative;overflow:hidden;
+      display:flex;align-items:flex-end;padding:24px;
+    }
+    .idol-card-top.vijay{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);}
+    .idol-card-top.buffett{background:linear-gradient(135deg,#1a3a1a 0%,#1e4d1e 50%,#14532d 100%);}
+    .idol-card-top-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+    }
+    .idol-card-label{
+      position:relative;z-index:1;
+      font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+      color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(8px);
+      padding:5px 12px;border-radius:6px;
+      border:1px solid rgba(255,255,255,0.15);
+    }
+    .idol-star-icon{
+      position:absolute;top:20px;right:20px;z-index:1;
+      font-size:32px;
+    }
+    .idol-card-body{padding:28px 28px 24px;}
+    .idol-name{font-family:'Nohemi',sans-serif;font-weight:500;font-size:26px;color:var(--black);margin-bottom:8px;letter-spacing:-0.5px;}
+    .idol-tagline{font-size:15px;color:var(--muted);line-height:1.65;margin-bottom:20px;}
+    .idol-traits{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+    .idol-trait{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;}
+    .idol-trait.vijay-t{background:rgba(99,102,241,0.1);color:#6366f1;}
+    .idol-trait.buffett-t{background:rgba(26,122,74,0.1);color:var(--green);}
+    .idol-read{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:14px;font-weight:600;color:var(--green);
+      border-bottom:2px solid rgba(26,122,74,0.3);padding-bottom:2px;
+      transition:all 0.2s;
+    }
+    .idol-card:hover .idol-read{gap:14px;border-color:var(--green);}
 
     /* ─── CONTACT ─── */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;position:relative;z-index:1;}
     .contact-links{display:flex;flex-direction:column;gap:12px;}
-    .c-link{
-      display:flex;align-items:center;gap:16px;padding:16px 20px;
-      border:1px solid var(--border);border-radius:12px;background:#fafbfc;
-      transition:all 0.25s;
-    }
-    .c-link:hover{border-color:var(--green);background:#fff;transform:translateX(6px);box-shadow:0 8px 20px rgba(0,0,0,0.05);}
-    .c-link-icon{
-      width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-      flex-shrink:0;font-size:16px;font-weight:700;color:var(--green);
-      background:rgba(26,122,74,0.1);
-    }
+    .c-link{display:flex;align-items:center;gap:16px;padding:16px 20px;border:1px solid rgba(20,184,166,0.15);border-radius:12px;background:rgba(255,255,255,0.7);transition:all 0.25s;}
+    .c-link:hover{border-color:var(--teal);background:#fff;transform:translateX(6px);box-shadow:0 8px 20px rgba(20,184,166,0.1);}
+    .c-link-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:700;color:var(--green);background:rgba(26,122,74,0.12);}
     .c-link-label{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:2px;}
     .c-link-val{font-size:14px;color:var(--black);font-weight:500;}
-    .cta-card{
-      background:var(--green);border-radius:18px;padding:44px;color:#fff;
-      position:relative;overflow:hidden;
-    }
-    .cta-card h3{font-family:'Nohemi',sans-serif;font-weight:500;font-size:28px;margin-bottom:14px;}
-    .cta-card p{font-size:15px;color:rgba(255,255,255,0.8);margin-bottom:30px;line-height:1.8;}
-    .cta-btn{
-      display:inline-flex;align-items:center;gap:10px;
-      background:#fff;color:var(--green);padding:13px 26px;border-radius:8px;
-      font-size:15px;font-weight:700;transition:all 0.2s;
-    }
+    .cta-card{background:var(--green);border-radius:18px;padding:44px;color:#fff;position:relative;overflow:hidden;}
+    .cta-card::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.07);}
+    .cta-card h3{font-family:'Nohemi',sans-serif;font-weight:500;font-size:28px;margin-bottom:14px;position:relative;z-index:1;}
+    .cta-card p{font-size:15px;color:rgba(255,255,255,0.8);margin-bottom:30px;line-height:1.8;position:relative;z-index:1;}
+    .cta-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--green);padding:13px 26px;border-radius:8px;font-size:15px;font-weight:700;transition:all 0.2s;position:relative;z-index:1;}
     .cta-btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,0.15);}
 
     footer{background:#fff;border-top:1px solid var(--border);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;}
     footer p{font-size:13px;color:var(--muted);}
     footer a{font-size:13px;color:var(--muted);transition:color 0.2s;}
     footer a:hover{color:var(--green);}
+
+    /* ─── REVEAL ─── */
+    .fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1);}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
 
     /* ─── RESPONSIVE ─── */
     @media(max-width:960px){
@@ -293,6 +273,7 @@
       .auto-grid{grid-template-columns:1fr;}
       .auto-card.wide{grid-column:span 1;}
       .proj-grid{grid-template-columns:1fr;}
+      .idols-grid{grid-template-columns:1fr;}
       footer{padding:20px 24px;flex-direction:column;gap:10px;text-align:center;}
     }
     @media(max-width:520px){
@@ -311,6 +292,7 @@
     <li><a href="#experience">Experience</a></li>
     <li><a href="#automations">Automations</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#idols">My Idols</a></li>
     <li><a href="blog/index.html">Writing</a></li>
   </ul>
   <div class="nav-right">
@@ -324,6 +306,7 @@
   <a href="#experience" onclick="closeMenu()">Experience</a>
   <a href="#automations" onclick="closeMenu()">Automations</a>
   <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#idols" onclick="closeMenu()">My Idols</a>
   <a href="blog/index.html">Writing</a>
   <a href="#contact" onclick="closeMenu()">Get in Touch</a>
 </div>
@@ -339,22 +322,12 @@
         <a href="blog/index.html" class="btn-outline">Read Writing →</a>
       </div>
       <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">7+</div>
-          <div class="stat-lbl">Automations Built</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">1,300</div>
-          <div class="stat-lbl">Newsletter Subscribers</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">3 Yrs</div>
-          <div class="stat-lbl">Equity Investing</div>
-        </div>
+        <div class="stat-item"><div class="stat-num">7+</div><div class="stat-lbl">Automations Built</div></div>
+        <div class="stat-item"><div class="stat-num">1,300</div><div class="stat-lbl">Newsletter Subscribers</div></div>
+        <div class="stat-item"><div class="stat-num">3 Yrs</div><div class="stat-lbl">Equity Investing</div></div>
       </div>
     </div>
     <div class="hero-photo">
-      <!-- TO REMOVE PHOTO: Delete the img tag below or add style="display:none;" to the img tag -->
       <img src="WhatsApp Image 2026-02-12 at 10.18.20 AM.jpeg" alt="Aravind Kumar R" />
       <div class="hero-photo-frame"></div>
       <div class="hero-photo-accent"></div>
@@ -366,11 +339,11 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-card section-card--green">
+  <div class="section-card section-card--green fade-up">
     <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
-      <circle cx="70" cy="70" r="50" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-      <circle cx="70" cy="70" r="30" fill="currentColor" opacity="0.2"/>
-      <path d="M70 20 L120 70 L70 120 L20 70 Z" stroke="currentColor" stroke-width="2" opacity="0.25"/>
+      <circle cx="70" cy="70" r="50" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+      <circle cx="70" cy="70" r="30" fill="currentColor" opacity="0.25"/>
+      <path d="M70 20 L120 70 L70 120 L20 70 Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
     </svg>
     <div class="section-header">
       <div class="eyebrow">About Me</div>
@@ -402,11 +375,11 @@
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-card section-card--blue">
+  <div class="section-card section-card--blue fade-up">
     <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
-      <rect x="20" y="30" width="30" height="80" rx="4" fill="currentColor" opacity="0.15"/>
-      <rect x="55" y="50" width="30" height="60" rx="4" fill="currentColor" opacity="0.25"/>
-      <rect x="90" y="20" width="30" height="90" rx="4" fill="currentColor" opacity="0.35"/>
+      <rect x="20" y="30" width="30" height="80" rx="4" fill="currentColor" opacity="0.2"/>
+      <rect x="55" y="50" width="30" height="60" rx="4" fill="currentColor" opacity="0.3"/>
+      <rect x="90" y="20" width="30" height="90" rx="4" fill="currentColor" opacity="0.4"/>
     </svg>
     <div class="section-header">
       <div class="eyebrow">Experience</div>
@@ -443,12 +416,12 @@
 
 <!-- AUTOMATIONS -->
 <section id="automations">
-  <div class="section-card section-card--purple">
+  <div class="section-card section-card--purple fade-up">
     <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
-      <circle cx="40" cy="70" r="20" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-      <circle cx="100" cy="70" r="20" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-      <line x1="60" y1="70" x2="80" y2="70" stroke="currentColor" stroke-width="3" opacity="0.4"/>
-      <circle cx="70" cy="70" r="8" fill="currentColor" opacity="0.5"/>
+      <circle cx="40" cy="70" r="20" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+      <circle cx="100" cy="70" r="20" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+      <line x1="60" y1="70" x2="80" y2="70" stroke="currentColor" stroke-width="3" opacity="0.5"/>
+      <circle cx="70" cy="70" r="8" fill="currentColor" opacity="0.6"/>
     </svg>
     <div class="section-header">
       <div class="eyebrow">Technical Contributions</div>
@@ -469,7 +442,7 @@
       </div>
       <div class="auto-card">
         <svg class="card-icon" viewBox="0 0 38 38" fill="none">
-          <circle cx="19" cy="19" r="13" stroke="#8b5cf6" stroke-width="1.5" opacity="0.25"/>
+          <circle cx="19" cy="19" r="13" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
           <path d="M19 6 A13 13 0 0 1 32 19" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round"/>
           <circle cx="19" cy="19" r="4" fill="#8b5cf6"/>
         </svg>
@@ -480,7 +453,7 @@
       </div>
       <div class="auto-card">
         <svg class="card-icon" viewBox="0 0 38 38" fill="none">
-          <rect x="5" y="6" width="28" height="26" rx="3" stroke="#8b5cf6" stroke-width="1.5" opacity="0.35"/>
+          <rect x="5" y="6" width="28" height="26" rx="3" stroke="#8b5cf6" stroke-width="1.5" opacity="0.4"/>
           <circle cx="29" cy="29" r="7" fill="#8b5cf6"/>
         </svg>
         <div class="auto-title">Agreement Alignment Checker</div>
@@ -506,10 +479,10 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-card section-card--yellow">
+  <div class="section-card section-card--yellow fade-up">
     <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
-      <path d="M20 120 L70 20 L120 120 Z" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
-      <circle cx="70" cy="70" r="25" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+      <path d="M20 120 L70 20 L120 120 Z" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.15"/>
+      <circle cx="70" cy="70" r="25" stroke="currentColor" stroke-width="2" opacity="0.35"/>
     </svg>
     <div class="section-header">
       <div class="eyebrow">Projects</div>
@@ -545,14 +518,69 @@
   </div>
 </section>
 
+<!-- MY IDOLS -->
+<section id="idols">
+  <div class="section-card section-card--indigo fade-up">
+    <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
+      <polygon points="70,15 85,55 130,55 95,80 110,120 70,95 30,120 45,80 10,55 55,55" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.15"/>
+    </svg>
+    <div class="section-header">
+      <div class="eyebrow">My Idols</div>
+      <h2 class="sec-title">People who shaped<br>the way I think.</h2>
+      <p class="sec-sub">Beyond textbooks and courses — these are the people whose lives, decisions, and journeys have influenced how I see the world.</p>
+    </div>
+    <div class="idols-grid">
+
+      <!-- VIJAY -->
+      <a href="blog/vijay.html" class="idol-card">
+        <div class="idol-card-top vijay">
+          <div class="idol-card-top-overlay"></div>
+          <span class="idol-star-icon">🎬</span>
+          <span class="idol-card-label">Personal Idol · Cinema</span>
+        </div>
+        <div class="idol-card-body">
+          <div class="idol-name">Thalapathy Vijay</div>
+          <div class="idol-tagline">Consistency, humility, and a quiet confidence that speaks louder than any applause. His journey taught me that staying grounded is the hardest — and most important — thing.</div>
+          <div class="idol-traits">
+            <span class="idol-trait vijay-t">Resilience</span>
+            <span class="idol-trait vijay-t">Consistency</span>
+            <span class="idol-trait vijay-t">Humility</span>
+            <span class="idol-trait vijay-t">Growth</span>
+          </div>
+          <span class="idol-read">Read my tribute →</span>
+        </div>
+      </a>
+
+      <!-- WARREN BUFFETT -->
+      <a href="blog/buffett.html" class="idol-card">
+        <div class="idol-card-top buffett">
+          <div class="idol-card-top-overlay"></div>
+          <span class="idol-star-icon">📈</span>
+          <span class="idol-card-label">Professional Idol · Investing</span>
+        </div>
+        <div class="idol-card-body">
+          <div class="idol-name">Warren Buffett</div>
+          <div class="idol-tagline">The man who turned patience into a philosophy and discipline into billions. His thinking on value, temperament, and long-term vision reshaped how I approach every financial decision.</div>
+          <div class="idol-traits">
+            <span class="idol-trait buffett-t">Patience</span>
+            <span class="idol-trait buffett-t">Discipline</span>
+            <span class="idol-trait buffett-t">Value Thinking</span>
+            <span class="idol-trait buffett-t">Simplicity</span>
+          </div>
+          <span class="idol-read">Read my tribute →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-card section-card--teal">
+  <div class="section-card section-card--teal fade-up">
     <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
-      <rect x="30" y="30" width="80" height="80" rx="8" stroke="currentColor" stroke-width="2" opacity="0.25"/>
-      <circle cx="70" cy="70" r="15" fill="currentColor" opacity="0.3"/>
-      <line x1="70" y1="30" x2="70" y2="50" stroke="currentColor" stroke-width="2" opacity="0.2"/>
-      <line x1="70" y1="90" x2="70" y2="110" stroke="currentColor" stroke-width="2" opacity="0.2"/>
+      <rect x="30" y="30" width="80" height="80" rx="8" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+      <circle cx="70" cy="70" r="15" fill="currentColor" opacity="0.35"/>
     </svg>
     <div class="section-header">
       <div class="eyebrow">Get in Touch</div>
@@ -590,16 +618,27 @@
 </div>
 
 <footer>
-  <p>© 2026 Aravind Kumar R/p>
+  <p>© 2026 Aravind Kumar R</p>
   <a href="blog/index.html">Writing →</a>
 </footer>
 
 <script>
 const hb = document.getElementById('hamburger');
 const mm = document.getElementById('mobileMenu');
-hb.addEventListener('click', ()=>{ hb.classList.toggle('open'); mm.classList.toggle('open'); });
+hb.addEventListener('click',()=>{ hb.classList.toggle('open'); mm.classList.toggle('open'); });
 function closeMenu(){ hb.classList.remove('open'); mm.classList.remove('open'); }
-</script>
 
+const ro = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); } });
+},{threshold:0.06});
+document.querySelectorAll('.fade-up').forEach(el=> ro.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+  });
+});
+</script>
 </body>
 </html>
