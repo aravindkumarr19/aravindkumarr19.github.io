@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Warren Buffett — My Professional Idol | Aravind Kumar R</title>
+  <meta name="description" content="A personal tribute to Warren Buffett — patience, discipline, and what The Snowball taught me about long-term thinking."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:400;}
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff');font-weight:600;}
+
+    :root{
+      --green:#1a7a4a;--green2:#2d9e6b;--green-dark:#0f3d24;
+      --gold:#c8a862;--ink:#1a1a1a;--ink2:#3a3a3a;
+      --muted:#6b7280;--border:#e5e7eb;--bg:#fafafa;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+    a{text-decoration:none;color:inherit;}
+
+    /* NAV */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 48px;background:rgba(250,250,250,0.96);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--muted);transition:color 0.2s;}
+    .nav-back:hover{color:var(--ink);}
+    .nav-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+    .nav-home{font-family:'Nohemi',sans-serif;font-weight:400;font-size:16px;color:var(--ink);}
+
+    /* HERO */
+    .article-hero{
+      min-height:92vh;
+      background:linear-gradient(160deg,#0a1f12 0%,#1a3a1a 45%,#14532d 100%);
+      display:flex;flex-direction:column;justify-content:flex-end;
+      padding:100px 48px 72px;
+      position:relative;overflow:hidden;
+    }
+    .article-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(26,122,74,0.2) 0%,transparent 70%);}
+    .article-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,98,0.1) 0%,transparent 70%);}
+
+    .hero-inner{max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1;}
+    .hero-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:6px 14px;border-radius:6px;margin-bottom:24px;}
+    .hero-title{font-family:'Nohemi',sans-serif;font-weight:400;font-size:clamp(40px,6vw,72px);color:#fff;line-height:1.08;letter-spacing:-2px;margin-bottom:20px;}
+    .hero-title em{font-style:normal;color:var(--gold);}
+    .hero-subtitle{font-size:18px;color:rgba(255,255,255,0.6);line-height:1.75;max-width:600px;margin-bottom:40px;}
+    .hero-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+    .meta-pill{font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:6px;}
+    .meta-pill span{color:rgba(255,255,255,0.8);}
+
+    /* ARTICLE */
+    .article-wrap{max-width:760px;margin:0 auto;padding:80px 48px 100px;}
+
+    .article-img{
+      width:100%;border-radius:16px;overflow:hidden;
+      margin:52px 0;box-shadow:0 12px 40px rgba(0,0,0,0.12);
+    }
+    .article-img img{width:100%;height:auto;display:block;max-height:520px;object-fit:cover;object-position:center top;}
+    .article-img figcaption{padding:12px 18px;font-size:13px;color:var(--muted);background:#fff;border-top:1px solid var(--border);font-style:italic;}
+
+    .pull-quote{
+      border-left:4px solid var(--green);
+      padding:20px 28px;margin:44px 0;
+      background:rgba(26,122,74,0.05);
+      border-radius:0 12px 12px 0;
+    }
+    .pull-quote p{font-family:'Lora',serif;font-style:italic;font-size:20px;color:var(--ink);line-height:1.65;margin:0;}
+
+    /* stat callout */
+    .stat-callout{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+      margin:44px 0;
+    }
+    .stat-box{
+      background:#fff;border:1px solid var(--border);border-radius:12px;
+      padding:20px 16px;text-align:center;
+      transition:all 0.2s;
+    }
+    .stat-box:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 8px 20px rgba(26,122,74,0.1);}
+    .stat-box .num{font-family:'Nohemi',sans-serif;font-size:28px;color:var(--green);margin-bottom:6px;}
+    .stat-box .lbl{font-size:12px;color:var(--muted);font-weight:500;}
+
+    .article-body h2{font-family:'Nohemi',sans-serif;font-weight:400;font-size:26px;color:var(--ink);margin:52px 0 16px;letter-spacing:-0.4px;}
+    .article-body p{font-size:17px;color:var(--ink2);line-height:1.88;margin-bottom:24px;}
+    .article-body strong{color:var(--ink);font-weight:600;}
+
+    .trait-row{display:flex;flex-wrap:wrap;gap:10px;margin:36px 0;}
+    .trait-badge{font-size:13px;font-weight:600;padding:8px 18px;border-radius:20px;background:rgba(26,122,74,0.1);color:var(--green);}
+
+    .back-cta{text-align:center;padding:60px 0 0;}
+    .back-cta a{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;padding:14px 30px;border-radius:10px;font-size:15px;font-weight:600;transition:all 0.2s;}
+    .back-cta a:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 10px 24px rgba(26,122,74,0.25);}
+
+    footer{text-align:center;padding:32px 24px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);}
+
+    @media(max-width:760px){
+      nav{padding:0 20px;}
+      .article-hero{padding:90px 20px 56px;}
+      .article-wrap{padding:56px 20px 72px;}
+      .hero-title{font-size:36px;}
+      .stat-callout{grid-template-columns:1fr 1fr;}
+      .pull-quote p{font-size:18px;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-back">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+  <div class="nav-home">Aravind Kumar R</div>
+</nav>
+
+<!-- HERO -->
+<div class="article-hero">
+  <div class="hero-inner">
+    <div class="hero-tag">📈 Professional Idol · Investing</div>
+    <h1 class="hero-title">Warren <em>Buffett</em></h1>
+    <p class="hero-subtitle">The man who turned patience into a philosophy and discipline into billions — and what reading his story changed in how I think about money and life.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">Written by <span>Aravind Kumar R</span></div>
+      <div class="meta-pill">Category <span>Finance · Personal</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+  <div class="article-body">
+
+    <p>My admiration for Warren Buffett really began after I read <strong>The Snowball</strong>. Before that, I just knew him as one of the richest and most successful investors in the world. But the book made him feel real to me — it showed his journey, his mistakes, his thinking, and how he built everything <strong>step by step.</strong> It was not the wealth that impressed me. It was the method.</p>
+
+    <p>What stayed with me the most was his mindset. He doesn't chase trends or get carried away by noise. He takes his time, understands things deeply, and makes decisions with conviction. That kind of patience is rare, and honestly, something I'm still trying to build within myself. The world around us constantly rewards speed — fast decisions, fast pivots, fast results. Buffett quietly proved that the opposite approach can compound into something extraordinary.</p>
+
+    <!-- IMAGE 1: place photo at  ../images/buffett-article-1.jpg  -->
+    <figure class="article-img">
+      <img src="../images/buffett-article-1.jpg" alt="Warren Buffett" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>The Oracle of Omaha — whose most powerful asset was never capital, but temperament.</figcaption>
+    </figure>
+
+    <div class="stat-callout">
+      <div class="stat-box"><div class="num">94</div><div class="lbl">Years of age — still compounding</div></div>
+      <div class="stat-box"><div class="num">60+</div><div class="lbl">Years running Berkshire</div></div>
+      <div class="stat-box"><div class="num">~20%</div><div class="lbl">Avg. annual return since 1965</div></div>
+    </div>
+
+    <h2>The principle that changed my thinking</h2>
+
+    <p>Reading about how he stuck to his principles even when others doubted him made me reflect on how important it is to <strong>trust your own thinking.</strong> In finance, especially, it's easy to get influenced by what everyone else is doing. Markets panic. Crowds chase momentum. Everyone seems to have an edge. Buffett's approach reminds me to slow down, think clearly, and focus on long-term value rather than short-term excitement.</p>
+
+    <p>His famous quote — "be fearful when others are greedy, and greedy when others are fearful" — sounds simple on paper. But living by it is genuinely hard. It means buying when everyone is selling, holding when others are running, and having the conviction to sit still when the crowd is screaming. That kind of temperament is not taught in textbooks. It is built over years of self-awareness.</p>
+
+    <div class="pull-quote">
+      <p>"Price is what you pay. Value is what you get." — The distinction most people never pause to make.</p>
+    </div>
+
+    <h2>Simplicity as a competitive edge</h2>
+
+    <p>Another thing that really inspires me is how <strong>simple he keeps his life.</strong> There's no unnecessary complexity — just clarity in thought and action. He still lives in the same house in Omaha he bought in 1958. He reads for hours every day. He avoids what he doesn't understand. It made me realize that success doesn't have to look flashy. Sometimes, it's just about doing the same things right over a long period of time.</p>
+
+    <p>This flies in the face of how modern finance presents itself — with complex instruments, endless jargon, and the illusion that sophistication equals superiority. Buffett showed that the edge often lies in simplicity: understand the business, understand the price, and wait. Most people can't wait. That inability to wait is where value investors find their opportunity.</p>
+
+    <!-- IMAGE 2: place photo at  ../images/buffett-article-2.jpg  -->
+    <figure class="article-img">
+      <img src="../images/buffett-article-2.jpg" alt="Warren Buffett" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>Decades of reading, thinking, and compounding — the real Berkshire model.</figcaption>
+    </figure>
+
+    <h2>What The Snowball actually taught me</h2>
+
+    <p>The Snowball is not just a biography. It's a study in how a life gets built. Buffett's early years — buying his first stock at 11, delivering newspapers, doing taxes for neighbors as a teenager — reveal that the compounding wasn't just financial. It was also intellectual. He was always reading, always learning, always upgrading his mental models. The wealth was a byproduct of the thinking.</p>
+
+    <p>What hit me hardest was the chapter on his relationship with Charlie Munger, his long-time partner. Munger pushed Buffett away from pure Graham-style deep value toward buying <strong>wonderful companies at fair prices.</strong> That evolution — being willing to upgrade your own thinking when confronted with better information — is something I want to carry in every phase of my own work. Staying curious and staying honest about what you don't yet know is its own kind of edge.</p>
+
+    <p>Munger's latticework of mental models also became something I actively think about. The idea that great decision-making comes from combining multiple disciplines — psychology, economics, engineering, history — feels deeply applicable to asset operations and finance. I try to bring that same cross-disciplinary thinking to my own work at BetterInvest.</p>
+
+    <!-- IMAGE 3: place photo at  ../images/buffett-article-3.jpg  -->
+    <figure class="article-img">
+      <img src="../images/buffett-article-3.jpg" alt="Warren Buffett" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>The snowball keeps rolling — if you find the right hill and have the patience to let it.</figcaption>
+    </figure>
+
+    <h2>How it shows up in my own work</h2>
+
+    <p>Even in my own journey in asset operations and finance, I often find myself going back to what I learned from his story. When reviewing film investment deals at BetterInvest, I think about underlying value — not just the projected return, but the quality of the collateral, the integrity of the structure, the durability of the cash flow. When building automations, I ask whether the solution I'm building is genuinely simple, or whether I'm adding complexity for complexity's sake.</p>
+
+    <p>Buffett has a concept he calls the "inner scorecard" — measuring yourself by your own standards rather than by what others think of you. That framing has helped me stay focused on building genuine skills over optimizing appearances. In a world of LinkedIn posts and personal branding, the inner scorecard is a useful anchor.</p>
+
+    <p>For me, Buffett isn't just an idol. He's a <strong>constant reminder that the right mindset matters more than quick results.</strong> Be patient. Stay consistent. Don't compromise on fundamentals. Think in decades, not quarters. And never stop reading.</p>
+
+    <div class="trait-row">
+      <span class="trait-badge">Patience</span>
+      <span class="trait-badge">Discipline</span>
+      <span class="trait-badge">Value Thinking</span>
+      <span class="trait-badge">Simplicity</span>
+      <span class="trait-badge">Inner Scorecard</span>
+      <span class="trait-badge">Long-Term Vision</span>
+    </div>
+
+  </div>
+
+  <div class="back-cta">
+    <a href="../index.html#idols">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Portfolio
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Aravind Kumar R</p>
+</footer>
+
+</body>
+</html>
