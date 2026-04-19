@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Day in Asset Operations — Aravind Kumar R</title>
   <meta name="description" content="What actually happens behind the scenes in fintech asset operations — financial models, legal docs, fund flows, and compliance." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
   <style>
     @font-face { font-family:'Nohemi'; src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff'); font-weight:400; }
@@ -13,164 +17,330 @@
     @font-face { font-family:'Nohemi'; src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff'); font-weight:600; }
 
     :root {
-      --green:#1a7a4a;--green2:#2d9e6b;
-      --blue:#3b82f6;--purple:#8b5cf6;--teal:#14b8a6;--yellow:#f59e0b;
-      --black:#0d0d0d;--ink:#111111;--ink2:#333333;
-      --muted:#6b7280;--border:#e8e8e8;--bg:#ffffff;
+      --green: #1a7a4a;
+      --green2: #2d9e6b;
+      --black: #0d0d0d;
+      --ink: #1a1a2e;
+      --ink2: #374151;
+      --muted: #6b7280;
+      --border: #e8eaed;
+      --bg: #fafbfc;
+      --reading-width: 680px;
     }
 
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
-    body { font-family:'Inter',sans-serif; background:#fafbfc; color:#1f2937; line-height:1.8; }
-    a { text-decoration:none; color:inherit; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink2); line-height: 1.8; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
 
-    /* ── NAV ── */
+    /* ─── NAV ─── */
     nav {
-      position:fixed; top:0; left:0; right:0; z-index:100;
-      background:rgba(255,255,255,0.92); backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--border);
-      padding:0 48px; display:flex; align-items:center; justify-content:space-between; height:64px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px; display: flex; align-items: center;
+      justify-content: space-between; height: 60px;
+      transition: box-shadow 0.3s;
     }
-    .nav-logo { font-family:'Nohemi',sans-serif; font-weight:500; font-size:18px; color:var(--black); }
-    .nav-links {
-      display:flex; gap:24px; align-items:center;
-    }
+    nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+    .nav-logo { font-family: 'Nohemi', sans-serif; font-weight: 500; font-size: 17px; color: var(--black); }
+    .nav-links { display: flex; gap: 12px; align-items: center; }
     .nav-link {
-      font-size:14px; font-weight:600; color:var(--muted);
-      padding:8px 18px; border-radius:8px; border:1px solid var(--border);
-      transition:all 0.2s;
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      padding: 7px 16px; border-radius: 7px; border: 1px solid var(--border);
+      transition: all 0.2s;
     }
-    .nav-link:hover { color:var(--green); border-color:var(--green); background:#fff; }
+    .nav-link:hover { color: var(--green); border-color: var(--green); background: #fff; }
 
-    /* HERO */
+    /* ─── HERO (colourful) ─── */
     .article-hero {
-      padding:120px 48px 70px;
-      background:#fff;
-      border-bottom:1px solid var(--border);
+      padding: 110px 24px 70px;
+      background: linear-gradient(160deg, #f0fdf6 0%, #fff 60%);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .article-hero::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,122,74,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
     .article-hero-inner {
-      max-width:800px;
-      margin:0 auto;
+      max-width: var(--reading-width);
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .article-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 20px;
+    }
+    .article-eyebrow::before {
+      content: '';
+      display: inline-block; width: 24px; height: 2px;
+      background: var(--green); border-radius: 2px;
     }
     .article-hero h1 {
-      font-family:'Nohemi',sans-serif; font-weight:400;
-      font-size:clamp(36px,5vw,52px);
-      line-height:1.15; letter-spacing:-1px;
-      color:var(--black); margin-bottom:24px;
+      font-family: 'Nohemi', sans-serif; font-weight: 400;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.15; letter-spacing: -1px;
+      color: var(--black); margin-bottom: 28px;
     }
-    .meta {
-      color:var(--muted); font-size:14px; margin-bottom:32px;
-      display:flex; justify-content:center; gap:16px; flex-wrap:wrap;
+    .article-lede {
+      font-size: 19px; font-weight: 400; color: var(--muted);
+      line-height: 1.75; margin-bottom: 32px;
+      font-family: 'Lora', serif; font-style: italic;
+      border-left: 3px solid var(--green);
+      padding-left: 20px;
     }
+    .article-meta {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      font-size: 13px; color: var(--muted);
+    }
+    .meta-author {
+      display: flex; align-items: center; gap: 8px;
+      font-weight: 600; color: var(--black);
+    }
+    .meta-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .meta-dot { color: var(--border); }
     .meta-tag {
-      background:rgba(26,122,74,0.08);
-      border:1px solid rgba(26,122,74,0.2);
-      color:var(--green);
-      padding:4px 14px; border-radius:6px;
-      font-size:12px; font-weight:600;
+      background: rgba(26,122,74,0.08);
+      border: 1px solid rgba(26,122,74,0.18);
+      color: var(--green);
+      padding: 3px 12px; border-radius: 20px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
     }
 
-    /* ARTICLE CONTENT */
-    .article-content {
-      max-width:800px; margin:0 auto;
-      padding:60px 48px 100px;
+    /* ─── READING PROGRESS ─── */
+    .progress-bar {
+      position: fixed; top: 60px; left: 0; right: 0; height: 2px;
+      background: var(--border); z-index: 99;
+    }
+    .progress-fill {
+      height: 100%; width: 0; background: var(--green);
+      transition: width 0.1s linear;
     }
 
-    /* Section with diagram */
-    .section-block {
-      background:#fff; border-radius:20px;
-      padding:50px 48px; margin-bottom:60px;
-      box-shadow:0 4px 20px rgba(0,0,0,0.04);
-      position:relative; overflow:hidden;
-      transition:all 0.3s;
-    }
-    .section-block::before {
-      content:''; position:absolute; top:0; left:0; right:0; bottom:0;
-      opacity:0.05; border-radius:20px; pointer-events:none;
-    }
-    .section-block--green::before{background:linear-gradient(135deg,#1a7a4a,#2d9e6b);}
-    .section-block--blue::before{background:linear-gradient(135deg,#3b82f6,#60a5fa);}
-    .section-block--purple::before{background:linear-gradient(135deg,#8b5cf6,#a78bfa);}
-    .section-block--teal::before{background:linear-gradient(135deg,#14b8a6,#2dd4bf);}
-    .section-block--yellow::before{background:linear-gradient(135deg,#f59e0b,#fbbf24);}
-    .section-block:hover {
-      transform:translateY(-4px);
-      box-shadow:0 12px 40px rgba(0,0,0,0.08);
+    /* ─── ARTICLE BODY ─── */
+    .article-wrap {
+      max-width: var(--reading-width);
+      margin: 0 auto;
+      padding: 64px 24px 100px;
     }
 
-    .section-icon {
-      position:absolute; right:30px; top:30px;
-      width:80px; height:80px; opacity:0.12; pointer-events:none;
+    /* ─── SECTION: heading only coloured, body clean ─── */
+    .article-section {
+      margin-bottom: 56px;
     }
 
-    .article-content p {
-      font-size:17px; margin-bottom:24px; color:#374151; position:relative; z-index:1;
+    /* Colourful section header strip */
+    .section-heading {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 24px;
+      padding: 18px 24px;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
     }
-    .article-content h2 {
-      font-family:'Nohemi',sans-serif; font-weight:500;
-      font-size:28px; color:var(--black);
-      margin-bottom:20px; position:relative; z-index:1;
-      display:flex; align-items:center; gap:14px;
+    .section-heading::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 12px;
+      opacity: 1;
     }
-    .article-content ul {
-      padding-left:0; margin-bottom:24px; list-style:none; position:relative; z-index:1;
-    }
-    .article-content li {
-      font-size:17px; margin-bottom:12px; color:#374151;
-      padding-left:28px; position:relative;
-    }
-    .article-content li::before {
-      content:''; position:absolute; left:0; top:10px;
-      width:8px; height:8px; background:var(--green);
-      border-radius:50%; opacity:0.6;
-    }
-    .article-content strong { color:var(--black); font-weight:600; }
+    /* colour variants */
+    .sh-green { background: linear-gradient(135deg, rgba(26,122,74,0.08), rgba(45,158,107,0.05)); border-left: 4px solid var(--green); }
+    .sh-blue   { background: linear-gradient(135deg, rgba(59,130,246,0.07), rgba(96,165,250,0.04)); border-left: 4px solid #3b82f6; }
+    .sh-purple { background: linear-gradient(135deg, rgba(139,92,246,0.07), rgba(167,139,250,0.04)); border-left: 4px solid #8b5cf6; }
+    .sh-teal   { background: linear-gradient(135deg, rgba(20,184,166,0.07), rgba(45,212,191,0.04)); border-left: 4px solid #14b8a6; }
+    .sh-yellow { background: linear-gradient(135deg, rgba(245,158,11,0.07), rgba(251,191,36,0.04)); border-left: 4px solid #f59e0b; }
+    .sh-indigo { background: linear-gradient(135deg, rgba(99,102,241,0.07), rgba(129,140,248,0.04)); border-left: 4px solid #6366f1; }
 
-    hr {
-      border:none; height:1px;
-      background:linear-gradient(90deg,transparent,var(--border),transparent);
-      margin:60px 0;
+    .section-heading h2 {
+      font-family: 'Nohemi', sans-serif; font-weight: 500;
+      font-size: clamp(20px, 2.5vw, 26px);
+      color: var(--black); line-height: 1.25;
+      position: relative; z-index: 1;
+    }
+    .sh-icon {
+      font-size: 22px; position: relative; z-index: 1;
+      flex-shrink: 0;
     }
 
+    /* ─── BODY PROSE ─── */
+    .prose p {
+      font-size: 17px; line-height: 1.9;
+      color: var(--ink2); margin-bottom: 22px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose strong { color: var(--black); font-weight: 600; }
+
+    /* Pull quote */
+    .prose blockquote {
+      margin: 32px 0;
+      padding: 20px 28px;
+      border-left: 3px solid var(--green);
+      background: rgba(26,122,74,0.04);
+      border-radius: 0 8px 8px 0;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: #374151;
+      line-height: 1.8;
+    }
+
+    /* Inline list */
+    .prose ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .prose li {
+      font-size: 16px; color: var(--ink2);
+      padding: 12px 16px 12px 44px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      position: relative;
+      line-height: 1.75;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .prose li:hover {
+      border-color: rgba(26,122,74,0.3);
+      box-shadow: 0 2px 10px rgba(26,122,74,0.06);
+    }
+    .prose li::before {
+      content: '';
+      position: absolute; left: 16px; top: 50%;
+      transform: translateY(-50%);
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%; opacity: 0.6;
+    }
+    .prose li strong {
+      display: block;
+      font-size: 13px; font-weight: 700;
+      color: var(--green); margin-bottom: 2px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* Section divider */
+    .prose-divider {
+      display: flex; align-items: center; gap: 16px;
+      margin: 52px 0;
+    }
+    .prose-divider::before,
+    .prose-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .prose-divider-icon { font-size: 16px; opacity: 0.4; }
+
+    /* ─── CLOSING CARD ─── */
+    .closing-card {
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      border-radius: 20px; padding: 44px 48px;
+      color: #fff; position: relative; overflow: hidden;
+      margin: 56px 0 0;
+    }
+    .closing-card::before {
+      content: '';
+      position: absolute; right: -40px; bottom: -40px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .closing-card h2 {
+      font-family: 'Nohemi', sans-serif; font-weight: 400;
+      font-size: 26px; margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    .closing-card p {
+      font-size: 16px; color: rgba(255,255,255,0.85);
+      line-height: 1.8; position: relative; z-index: 1;
+    }
+
+    /* ─── BACK LINK ─── */
     .back-link {
-      display:inline-flex; align-items:center; gap:10px;
-      font-size:14px; font-weight:600; color:var(--green);
-      padding:10px 22px; border-radius:8px;
-      border:2px solid var(--green);
-      transition:all 0.25s; margin-top:40px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--green);
+      padding: 10px 20px; border-radius: 8px;
+      border: 2px solid var(--green);
+      transition: all 0.25s; margin-top: 48px;
     }
     .back-link:hover {
-      background:var(--green); color:#fff;
-      transform:translateY(-3px);
-      box-shadow:0 8px 20px rgba(26,122,74,0.2);
+      background: var(--green); color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(26,122,74,0.2);
     }
 
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-fast {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-fast.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── FOOTER ─── */
     footer {
-      background:#fff; border-top:1px solid var(--border);
-      padding:24px 48px;
-      display:flex; justify-content:space-between; align-items:center;
+      background: #fff; border-top: 1px solid var(--border);
+      padding: 22px 48px;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    footer p { font-size:13px; color:var(--muted); }
-    footer a { color:var(--muted); font-size:13px; transition:color 0.2s; }
-    footer a:hover { color:var(--green); }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer a { color: var(--muted); font-size: 13px; transition: color 0.2s; }
+    footer a:hover { color: var(--green); }
 
-    @media(max-width:768px) {
-      nav { padding:0 20px; }
-      .nav-links { gap:12px; }
-      .nav-link { padding:6px 12px; font-size:13px; }
-      .article-hero { padding:90px 20px 50px; }
-      .article-content { padding:50px 20px 80px; }
-      .section-block { padding:36px 24px; margin-bottom:40px; }
-      .article-content h2 { font-size:24px; }
-      .article-content p, .article-content li { font-size:16px; }
-      footer { padding:20px; flex-direction:column; gap:10px; text-align:center; }
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-link { padding: 6px 12px; font-size: 12px; }
+      .article-hero { padding: 90px 20px 52px; }
+      .article-lede { font-size: 17px; }
+      .article-wrap { padding: 48px 20px 80px; }
+      .section-heading { padding: 14px 18px; }
+      .section-heading h2 { font-size: 18px; }
+      .prose p { font-size: 16px; }
+      .prose blockquote { font-size: 16px; padding: 16px 20px; }
+      .closing-card { padding: 32px 28px; }
+      .closing-card h2 { font-size: 22px; }
+      footer { padding: 18px 20px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .article-hero h1 { font-size: 28px; }
+      .article-meta { gap: 10px; }
     }
   </style>
 </head>
 
 <body>
 
-  <nav>
+  <!-- Reading progress bar -->
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <nav id="nav">
     <div class="nav-logo">Aravind Kumar R</div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">← All Writing</a>
@@ -178,125 +348,159 @@
     </div>
   </nav>
 
+  <!-- HERO — stays colourful -->
   <div class="article-hero">
     <div class="article-hero-inner">
+      <div class="article-eyebrow">Fintech · Operations</div>
       <h1>A Day in Asset Operations — What Actually Happens Behind the Scenes</h1>
-      <div class="meta">
-        <span>By Aravind Kumar R</span>
-        <span>·</span>
+      <p class="article-lede">Most people see the frictionless surface of fintech. Few see what runs beneath it — the structured operational framework that keeps every transaction honest.</p>
+      <div class="article-meta">
+        <div class="meta-author">
+          <div class="meta-avatar">A</div>
+          Aravind Kumar R
+        </div>
+        <span class="meta-dot">·</span>
         <span>Asset Operations Intern · BetterInvest</span>
-        <span>·</span>
+        <span class="meta-dot">·</span>
         <span>2025</span>
-        <span class="meta-tag">Fintech · Operations</span>
+        <span class="meta-tag">Fintech</span>
+        <span class="meta-tag">Operations</span>
       </div>
     </div>
   </div>
 
-  <div class="article-content">
+  <!-- ARTICLE BODY -->
+  <div class="article-wrap">
 
-    <div class="section-block section-block--green">
-      <svg class="section-icon" viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="30" stroke="currentColor" stroke-width="2"/>
-        <path d="M40 20 L50 40 L40 60 L30 40 Z" fill="currentColor" opacity="0.3"/>
-      </svg>
-      <p>Most people associate fintech with seamless apps, instant transactions, and clean user interfaces. The experience is deliberately frictionless — a few taps, and money moves. It feels almost effortless.</p>
-      <p>But what users experience is only the surface layer of a far more complex system.</p>
-      <p>Behind every transaction is a structured operational framework that ensures funds move correctly, risks are identified and contained, regulatory compliance is maintained, and every stakeholder across the chain remains aligned. This framework doesn't build itself — it's managed, monitored, and continuously refined by the people working in operations.</p>
+    <!-- Opening -->
+    <div class="article-section reveal">
+      <div class="prose">
+        <p>Most people associate fintech with seamless apps, instant transactions, and clean user interfaces. The experience is deliberately frictionless — a few taps, and money moves. It feels almost effortless.</p>
+        <p>But what users experience is only the surface layer of a far more complex system. Behind every transaction is a structured operational framework that ensures funds move correctly, risks are identified and contained, regulatory compliance is maintained, and every stakeholder across the chain remains aligned.</p>
+        <p>This framework doesn't build itself. It's managed, monitored, and continuously refined by the people working in operations. Here's what that actually looks like day-to-day.</p>
+      </div>
     </div>
 
-    <div class="section-block section-block--blue">
-      <svg class="section-icon" viewBox="0 0 80 80" fill="none">
-        <rect x="15" y="20" width="50" height="40" rx="4" stroke="currentColor" stroke-width="2"/>
-        <line x1="25" y1="32" x2="55" y2="32" stroke="currentColor" stroke-width="2" opacity="0.5"/>
-        <line x1="25" y1="42" x2="55" y2="42" stroke="currentColor" stroke-width="2" opacity="0.5"/>
-        <line x1="25" y1="52" x2="45" y2="52" stroke="currentColor" stroke-width="2" opacity="0.5"/>
-      </svg>
-      <h2>It starts with understanding the deal, not executing it</h2>
-      <p>The first thing I learned in asset operations is that execution without context is a liability. Before a single transaction is processed, the priority is clarity — a complete understanding of the deal structure that governs it.</p>
-      <p>Every deal involves multiple dimensions that must be thoroughly mapped before operations can begin:</p>
-      <ul>
-        <li>Who the counterparties and stakeholders are, and what their respective roles entail</li>
-        <li>How funds are expected to flow — directionality, sequencing, and timing</li>
-        <li>What contractual obligations each party holds, and under what conditions they activate</li>
-        <li>What the risk exposure looks like at each stage of the transaction lifecycle</li>
-      </ul>
+    <div class="prose-divider reveal-fast"><span class="prose-divider-icon">◆</span></div>
+
+    <!-- Section 1 -->
+    <div class="article-section reveal">
+      <div class="section-heading sh-blue">
+        <span class="sh-icon">📋</span>
+        <h2>It starts with understanding the deal, not executing it</h2>
+      </div>
+      <div class="prose">
+        <p>The first thing I learned in asset operations is that execution without context is a liability. Before a single transaction is processed, the priority is clarity — a complete understanding of the deal structure that governs it.</p>
+        <p>Every deal involves multiple dimensions that must be thoroughly mapped before operations can begin:</p>
+        <ul>
+          <li>Who the counterparties and stakeholders are, and what their respective roles entail</li>
+          <li>How funds are expected to flow — directionality, sequencing, and timing</li>
+          <li>What contractual obligations each party holds, and under what conditions they activate</li>
+          <li>What the risk exposure looks like at each stage of the transaction lifecycle</li>
+        </ul>
+        <p>This upfront mapping is what separates operational teams that run smoothly from those that constantly firefight. The goal is to have no surprises once the machine is in motion.</p>
+      </div>
     </div>
 
-    <div class="section-block section-block--purple">
-      <svg class="section-icon" viewBox="0 0 80 80" fill="none">
-        <rect x="15" y="25" width="15" height="30" rx="2" fill="currentColor" opacity="0.2"/>
-        <rect x="32" y="18" width="15" height="37" rx="2" fill="currentColor" opacity="0.35"/>
-        <rect x="49" y="10" width="15" height="45" rx="2" fill="currentColor" opacity="0.5"/>
-      </svg>
-      <h2>Financial models define the deal</h2>
-      <p>Financial modeling in an operations context is less about building valuation models from scratch and more about deeply understanding the ones that drive the deals you're executing. The model is the source of truth — it tells you what returns are expected, how the structure is designed to perform under different scenarios, and what assumptions are baked into the terms you're operationalizing.</p>
-      <p>On a day-to-day basis, this involves:</p>
-      <ul>
-        <li>Reviewing deal models to validate that operational inputs — disbursement amounts, timelines, allocation splits — are consistent with agreed terms</li>
-        <li>Identifying discrepancies between modeled assumptions and real-world data before they propagate into live transactions</li>
-        <li>Working cross-functionally with finance and structuring teams to flag anomalies early</li>
-      </ul>
+    <!-- Section 2 -->
+    <div class="article-section reveal">
+      <div class="section-heading sh-purple">
+        <span class="sh-icon">📊</span>
+        <h2>Financial models define the deal</h2>
+      </div>
+      <div class="prose">
+        <p>Financial modeling in an operations context is less about building valuation models from scratch and more about deeply understanding the ones that drive the deals you're executing. The model is the source of truth — it tells you what returns are expected, how the structure is designed to perform under different scenarios, and what assumptions are baked into the terms you're operationalising.</p>
+        <blockquote>
+          "If a number doesn't match the model, it's not a minor discrepancy — it's a signal that something upstream went wrong."
+        </blockquote>
+        <p>On a day-to-day basis, this involves reviewing deal models to validate that operational inputs are consistent with agreed terms, identifying discrepancies before they propagate into live transactions, and working cross-functionally with finance and structuring teams to flag anomalies early.</p>
+        <p>The earlier you catch a model-to-reality gap, the cheaper it is to fix. Operations is often the last line of verification before execution — which makes model literacy non-negotiable.</p>
+      </div>
     </div>
 
-    <div class="section-block section-block--teal">
-      <svg class="section-icon" viewBox="0 0 80 80" fill="none">
-        <path d="M20 60 L40 20 L60 60 Z" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.15"/>
-        <circle cx="40" cy="40" r="15" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-      </svg>
-      <h2>Documentation makes everything enforceable</h2>
-      <p>In financial operations, if it isn't documented, it doesn't exist. Documentation is the foundation that makes every deal legally enforceable, operationally traceable, and audit-ready at any point in time.</p>
-      <p>Before funds move, a complete set of agreements must be in place and reviewed:</p>
-      <ul>
-        <li><strong>Discounting Agreements</strong> — outlining the terms under which receivables or instruments are discounted</li>
-        <li><strong>Indemnity Bonds</strong> — establishing liability protections and the conditions under which they apply</li>
-        <li><strong>Guarantee Agreements</strong> — defining the scope and limits of guarantees extended by each party</li>
-        <li><strong>Term Sheets</strong> — capturing the commercial terms agreed upon before formal documentation is finalized</li>
-      </ul>
+    <!-- Section 3 -->
+    <div class="article-section reveal">
+      <div class="section-heading sh-teal">
+        <span class="sh-icon">📄</span>
+        <h2>Documentation makes everything enforceable</h2>
+      </div>
+      <div class="prose">
+        <p>In financial operations, if it isn't documented, it doesn't exist. Documentation is the foundation that makes every deal legally enforceable, operationally traceable, and audit-ready at any point in time.</p>
+        <p>Before funds move, a complete set of agreements must be in place and reviewed. The key documents across any structured deal typically include:</p>
+        <ul>
+          <li><strong>Discounting Agreements</strong>Outlining the terms under which receivables or instruments are discounted — the core commercial contract.</li>
+          <li><strong>Indemnity Bonds</strong>Establishing liability protections and the conditions under which they apply for each party.</li>
+          <li><strong>Guarantee Agreements</strong>Defining the scope and limits of guarantees extended — critical for risk containment.</li>
+          <li><strong>Term Sheets</strong>Capturing the commercial terms agreed upon before formal documentation is finalised.</li>
+        </ul>
+        <p>Reviewing these documents isn't a formality. You're looking for misalignment between what was agreed commercially and what's captured legally — and those gaps, if missed, become expensive problems later.</p>
+      </div>
     </div>
 
-    <div class="section-block section-block--yellow">
-      <svg class="section-icon" viewBox="0 0 80 80" fill="none">
-        <circle cx="25" cy="40" r="15" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-        <circle cx="55" cy="40" r="15" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-        <line x1="40" y1="40" x2="40" y2="40" stroke="currentColor" stroke-width="3"/>
-        <circle cx="40" cy="40" r="6" fill="currentColor" opacity="0.4"/>
-      </svg>
-      <h2>VBA creation and KYC</h2>
-      <p>Virtual Bank Accounts (VBAs) are one of the key operational tools in structured finance. Rather than routing all funds through a single account and reconciling later, VBAs allow each deal, counterparty, or asset to have a dedicated account structure — making fund tracking precise, automated, and auditable.</p>
-      <p>Alongside this, KYC (Know Your Customer) processes ensure that every counterparty, vendor, and stakeholder interacting with the platform is verified, documented, and compliant with regulatory requirements.</p>
+    <!-- Section 4 -->
+    <div class="article-section reveal">
+      <div class="section-heading sh-yellow">
+        <span class="sh-icon">🏦</span>
+        <h2>VBA creation and KYC</h2>
+      </div>
+      <div class="prose">
+        <p>Virtual Bank Accounts (VBAs) are one of the key operational tools in structured finance. Rather than routing all funds through a single account and reconciling later, VBAs allow each deal, counterparty, or asset to have a dedicated account structure — making fund tracking precise, automated, and auditable from day one.</p>
+        <p>This matters enormously at scale. When you're managing dozens of deals simultaneously, the ability to isolate fund flows per asset is what keeps reconciliation manageable and compliance airtight.</p>
+        <p>Alongside VBA creation, KYC (Know Your Customer) processes ensure that every counterparty, vendor, and stakeholder interacting with the platform is verified, documented, and compliant with regulatory requirements. KYC isn't a one-time checkbox — it's a living record that must be maintained and updated as relationships evolve.</p>
+      </div>
     </div>
 
-    <div class="section-block section-card--green">
-      <svg class="section-icon" viewBox="0 0 80 80" fill="none">
-        <rect x="15" y="15" width="50" height="50" rx="6" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-        <circle cx="40" cy="40" r="12" fill="currentColor" opacity="0.25"/>
-      </svg>
-      <h2>Fund flow coordination</h2>
-      <p>Fund flow is where the operational work becomes most visible — and most consequential. Once all the upstream preparation is complete, the actual movement of money must be orchestrated with precision.</p>
-      <p>This involves close coordination with internal finance teams to ensure disbursements are timed correctly, amounts match agreed terms, and allocation logic is applied consistently. It also means maintaining real-time awareness of incoming repayments, collections, and any deviations from expected schedules.</p>
+    <!-- Section 5 -->
+    <div class="article-section reveal">
+      <div class="section-heading sh-green">
+        <span class="sh-icon">💸</span>
+        <h2>Fund flow coordination</h2>
+      </div>
+      <div class="prose">
+        <p>Fund flow is where the operational work becomes most visible — and most consequential. Once all the upstream preparation is complete, the actual movement of money must be orchestrated with precision.</p>
+        <p>This involves close coordination with internal finance teams to ensure disbursements are timed correctly, amounts match agreed terms, and allocation logic is applied consistently across investors and tranches. It also means maintaining real-time awareness of incoming repayments, collections, and any deviations from expected schedules.</p>
+        <blockquote>
+          "Operational excellence in fund flow isn't about speed — it's about accuracy. A fast wrong transaction is worse than a slightly delayed correct one."
+        </blockquote>
+        <p>Any mismatch here — a wrong amount, a missed counterparty, an incorrect allocation — doesn't just create accounting headaches. It creates legal exposure and erodes investor trust. The stakes are genuinely high.</p>
+      </div>
     </div>
 
-    <div class="section-block section-block--blue">
-      <h2>TDS and compliance</h2>
-      <p>Every transaction in India's financial ecosystem carries a regulatory dimension, and in asset operations, TDS (Tax Deducted at Source) compliance is a recurring responsibility that runs parallel to every disbursement and collection.</p>
-      <p>This means ensuring that the correct TDS rates are applied based on instrument type, counterparty category, and applicable sections of the Income Tax Act — and that certificates and documentation are maintained and made available to counterparties within statutory timelines.</p>
+    <!-- Section 6 -->
+    <div class="article-section reveal">
+      <div class="section-heading sh-indigo">
+        <span class="sh-icon">📑</span>
+        <h2>TDS and compliance</h2>
+      </div>
+      <div class="prose">
+        <p>Every transaction in India's financial ecosystem carries a regulatory dimension, and in asset operations, TDS (Tax Deducted at Source) compliance is a recurring responsibility that runs parallel to every disbursement and collection.</p>
+        <p>This means ensuring that the correct TDS rates are applied based on instrument type, counterparty category, and applicable sections of the Income Tax Act — and that certificates and documentation are maintained and made available to counterparties within statutory timelines.</p>
+        <p>What makes TDS management genuinely complex at scale is volume. When you're processing thousands of transactions across hundreds of investors, even a small systematic error compounds quickly. This is precisely why I built a Python-based TDS reconciler at BetterInvest — processing 2,000+ Form 16A PDFs automatically and cross-matching against internal records, reducing reconciliation time by over 90%.</p>
+      </div>
     </div>
 
-    <div class="section-block section-block--purple">
-      <h2>What I've learned</h2>
-      <p>Asset operations sits at the intersection of finance, compliance, technology, and execution. It demands a combination of skills that are rarely taught together — financial literacy, regulatory awareness, systems thinking, and meticulous attention to detail — all applied simultaneously in a fast-moving environment.</p>
-      <p>The role has taught me that operational excellence is not about following processes mechanically. It's about understanding why each process exists, what it's designed to protect against, and how to adapt when the situation requires judgment rather than just procedure.</p>
+    <div class="prose-divider reveal-fast"><span class="prose-divider-icon">◆</span></div>
+
+    <!-- What I've Learned -->
+    <div class="article-section reveal">
+      <div class="section-heading sh-green">
+        <span class="sh-icon">💡</span>
+        <h2>What I've learned</h2>
+      </div>
+      <div class="prose">
+        <p>Asset operations sits at the intersection of finance, compliance, technology, and execution. It demands a combination of skills that are rarely taught together — financial literacy, regulatory awareness, systems thinking, and meticulous attention to detail — all applied simultaneously in a fast-moving environment.</p>
+        <p>The role has taught me that operational excellence is not about following processes mechanically. It's about understanding <strong>why</strong> each process exists, what it's designed to protect against, and how to adapt when the situation requires judgment rather than just procedure.</p>
+        <p>It's also taught me that automation and operations aren't in tension — they're complementary. Every repetitive manual task I've automated hasn't eliminated the need for human judgment. It's freed that judgment up for the decisions that actually matter.</p>
+      </div>
     </div>
 
-    <hr>
-
-    <div class="section-block section-block--teal">
-      <h2>Closing perspective</h2>
-      <p>Fintech may feel instant to the people who use it — and that seamlessness is genuinely valuable. But it is the product of an enormous amount of careful, coordinated, unglamorous work happening in the background, every single day.</p>
-      <p>Asset operations is that background. It's the layer that makes the front end possible — the system of checks, structures, and people that ensures every transaction does exactly what it's supposed to do, every time.</p>
+    <!-- Closing card -->
+    <div class="closing-card reveal">
+      <h2>The invisible infrastructure of fintech</h2>
+      <p>Fintech may feel instant to the people who use it — and that seamlessness is genuinely valuable. But it is the product of an enormous amount of careful, coordinated, unglamorous work happening in the background, every single day. Asset operations is that background. It's the layer that makes the front end possible — the system of checks, structures, and people that ensures every transaction does exactly what it's supposed to do, every time.</p>
     </div>
 
-    <a href="index.html" class="back-link">← Back to all writing</a>
+    <a href="index.html" class="back-link reveal">← Back to all writing</a>
 
   </div>
 
@@ -304,6 +508,44 @@
     <p>© 2026 Aravind Kumar R</p>
     <a href="../index.html">Portfolio →</a>
   </footer>
+
+  <script>
+    /* ─── LENIS ─── */
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      smoothTouch: false,
+      touchMultiplier: 1.5,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    /* ─── READING PROGRESS ─── */
+    const fill = document.getElementById('progressFill');
+    lenis.on('scroll', ({ scroll }) => {
+      const body = document.body;
+      const docH = Math.max(body.scrollHeight, body.offsetHeight) - window.innerHeight;
+      fill.style.width = (scroll / docH * 100) + '%';
+      document.getElementById('nav').classList.toggle('scrolled', scroll > 10);
+    });
+
+    /* ─── SCROLL REVEAL ─── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), 50);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-fast').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
