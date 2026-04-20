@@ -1,347 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Writing — Aravind Kumar R</title>
-  <meta name="description" content="Financial writing by Aravind Kumar R — Capital Story newsletter and longform articles on fintech, operations, and markets." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <meta name="description" content="Financial writing by Aravind Kumar R — Capital Story newsletter and longform articles on fintech, operations, and markets."/>
+  <link rel="icon" type="image/png" href="../images/logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-
   <style>
-    @font-face { font-family:'Nohemi'; src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff'); font-weight:400; }
-    @font-face { font-family:'Nohemi'; src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff'); font-weight:500; }
-    @font-face { font-family:'Nohemi'; src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff'); font-weight:600; }
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:400;}
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:500;}
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff');font-weight:600;}
 
-    :root {
-      --green:#1a7a4a; --green2:#2d9e6b;
-      --blue:#3b82f6; --purple:#8b5cf6; --teal:#14b8a6;
-      --black:#0d0d0d; --ink:#111111; --ink2:#333333;
-      --muted:#6b7280; --border:#e8e8e8;
+    :root{
+      --black:#1d1d1f;--ink:#1d1d1f;--ink2:#3a3a3c;
+      --muted:#6e6e73;--border:#d2d2d7;--bg:#ffffff;
+      --surface:#f5f5f7;--accent:#0071e3;--accent2:#0077ed;
     }
 
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:auto; }
-    body { font-family:'Inter',sans-serif; background:#fafbfc; color:var(--ink); line-height:1.7; overflow-x:hidden; }
-    a { text-decoration:none; color:inherit; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:auto;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
 
-    /* ── NAV ── */
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:100;
-      background:rgba(255,255,255,0.95); backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--border);
-      padding:0 48px; display:flex; align-items:center;
-      justify-content:space-between; height:64px;
-      transition:box-shadow 0.3s;
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;height:52px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 48px;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:saturate(180%) blur(20px);
+      border-bottom:1px solid rgba(0,0,0,0.08);
     }
-    nav.scrolled { box-shadow:0 2px 16px rgba(0,0,0,0.06); }
-    .nav-logo { font-family:'Nohemi',sans-serif; font-weight:500; font-size:18px; color:var(--black); }
-    .nav-back {
-      font-size:14px; font-weight:600; color:var(--muted);
-      display:flex; align-items:center; gap:8px;
-      padding:8px 18px; border-radius:8px; border:1px solid var(--border);
+    .nav-logo{font-family:'Nohemi',sans-serif;font-weight:500;font-size:16px;color:var(--black);}
+    .nav-back{
+      font-size:13px;font-weight:500;color:var(--muted);
+      display:flex;align-items:center;gap:6px;
+      padding:6px 16px;border-radius:980px;
+      background:var(--surface);
       transition:all 0.2s;
     }
-    .nav-back:hover { color:var(--green); border-color:var(--green); background:#fff; }
+    .nav-back:hover{color:var(--black);background:#e8e8ed;}
 
-    /* ── HERO ── */
-    .blog-hero {
-      padding:120px 48px 70px;
-      background:#fff;
+    /* HERO */
+    .blog-hero{
+      padding:110px 48px 72px;
+      background:var(--bg);
       border-bottom:1px solid var(--border);
+      position:relative;overflow:hidden;
     }
-    .blog-hero-inner { max-width:900px; margin:0 auto; text-align:center; }
-    .blog-eyebrow {
-      font-size:12px; font-weight:700; letter-spacing:2.5px;
-      text-transform:uppercase; color:var(--green);
-      margin-bottom:18px; display:inline-block;
+    .blog-hero::before{
+      content:'';position:absolute;
+      top:-40%;right:-10%;
+      width:60vw;height:60vw;
+      background:radial-gradient(ellipse,rgba(0,113,227,0.05) 0%,transparent 65%);
+      pointer-events:none;
     }
-    .blog-hero-inner h1 {
-      font-family:'Nohemi',sans-serif; font-weight:400;
-      font-size:clamp(38px,5vw,56px);
-      color:var(--black); letter-spacing:-1.5px;
-      line-height:1.15; margin-bottom:20px;
+    .blog-hero-inner{max-width:860px;margin:0 auto;position:relative;z-index:1;}
+    .blog-eyebrow{
+      display:inline-block;
+      font-size:11px;font-weight:700;letter-spacing:2px;
+      text-transform:uppercase;color:var(--accent);
+      margin-bottom:16px;
     }
-    .blog-hero-inner h1 em { font-style:normal; color:var(--green); }
-    .blog-hero-inner p {
-      font-size:18px; color:var(--muted); line-height:1.8;
-      max-width:600px; margin:0 auto;
+    .blog-hero-inner h1{
+      font-family:'Nohemi',sans-serif;font-weight:400;
+      font-size:clamp(36px,5vw,56px);
+      color:var(--black);letter-spacing:-1.5px;
+      line-height:1.1;margin-bottom:18px;
     }
-
-    /* ── SECTION CARDS ── */
-    .section-card {
-      background:#fff; border-radius:24px; padding:50px;
-      box-shadow:0 4px 20px rgba(0,0,0,0.04);
-      transition:transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);
-      position:relative; overflow:hidden; margin-bottom:60px;
-    }
-    .section-card::before {
-      content:''; position:absolute; inset:0;
-      opacity:0.06; border-radius:24px; pointer-events:none;
-    }
-    .section-card--green::before { background:linear-gradient(135deg,#1a7a4a,#2d9e6b); }
-    .section-card--blue::before  { background:linear-gradient(135deg,#3b82f6,#60a5fa); }
-    .section-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.08); }
-
-    /* ── NEWSLETTER WRAP ── */
-    .newsletter-wrap { max-width:900px; margin:60px auto 0; padding:0 48px; }
-    
-    /* Newsletter logo styling */
-    .newsletter-logo {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 20px;
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(26,122,74,0.15);
-      transition: transform 0.3s ease;
-    }
-    .newsletter-logo:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(26,122,74,0.2);
+    .blog-hero-inner h1 em{font-style:normal;color:var(--accent);}
+    .blog-hero-inner p{
+      font-size:17px;color:var(--muted);
+      line-height:1.8;max-width:540px;
     }
 
-    /* ── ARTICLES ── */
-    .articles-section { max-width:900px; margin:0 auto 100px; padding:0 48px; }
-    .articles-label {
-      font-size:12px; font-weight:700; letter-spacing:2.5px;
-      text-transform:uppercase; color:var(--green);
-      margin-bottom:12px; display:block;
+    /* NEWSLETTER CARD */
+    .newsletter-wrap{max-width:860px;margin:60px auto 0;padding:0 48px;}
+    .newsletter-card{
+      background:var(--surface);
+      border-radius:20px;padding:44px 48px;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:32px;flex-wrap:wrap;
+      transition:transform 0.3s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s;
     }
-    .articles-title {
-      font-family:'Nohemi',sans-serif; font-weight:400;
-      font-size:32px; color:var(--black); letter-spacing:-0.5px;
-      margin-bottom:40px;
+    .newsletter-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.07);}
+    .nl-left{display:flex;align-items:center;gap:20px;}
+    .nl-icon{
+      width:52px;height:52px;border-radius:14px;
+      background:var(--accent);
+      display:flex;align-items:center;justify-content:center;
+      font-size:22px;flex-shrink:0;
     }
-    .article-card {
-      display:grid; grid-template-columns:60px 1fr;
-      gap:28px; align-items:start;
-      padding:36px 0;
+    .nl-title{font-family:'Nohemi',sans-serif;font-weight:500;font-size:20px;color:var(--black);margin-bottom:4px;}
+    .nl-sub{font-size:14px;color:var(--muted);}
+    .nl-btn{
+      background:var(--accent);color:#fff;
+      padding:11px 24px;border-radius:980px;
+      font-size:14px;font-weight:500;white-space:nowrap;
+      transition:background 0.2s,transform 0.15s;flex-shrink:0;
+    }
+    .nl-btn:hover{background:var(--accent2);transform:scale(1.04);}
+
+    /* ARTICLES */
+    .articles-section{max-width:860px;margin:60px auto 100px;padding:0 48px;}
+    .articles-label{
+      font-size:11px;font-weight:700;letter-spacing:2px;
+      text-transform:uppercase;color:var(--accent);
+      margin-bottom:8px;display:block;
+    }
+    .articles-title{
+      font-family:'Nohemi',sans-serif;font-weight:400;
+      font-size:30px;color:var(--black);letter-spacing:-0.5px;
+      margin-bottom:36px;
+    }
+    .article-card{
+      display:grid;grid-template-columns:52px 1fr;
+      gap:24px;align-items:start;
+      padding:32px 0;
       border-bottom:1px solid var(--border);
-      transition:opacity 0.2s;
+      text-decoration:none;color:inherit;
+      transition:all 0.2s;
     }
-    .article-card:last-child { border-bottom:none; }
-    .article-card:hover .article-title { color:var(--green); }
-    .article-card:hover .article-num { color:var(--green); }
-    .article-num {
-      font-family:'Nohemi',sans-serif; font-weight:400;
-      font-size:16px; color:var(--muted);
-      padding-top:6px; transition:color 0.2s;
+    .article-card:last-child{border-bottom:none;}
+    .article-card:hover .article-title{color:var(--accent);}
+    .article-card:hover .article-num{color:var(--accent);}
+    .article-num{
+      font-family:'Nohemi',sans-serif;font-weight:400;
+      font-size:15px;color:var(--muted);
+      padding-top:5px;transition:color 0.2s;
     }
-    .article-meta {
-      font-size:13px; color:var(--muted);
-      margin-bottom:12px; display:flex; gap:12px;
-      align-items:center; flex-wrap:wrap;
+    .article-meta{
+      font-size:12px;color:var(--muted);
+      margin-bottom:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
     }
-    .article-tag {
-      background:rgba(26,122,74,0.08);
-      border:1px solid rgba(26,122,74,0.2);
-      color:var(--green);
-      padding:3px 12px; border-radius:6px;
-      font-size:11px; font-weight:600;
+    .article-tag{
+      background:var(--surface);
+      color:var(--ink2);
+      padding:2px 10px;border-radius:980px;
+      font-size:11px;font-weight:600;border:1px solid var(--border);
     }
-    .article-title {
-      font-family:'Nohemi',sans-serif; font-weight:500;
-      font-size:23px; color:var(--black); margin-bottom:12px;
-      line-height:1.3; letter-spacing:-0.3px;
+    .article-title{
+      font-family:'Nohemi',sans-serif;font-weight:500;
+      font-size:22px;color:var(--black);margin-bottom:10px;
+      line-height:1.28;letter-spacing:-0.3px;
       transition:color 0.2s;
     }
-    .article-excerpt { font-size:16px; color:var(--muted); line-height:1.8; margin-bottom:18px; }
-    .article-link {
-      font-size:14px; font-weight:600; color:var(--green);
-      border-bottom:2px solid var(--green);
-      padding-bottom:2px;
-      display:inline-flex; align-items:center; gap:6px;
+    .article-excerpt{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:14px;}
+    .article-link{
+      font-size:13px;font-weight:600;color:var(--accent);
+      display:inline-flex;align-items:center;gap:4px;
       transition:gap 0.2s;
     }
-    .article-card:hover .article-link { gap:12px; }
-    .article-card.placeholder { opacity:0.4; pointer-events:none; }
+    .article-card:hover .article-link{gap:9px;}
+    .article-card.placeholder{opacity:0.35;pointer-events:none;}
 
-    .section-diagram {
-      position:absolute; right:40px; top:40px;
-      width:140px; height:140px; opacity:0.1; pointer-events:none;
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity:0;
-      transform:translateY(28px);
-      transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
-      will-change:opacity,transform;
-    }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-
-    /* hero children stagger on load */
-    .hero-animate { opacity:0; transform:translateY(18px); }
-    .hero-animate.loaded {
-      opacity:1; transform:translateY(0);
-      transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    /* article list rows stagger */
-    .article-card {
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1);
-    }
-    .article-card.visible { opacity:1; transform:translateY(0); }
-    .article-card.placeholder.visible { opacity:0.4; }
-
-    /* ── FOOTER ── */
-    footer {
+    footer{
       border-top:1px solid var(--border);
-      padding:24px 48px;
-      display:flex; justify-content:space-between; align-items:center;
-      background:#fff;
+      padding:20px 48px;
+      display:flex;justify-content:space-between;align-items:center;
+      background:var(--bg);
     }
-    footer p { font-size:13px; color:var(--muted); }
-    footer a { color:var(--muted); font-size:13px; transition:color 0.2s; }
-    footer a:hover { color:var(--green); }
+    footer p{font-size:13px;color:var(--muted);}
+    footer a{color:var(--muted);font-size:13px;transition:color 0.2s;}
+    footer a:hover{color:var(--accent);}
+
+    /* REVEAL */
+    .reveal{
+      opacity:0;transform:translateY(24px);
+      transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible{opacity:1;transform:none;}
+    .hero-animate{opacity:0;transform:translateY(16px);}
+    .hero-animate.loaded{
+      opacity:1;transform:none;
+      transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .article-card.reveal{opacity:0;transform:translateY(16px);}
+    .article-card.reveal.visible{opacity:1;transform:none;}
+    .article-card.placeholder.reveal.visible{opacity:0.35;}
 
     @media(max-width:700px){
-      nav { padding:0 20px; }
-      .blog-hero { padding:90px 20px 50px; }
-      .newsletter-wrap { padding:0 20px; }
-      .newsletter-logo { width: 100px; height: 100px; }
-      .section-card { padding:36px 24px; margin-bottom:40px; }
-      .articles-section { padding:0 20px; }
-      footer { padding:20px; flex-direction:column; gap:10px; text-align:center; }
-      .blog-hero-inner h1 { font-size:34px; }
-      .article-card { grid-template-columns:48px 1fr; gap:20px; }
-      .article-title { font-size:20px; }
+      nav{padding:0 20px;}
+      .blog-hero{padding:90px 20px 52px;}
+      .newsletter-wrap,.articles-section{padding:0 20px;}
+      .newsletter-card{padding:28px 24px;flex-direction:column;align-items:flex-start;}
+      .blog-hero-inner h1{font-size:32px;}
+      .article-card{grid-template-columns:40px 1fr;gap:16px;}
+      .article-title{font-size:19px;}
+      footer{padding:16px 20px;flex-direction:column;gap:6px;text-align:center;}
     }
   </style>
 </head>
 <body>
 
-  <nav id="nav">
-    <div class="nav-logo">Aravind Kumar R</div>
-    <a href="../index.html" class="nav-back">← Back to Portfolio</a>
-  </nav>
+<nav>
+  <div class="nav-logo">Aravind Kumar R</div>
+  <a href="../index.html" class="nav-back">← Portfolio</a>
+</nav>
 
-  <!-- HERO -->
-  <div class="blog-hero">
-    <div class="blog-hero-inner">
-      <div class="blog-eyebrow hero-animate">Writing & Perspectives</div>
-      <h1 class="hero-animate" style="transition-delay:0.08s;">Thinking out loud about <em>Finance & Operations</em></h1>
-      <p class="hero-animate" style="transition-delay:0.16s;">Longform articles on fintech, operations, and markets — plus the Capital Story newsletter, read by 1,300+ professionals on LinkedIn.</p>
-    </div>
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="blog-eyebrow hero-animate">Writing &amp; Perspectives</div>
+    <h1 class="hero-animate" style="transition-delay:0.08s;">
+      Thinking out loud about<br><em>Finance &amp; Operations</em>
+    </h1>
+    <p class="hero-animate" style="transition-delay:0.16s;">Longform articles on fintech, operations, and markets — plus the Capital Story newsletter, read by 1,300+ professionals on LinkedIn.</p>
   </div>
+</div>
 
-  <!-- NEWSLETTER BANNER -->
-  <div class="newsletter-wrap">
-    <div class="section-card section-card--green reveal">
-      <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
-        <rect x="30" y="40" width="80" height="60" rx="4" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-        <line x1="40" y1="55" x2="90" y2="55" stroke="currentColor" stroke-width="2" opacity="0.25"/>
-        <line x1="40" y1="70" x2="110" y2="70" stroke="currentColor" stroke-width="2" opacity="0.25"/>
-        <line x1="40" y1="85" x2="95" y2="85" stroke="currentColor" stroke-width="2" opacity="0.25"/>
-      </svg>
-      <div style="max-width:700px; margin:0 auto; text-align:center; position:relative; z-index:1;">
-        <img src="../images/capital-story.jpg" alt="Capital Story Logo" class="newsletter-logo" onerror="this.style.display='none'"/>
-        <h3 style="font-family:'Nohemi',sans-serif; font-weight:500; font-size:26px; color:var(--black); margin-bottom:12px;">Capital Story Newsletter</h3>
-        <p style="font-size:16px; color:var(--muted); margin-bottom:28px; line-height:1.75;">Financial narratives for curious professionals · 1,300+ subscribers on LinkedIn</p>
-        <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7378470095842451456" target="_blank"
-           style="display:inline-flex; align-items:center; gap:10px; background:var(--green); color:#fff; padding:13px 28px; border-radius:8px; font-size:15px; font-weight:600; transition:all 0.2s;">
-          Subscribe on LinkedIn →
-        </a>
+<div class="newsletter-wrap">
+  <div class="newsletter-card reveal">
+    <div class="nl-left">
+      <div class="nl-icon">📰</div>
+      <div>
+        <div class="nl-title">Capital Story Newsletter</div>
+        <div class="nl-sub">Financial narratives for curious professionals · 1,300+ subscribers on LinkedIn</div>
       </div>
     </div>
+    <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7378470095842451456" target="_blank" class="nl-btn">Subscribe →</a>
   </div>
+</div>
 
-  <!-- ARTICLES -->
-  <div class="articles-section">
-    <div class="section-card section-card--blue reveal">
-      <svg class="section-diagram" viewBox="0 0 140 140" fill="none">
-        <circle cx="70" cy="70" r="40" stroke="currentColor" stroke-width="2" opacity="0.3"/>
-        <circle cx="70" cy="70" r="20" fill="currentColor" opacity="0.2"/>
-        <path d="M70 30 L70 50 M70 90 L70 110 M30 70 L50 70 M90 70 L110 70" stroke="currentColor" stroke-width="2" opacity="0.25"/>
-      </svg>
-      <div style="position:relative; z-index:1;">
-        <span class="articles-label">Published Articles</span>
-        <div class="articles-title">From the desk</div>
+<div class="articles-section">
+  <span class="articles-label reveal">Published Articles</span>
+  <div class="articles-title reveal">From the desk</div>
 
-        <a href="asset-ops-article.html" class="article-card">
-          <div class="article-num">01</div>
-          <div>
-            <div class="article-meta">
-              <span>2025</span>
-              <span class="article-tag">Fintech · Operations</span>
-            </div>
-            <div class="article-title">A Day in Asset Operations — What Actually Happens Behind the Scenes</div>
-            <div class="article-excerpt">Most people associate fintech with seamless apps and instant transactions. But behind every deal is an enormous amount of careful, coordinated work — financial models, legal documents, fund flows, and compliance cycles running in parallel.</div>
-            <span class="article-link">Read Article →</span>
-          </div>
-        </a>
-
-        <div class="article-card placeholder">
-          <div class="article-num">02</div>
-          <div>
-            <div class="article-meta"><span>Coming Soon</span><span class="article-tag">Markets</span></div>
-            <div class="article-title">More articles from Capital Story — coming soon</div>
-            <div class="article-excerpt">Subscribe to Capital Story on LinkedIn to read the latest issues before they arrive here.</div>
-          </div>
-        </div>
-
+  <a href="asset-ops-article.html" class="article-card reveal">
+    <div class="article-num">01</div>
+    <div>
+      <div class="article-meta">
+        <span>2025</span>
+        <span class="article-tag">Fintech · Operations</span>
       </div>
+      <div class="article-title">A Day in Asset Operations — What Actually Happens Behind the Scenes</div>
+      <div class="article-excerpt">Most people associate fintech with seamless apps and instant transactions. But behind every deal is an enormous amount of careful, coordinated work — financial models, legal documents, fund flows, and compliance cycles running in parallel.</div>
+      <span class="article-link">Read Article →</span>
+    </div>
+  </a>
+
+  <div class="article-card placeholder reveal">
+    <div class="article-num">02</div>
+    <div>
+      <div class="article-meta"><span>Coming Soon</span><span class="article-tag">Markets</span></div>
+      <div class="article-title">More articles from Capital Story — coming soon</div>
+      <div class="article-excerpt">Subscribe to Capital Story on LinkedIn to read the latest issues before they arrive here.</div>
     </div>
   </div>
+</div>
 
-  <footer>
-    <p>© 2026 Aravind Kumar R</p>
-    <a href="../index.html">← Portfolio</a>
-  </footer>
+<footer>
+  <p>© 2026 Aravind Kumar R</p>
+  <a href="../index.html">← Portfolio</a>
+</footer>
 
-  <script>
-    /* ── LENIS ── */
-    const lenis = new Lenis({
-      duration: 0.95,
-      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smooth: true,
-      smoothTouch: false,
-      touchMultiplier: 1.5,
-    });
-    (function raf(time){ lenis.raf(time); requestAnimationFrame(raf); })(0);
+<script>
+const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smooth:true,smoothTouch:false});
+(function raf(t){lenis.raf(t);requestAnimationFrame(raf);})(0);
 
-    /* nav shadow */
-    lenis.on('scroll', ({ scroll }) => {
-      document.getElementById('nav').classList.toggle('scrolled', scroll > 10);
-    });
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.hero-animate').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('loaded'),80+i*90);
+  });
+});
 
-    /* ── HERO load animation ── */
-    window.addEventListener('load', () => {
-      document.querySelectorAll('.hero-animate').forEach((el, i) => {
-        setTimeout(() => el.classList.add('loaded'), 80 + i * 90);
-      });
-    });
-
-    /* ── SCROLL REVEAL ── */
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.07, rootMargin: '0px 0px -32px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    /* article rows stagger */
-    const rowIO = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const rows = entry.target.querySelectorAll('.article-card');
-          rows.forEach((row, i) => {
-            setTimeout(() => row.classList.add('visible'), i * 110);
-          });
-          rowIO.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05 });
-
-    document.querySelectorAll('.section-card').forEach(card => rowIO.observe(card));
-  </script>
-
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
