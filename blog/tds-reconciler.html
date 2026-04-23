@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TDS Reconciler — Aravind Kumar R</title>
+  <meta name="description" content="How I built a Python tool that reduced quarterly TDS reconciliation across 2,000+ Form 16A PDFs by 90–95%."/>
+  <link rel="icon" type="image/png" href="../images/logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <style>
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:400;}
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff');font-weight:600;}
+    :root{--black:#1d1d1f;--ink2:#3a3a3c;--muted:#6e6e73;--border:#d2d2d7;--surface:#f5f5f7;--accent:#0071e3;--col:680px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:#fff;color:var(--ink2);line-height:1.8;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    .progress-bar{position:fixed;top:52px;left:0;right:0;height:2px;z-index:99;background:transparent;}
+    .progress-fill{height:100%;width:0;background:var(--accent);transition:width 0.06s linear;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(255,255,255,0.88);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.08);}
+    .nav-logo{font-family:'Nohemi',sans-serif;font-weight:500;font-size:16px;color:var(--black);}
+    .nav-links{display:flex;gap:8px;}
+    .nav-link{font-size:13px;font-weight:500;color:var(--muted);padding:6px 16px;border-radius:980px;background:var(--surface);transition:all 0.2s;}
+    .nav-link:hover{color:var(--black);background:#e8e8ed;}
+    .article-hero{padding:108px 24px 64px;background:#fff;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+    .article-hero::after{content:'';position:absolute;top:-80px;right:-80px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,113,227,0.05) 0%,transparent 65%);pointer-events:none;}
+    .article-hero-inner{max-width:var(--col);margin:0 auto;position:relative;z-index:1;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
+    .hero-eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--accent);border-radius:2px;}
+    .article-hero h1{font-family:'Nohemi',sans-serif;font-weight:400;font-size:clamp(28px,5vw,44px);line-height:1.12;letter-spacing:-1px;color:var(--black);margin-bottom:20px;}
+    .hero-lede{font-size:17px;line-height:1.82;color:var(--muted);border-left:3px solid var(--border);padding-left:18px;margin-bottom:28px;}
+    .hero-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);}
+    .hero-author{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--black);}
+    .hero-avatar{width:28px;height:28px;border-radius:50%;background:var(--black);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+    .hero-dot{color:var(--border);}
+    .hero-tag{background:var(--surface);border:1px solid var(--border);color:var(--ink2);padding:3px 10px;border-radius:980px;font-size:11px;font-weight:600;}
+    .impact-strip{background:rgba(52,199,89,0.06);border:1px solid rgba(52,199,89,0.2);border-radius:14px;padding:20px 24px;margin-bottom:40px;display:flex;align-items:center;gap:16px;}
+    .impact-number{font-family:'Nohemi',sans-serif;font-weight:500;font-size:32px;color:#1a7a4a;line-height:1;flex-shrink:0;}
+    .impact-label{font-size:14px;color:var(--ink2);line-height:1.5;}
+    .impact-label strong{color:var(--black);font-weight:600;}
+    .article-body{max-width:var(--col);margin:0 auto;padding:64px 24px 100px;}
+    .prose p{font-size:18px;line-height:1.92;color:#374151;margin-bottom:28px;}
+    .prose strong{color:var(--black);font-weight:600;}
+    .prose h2{font-family:'Nohemi',sans-serif;font-weight:500;font-size:clamp(20px,3vw,26px);color:var(--black);letter-spacing:-0.4px;line-height:1.25;margin:52px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+    .prose h2::before{content:'';display:block;width:28px;height:2px;background:var(--accent);border-radius:2px;margin-bottom:12px;}
+    .prose blockquote{margin:36px 0;padding:20px 26px;border-left:3px solid var(--black);font-size:17px;color:#374151;line-height:1.82;}
+    .prose ul{list-style:none;padding:0;margin:8px 0 28px;display:flex;flex-direction:column;gap:10px;}
+    .prose li{font-size:17px;color:#374151;line-height:1.8;padding-left:20px;position:relative;}
+    .prose li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;background:var(--accent);border-radius:50%;opacity:0.6;}
+    .output-card{background:var(--surface);border-radius:14px;padding:24px 28px;margin:28px 0;border-left:3px solid #1a7a4a;}
+    .output-card-title{font-family:'Nohemi',sans-serif;font-weight:500;font-size:15px;color:var(--black);margin-bottom:12px;}
+    .output-row{display:flex;justify-content:space-between;font-size:14px;color:var(--ink2);padding:8px 0;border-bottom:1px solid var(--border);}
+    .output-row:last-child{border-bottom:none;}
+    .output-status{font-weight:600;color:#1a7a4a;font-size:13px;}
+    .output-status.mismatch{color:#d93025;}
+    .tool-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 28px;}
+    .tool-chip{font-size:12px;font-weight:600;padding:5px 14px;border-radius:980px;background:var(--surface);color:var(--ink2);border:1px solid var(--border);}
+    .ornament{display:flex;align-items:center;gap:12px;margin:48px 0;color:var(--border);font-size:13px;letter-spacing:4px;}
+    .ornament::before,.ornament::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);}
+    .closing-block{background:var(--black);border-radius:18px;padding:40px 44px;color:#fff;position:relative;overflow:hidden;margin-top:60px;}
+    .closing-block::before{content:'';position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;border-radius:50%;background:rgba(0,113,227,0.15);}
+    .closing-block h2{font-family:'Nohemi',sans-serif;font-weight:400;font-size:22px;color:#fff;margin-bottom:12px;border:none;padding:0;position:relative;z-index:1;}
+    .closing-block h2::before{display:none;}
+    .closing-block p{font-size:16px;color:rgba(255,255,255,0.75);line-height:1.85;margin-bottom:0;position:relative;z-index:1;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;color:var(--accent);padding:10px 20px;border-radius:980px;background:var(--surface);transition:all 0.2s;margin-top:48px;}
+    .back-link:hover{background:#e8e8ed;transform:scale(1.03);}
+    footer{background:#fff;border-top:1px solid var(--border);padding:20px 48px;display:flex;justify-content:space-between;align-items:center;}
+    footer p{font-size:13px;color:var(--muted);}
+    footer a{color:var(--muted);font-size:13px;transition:color 0.2s;}
+    footer a:hover{color:var(--accent);}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1);}
+    .reveal.visible{opacity:1;transform:none;}
+    .hero-animate{opacity:0;transform:translateY(14px);}
+    .hero-animate.loaded{opacity:1;transform:none;transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+    @media(max-width:700px){nav{padding:0 20px;}.article-hero{padding:90px 20px 48px;}.article-body{padding:48px 20px 80px;}.prose p{font-size:17px;}.closing-block{padding:28px 24px;}footer{padding:16px 20px;flex-direction:column;gap:6px;text-align:center;}}
+  </style>
+</head>
+<body>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<nav id="nav">
+  <div class="nav-logo">Aravind Kumar R</div>
+  <div class="nav-links">
+    <a href="../index.html#works-section" class="nav-link">← My Works</a>
+    <a href="../index.html" class="nav-link">Portfolio</a>
+  </div>
+</nav>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <div class="hero-eyebrow hero-animate">TDS Compliance · Python</div>
+    <h1 class="hero-animate" style="transition-delay:0.08s;">TDS Reconciler</h1>
+    <p class="hero-lede hero-animate" style="transition-delay:0.16s;">During quarterly TDS cycles, reconciling Form 16A documents with internal records across 2,000+ PDFs was a manual, error-prone task that took days. I built an end-to-end Python workflow to handle it automatically.</p>
+    <div class="hero-meta hero-animate" style="transition-delay:0.22s;">
+      <div class="hero-author"><div class="hero-avatar">A</div>Aravind Kumar R</div>
+      <span class="hero-dot">·</span>
+      <span>Asset Operations Intern · BetterInvest</span>
+      <span class="hero-dot">·</span>
+      <span class="hero-tag">Python</span>
+      <span class="hero-tag">Excel</span>
+      <span class="hero-tag">Compliance</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-body">
+  <div class="impact-strip reveal">
+    <div class="impact-number">90–95%</div>
+    <div class="impact-label"><strong>Reduction in reconciliation time.</strong> 2,000+ Form 16A PDFs processed automatically — PAN extraction, TDS matching, and variance flagging in a single run.</div>
+  </div>
+
+  <div class="prose">
+    <h2 class="reveal">The Problem</h2>
+    <p class="reveal">During quarterly TDS cycles at BetterInvest, one of the most time-consuming tasks was reconciling large volumes of Form 16A documents with internal TDS master records. These PDFs were scattered, unstructured, and numerous — manually extracting PAN numbers and TDS values for comparison across 2,000+ files was both repetitive and prone to oversight. A single missed PAN or wrong TDS value could create compliance exposure.</p>
+
+    <h2 class="reveal">The Solution</h2>
+    <p class="reveal">I built an end-to-end TDS reconciliation workflow that processes the entire document set automatically. The script bulk-extracts PAN numbers and corresponding TDS values from every Form 16A PDF and matches them against the internal TDS master data. The output is a structured reconciliation summary that gives the team a clear picture of the entire investor set in one go.</p>
+
+    <div class="output-card reveal">
+      <div class="output-card-title">Reconciliation Output — Per Investor Row</div>
+      <div class="output-row"><span>PAN</span><span style="color:var(--muted);font-size:13px;">XXXXXX1234X</span></div>
+      <div class="output-row"><span>TDS as per Form 16A</span><span style="color:var(--muted);font-size:13px;">₹12,450</span></div>
+      <div class="output-row"><span>TDS as per Master</span><span style="color:var(--muted);font-size:13px;">₹12,450</span></div>
+      <div class="output-row"><span>Status</span><span class="output-status">Matched ✓</span></div>
+    </div>
+
+    <p class="reveal">For every investor, the output shows their PAN, the TDS amount as per Form 16A, the TDS amount as per the internal master, and a status — matched, mismatch, or variance. Any discrepancy is immediately flagged for review. The production house TDS filings are validated against BetterInvest's internal records for each investor across each asset.</p>
+
+    <h2 class="reveal">Why It Matters</h2>
+    <p class="reveal">This transforms what was previously a heavy, manual verification task into a structured, repeatable, and dependable process. The accuracy improvement is equally important — the tool doesn't get tired or distracted at row 1,847. Every file gets the same level of scrutiny.</p>
+    <blockquote class="reveal">"It ensures cleaner, more reliable reconciliation and gives us confidence that production houses have filed the correct TDS amounts for each investor in line with our internal records."</blockquote>
+
+    <h2 class="reveal">Tools Used</h2>
+    <div class="tool-row reveal">
+      <span class="tool-chip">Python</span>
+      <span class="tool-chip">Excel</span>
+      <span class="tool-chip">PDF Extraction</span>
+    </div>
+
+    <p class="reveal">A reconciliation template and step-by-step tutorial were prepared and shared with the team, so the workflow can be run by any team member without technical knowledge at every quarterly cycle.</p>
+
+    <div class="closing-block reveal">
+      <h2>Compliance that scales</h2>
+      <p>The TDS Reconciler demonstrates a principle I believe in strongly: repetitive, high-stakes compliance work should never rely on manual attention at scale. When the stakes are compliance-level and the volume is in the thousands, automation is not a convenience — it is the standard.</p>
+    </div>
+
+    <a href="../index.html#works-section" class="back-link reveal">← Back to My Works</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Aravind Kumar R</p>
+  <a href="../index.html">Portfolio →</a>
+</footer>
+
+<script>
+const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true, smoothTouch: false });
+(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+lenis.on('scroll', ({ scroll }) => { document.getElementById('progressFill').style.width = (scroll / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%'; });
+window.addEventListener('load', () => { document.querySelectorAll('.hero-animate').forEach((el, i) => setTimeout(() => el.classList.add('loaded'), 80 + i * 100)); });
+const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
