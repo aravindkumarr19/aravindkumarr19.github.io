@@ -859,18 +859,7 @@ html
 </footer>
 
 <script>
-/* ── LENIS ── */
-const lenis = new Lenis({
-  duration: 1.2,
-  smoothWheel: true,
-  smoothTouch: false,
-  wheelMultiplier: 1,
-});
-/* Reading progress */
-lenis.on('scroll',({scroll})=>{
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  document.getElementById('progressFill').style.width=(scroll/h*100)+'%';
-});
+
 
 /* ── HERO LOAD ── */
 window.addEventListener('load',()=>{
