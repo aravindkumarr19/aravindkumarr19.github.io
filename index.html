@@ -861,19 +861,11 @@ html
 <script>
 /* ── LENIS ── */
 const lenis = new Lenis({
-  duration:1.2,
-  easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),
-  smooth:true,smoothTouch:true,touchMultiplier:1.5,
+  duration: 1.2,
+  smoothWheel: true,
+  smoothTouch: false,
+  wheelMultiplier: 1,
 });
-(function raf(t){lenis.raf(t);requestAnimationFrame(raf);})(0);
-
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){e.preventDefault();lenis.scrollTo(t,{offset:-60,duration:1.4});}
-  });
-});
-
 /* Reading progress */
 lenis.on('scroll',({scroll})=>{
   const h=document.documentElement.scrollHeight-window.innerHeight;
