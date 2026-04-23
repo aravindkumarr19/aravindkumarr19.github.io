@@ -28,14 +28,15 @@
     }
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
+    /* REMOVED scroll-behavior:smooth to prevent conflict with Lenis */
+    html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
     body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;overflow-x:hidden;}
     a{text-decoration:none;color:inherit;}
     img{display:block;max-width:100%;}
 
     /* ── READING PROGRESS ── */
-    .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:9999;background:transparent;}
-    .progress-fill{height:100%;width:0;background:var(--accent);transition:width 0.06s linear;}
+    .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:9999;background:transparent;pointer-events:none;}
+    .progress-fill{height:100%;width:0;background:var(--accent);will-change:width;}
 
     /* ── NAV ── */
     nav{
@@ -175,7 +176,6 @@
     .wid-col:first-child{padding-left:0;}
     .wid-col:last-child{border-right:none;padding-right:0;}
     .wid-col:hover{transform:translateY(-3px);}
-    /* No emoji icons — replaced with elegant number accent */
     .wid-num{
       font-family:'Nohemi',sans-serif;font-weight:400;
       font-size:13px;letter-spacing:3px;text-transform:uppercase;
@@ -246,7 +246,6 @@
     .works-header .sec-title{color:#f5f5f7;}
     .works-header .sec-sub{color:rgba(255,255,255,0.45);}
 
-    /* Card grid — image-style like the reference screenshot */
     .works-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -269,7 +268,6 @@
     }
     .work-card.wide{grid-column:span 2;}
 
-    /* Visual header area — replaces card-icon with visual strip */
     .work-visual{
       height:140px;
       position:relative;
@@ -285,7 +283,6 @@
     .work-visual.termsheet{background:linear-gradient(135deg,#0d1a1a 0%,#0f2a2a 50%,#071515 100%);}
     .work-visual.investor{background:linear-gradient(135deg,#1a0d1a 0%,#2a1030 50%,#12071a 100%);}
 
-    /* Abstract visual pattern per card */
     .work-visual svg{width:100%;height:100%;position:absolute;inset:0;opacity:0.5;}
     .work-visual-label{
       position:absolute;bottom:12px;left:16px;
@@ -328,7 +325,7 @@
     .ic-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px;}
     .ic-value{font-size:14px;font-weight:500;color:var(--ink2);}
 
-    /* ── INTERESTS (formerly Beyond the Day Job) ── */
+    /* ── INTERESTS ── */
     .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;position:relative;z-index:1;}
     .proj-card{
       border-radius:16px;overflow:hidden;background:#fff;
@@ -391,7 +388,7 @@
     footer a:hover{color:var(--accent);}
 
     /* ── REVEAL ANIMATIONS ── */
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);will-change:opacity,transform;}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
     .reveal.visible{opacity:1;transform:none;}
     .reveal-stagger>*{opacity:0;transform:translateY(20px);transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1);}
     .reveal-stagger.visible>*:nth-child(1){opacity:1;transform:none;transition-delay:0.04s;}
@@ -940,49 +937,94 @@
 /* ── LENIS SMOOTH SCROLL ── */
 const lenis = new Lenis({
   duration: 1.2,
-  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smooth: true,
-  smoothTouch: false
+  smoothTouch: false,
+  touchMultiplier: 2
 });
-(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
 
-/* ── READING PROGRESS ── */
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+/* ── READING PROGRESS (Optimized) ── */
+let ticking = false;
 lenis.on('scroll', ({ scroll }) => {
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  document.getElementById('progressFill').style.width = (scroll / h * 100) + '%';
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scroll / maxScroll) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+      ticking = false;
+    });
+    ticking = true;
+  }
 });
 
-/* ── HERO LOAD ── */
+/* ── HERO LOAD ANIMATION ── */
 window.addEventListener('load', () => {
-  document.querySelectorAll('.hero-animate').forEach((el, i) => {
-    setTimeout(() => el.classList.add('loaded'), 80 + i * 100);
+  const heroElements = document.querySelectorAll('.hero-animate');
+  heroElements.forEach((el, i) => {
+    setTimeout(() => el.classList.add('loaded'), 80 + (i * 100));
   });
+  
   setTimeout(() => {
-    const s = document.querySelector('.hero-stats');
-    if (s) s.classList.add('visible');
+    const stats = document.querySelector('.hero-stats');
+    if (stats) stats.classList.add('visible');
   }, 480);
 });
 
-/* ── SCROLL REVEAL ── */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+/* ── SCROLL REVEAL (Optimized with IntersectionObserver) ── */
+const observerOptions = {
+  threshold: 0.07,
+  rootMargin: '0px 0px -40px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
   });
-}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+}, observerOptions);
 
-/* ── HAMBURGER ── */
-const hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
-hb.addEventListener('click', () => { hb.classList.toggle('open'); mm.classList.toggle('open'); });
-function closeMenu() { hb.classList.remove('open'); mm.classList.remove('open'); }
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+  observer.observe(el);
+});
 
-/* ── NAV ANCHOR SMOOTH (lenis) ── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -52 }); }
+/* ── HAMBURGER MENU ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+/* ── SMOOTH ANCHOR SCROLLING WITH LENIS ── */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+    const target = document.querySelector(targetId);
+    
+    if (target) {
+      e.preventDefault();
+      lenis.scrollTo(target, {
+        offset: -52,
+        duration: 1.2
+      });
+    }
   });
 });
 </script>
+
 </body>
 </html>
