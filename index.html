@@ -859,14 +859,7 @@ html
 </footer>
 
 <script>
-const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smooth:true,smoothTouch:false});
-(function raf(t){lenis.raf(t);requestAnimationFrame(raf);})(0);
 
-window.addEventListener('load',()=>{
-  document.querySelectorAll('.hero-animate').forEach((el,i)=>{
-    setTimeout(()=>el.classList.add('loaded'),80+i*90);
-  });
-});
 /* ── HERO LOAD ── */
 window.addEventListener('load',()=>{
   document.querySelectorAll('.hero-animate').forEach((el,i)=>{
