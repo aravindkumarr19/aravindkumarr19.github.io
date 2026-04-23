@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legal Case Documentation Pipeline — Aravind Kumar R</title>
+  <meta name="description" content="How I built a two-phase Python automation that reduced 2–3 days of manual legal document work per asset to minutes."/>
+  <link rel="icon" type="image/png" href="../images/logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <style>
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:400;}
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff');font-weight:600;}
+    :root{--black:#1d1d1f;--ink2:#3a3a3c;--muted:#6e6e73;--border:#d2d2d7;--surface:#f5f5f7;--accent:#0071e3;--col:680px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:#fff;color:var(--ink2);line-height:1.8;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    .progress-bar{position:fixed;top:52px;left:0;right:0;height:2px;z-index:99;background:transparent;}
+    .progress-fill{height:100%;width:0;background:var(--accent);transition:width 0.06s linear;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(255,255,255,0.88);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.08);}
+    .nav-logo{font-family:'Nohemi',sans-serif;font-weight:500;font-size:16px;color:var(--black);}
+    .nav-links{display:flex;gap:8px;}
+    .nav-link{font-size:13px;font-weight:500;color:var(--muted);padding:6px 16px;border-radius:980px;background:var(--surface);transition:all 0.2s;}
+    .nav-link:hover{color:var(--black);background:#e8e8ed;}
+    /* Hero — dark themed for this automation */
+    .article-hero{padding:108px 24px 64px;background:var(--black);border-bottom:1px solid #2a2a2e;position:relative;overflow:hidden;}
+    .article-hero::before{content:'';position:absolute;top:-30%;right:-10%;width:55vw;height:55vw;background:radial-gradient(ellipse,rgba(0,113,227,0.12) 0%,transparent 65%);pointer-events:none;}
+    .article-hero::after{content:'';position:absolute;bottom:-20%;left:-5%;width:40vw;height:40vw;background:radial-gradient(ellipse,rgba(0,113,227,0.07) 0%,transparent 70%);pointer-events:none;}
+    .article-hero-inner{max-width:var(--col);margin:0 auto;position:relative;z-index:1;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,113,227,0.9);margin-bottom:20px;}
+    .hero-eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--accent);border-radius:2px;}
+    .article-hero h1{font-family:'Nohemi',sans-serif;font-weight:400;font-size:clamp(28px,5vw,44px);line-height:1.12;letter-spacing:-1px;color:#f5f5f7;margin-bottom:20px;}
+    .hero-lede{font-family:'Inter',sans-serif;font-size:17px;line-height:1.82;color:rgba(255,255,255,0.55);border-left:3px solid rgba(255,255,255,0.12);padding-left:18px;margin-bottom:28px;}
+    .hero-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,0.4);}
+    .hero-author{display:flex;align-items:center;gap:8px;font-weight:600;color:rgba(255,255,255,0.8);}
+    .hero-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+    .hero-dot{color:rgba(255,255,255,0.2);}
+    .hero-tag{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.5);padding:3px 10px;border-radius:980px;font-size:11px;font-weight:600;}
+    /* Impact strip */
+    .impact-strip{background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.2);border-radius:14px;padding:20px 24px;margin-bottom:40px;display:flex;align-items:center;gap:16px;}
+    .impact-number{font-family:'Nohemi',sans-serif;font-weight:500;font-size:32px;color:var(--accent);line-height:1;flex-shrink:0;}
+    .impact-label{font-size:14px;color:var(--ink2);line-height:1.5;}
+    .impact-label strong{color:var(--black);font-weight:600;}
+    /* Body */
+    .article-body{max-width:var(--col);margin:0 auto;padding:64px 24px 100px;}
+    .prose p{font-size:18px;line-height:1.92;color:#374151;margin-bottom:28px;}
+    .prose strong{color:var(--black);font-weight:600;}
+    .prose h2{font-family:'Nohemi',sans-serif;font-weight:500;font-size:clamp(20px,3vw,26px);color:var(--black);letter-spacing:-0.4px;line-height:1.25;margin:52px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+    .prose h2::before{content:'';display:block;width:28px;height:2px;background:var(--accent);border-radius:2px;margin-bottom:12px;}
+    .prose blockquote{margin:36px 0;padding:20px 26px;border-left:3px solid var(--black);font-size:17px;color:#374151;line-height:1.82;}
+    .prose ul{list-style:none;padding:0;margin:8px 0 28px;display:flex;flex-direction:column;gap:10px;}
+    .prose li{font-size:17px;color:#374151;line-height:1.8;padding-left:20px;position:relative;}
+    .prose li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;background:var(--accent);border-radius:50%;opacity:0.6;}
+    /* Phase cards */
+    .phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0;}
+    .phase-card{background:var(--surface);border-radius:14px;padding:24px;border-left:3px solid var(--accent);}
+    .phase-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+    .phase-title{font-family:'Nohemi',sans-serif;font-weight:500;font-size:16px;color:var(--black);margin-bottom:10px;}
+    .phase-desc{font-size:14px;color:var(--muted);line-height:1.7;}
+    /* Tool row */
+    .tool-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 28px;}
+    .tool-chip{font-size:12px;font-weight:600;padding:5px 14px;border-radius:980px;background:var(--surface);color:var(--ink2);border:1px solid var(--border);}
+    .ornament{display:flex;align-items:center;gap:12px;margin:48px 0;color:var(--border);font-size:13px;letter-spacing:4px;}
+    .ornament::before,.ornament::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);}
+    .closing-block{background:var(--black);border-radius:18px;padding:40px 44px;color:#fff;position:relative;overflow:hidden;margin-top:60px;}
+    .closing-block::before{content:'';position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;border-radius:50%;background:rgba(0,113,227,0.15);}
+    .closing-block h2{font-family:'Nohemi',sans-serif;font-weight:400;font-size:22px;color:#fff;margin-bottom:12px;border:none;padding:0;letter-spacing:-0.3px;position:relative;z-index:1;}
+    .closing-block h2::before{display:none;}
+    .closing-block p{font-size:16px;color:rgba(255,255,255,0.75);line-height:1.85;margin-bottom:0;position:relative;z-index:1;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;color:var(--accent);padding:10px 20px;border-radius:980px;background:var(--surface);transition:all 0.2s;margin-top:48px;}
+    .back-link:hover{background:#e8e8ed;transform:scale(1.03);}
+    footer{background:#fff;border-top:1px solid var(--border);padding:20px 48px;display:flex;justify-content:space-between;align-items:center;}
+    footer p{font-size:13px;color:var(--muted);}
+    footer a{color:var(--muted);font-size:13px;transition:color 0.2s;}
+    footer a:hover{color:var(--accent);}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1);}
+    .reveal.visible{opacity:1;transform:none;}
+    .hero-animate{opacity:0;transform:translateY(14px);}
+    .hero-animate.loaded{opacity:1;transform:none;transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+    @media(max-width:700px){nav{padding:0 20px;}.article-hero{padding:90px 20px 48px;}.article-body{padding:48px 20px 80px;}.prose p{font-size:17px;}.phase-grid{grid-template-columns:1fr;}.closing-block{padding:28px 24px;}footer{padding:16px 20px;flex-direction:column;gap:6px;text-align:center;}}
+  </style>
+</head>
+<body>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<nav id="nav">
+  <div class="nav-logo">Aravind Kumar R</div>
+  <div class="nav-links">
+    <a href="../index.html#works-section" class="nav-link">← My Works</a>
+    <a href="../index.html" class="nav-link">Portfolio</a>
+  </div>
+</nav>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <div class="hero-eyebrow hero-animate">Legal Docs · Python Automation</div>
+    <h1 class="hero-animate" style="transition-delay:0.08s;">Legal Case Documentation Pipeline</h1>
+    <p class="hero-lede hero-animate" style="transition-delay:0.16s;">Whenever a legal case is filed against an investor, the team needs a complete documentation package per investor — across 100–150 investors per active case. What was a 2–3 day manual job per asset became a pipeline that runs in minutes.</p>
+    <div class="hero-meta hero-animate" style="transition-delay:0.22s;">
+      <div class="hero-author"><div class="hero-avatar">A</div>Aravind Kumar R</div>
+      <span class="hero-dot">·</span>
+      <span>Asset Operations Intern · BetterInvest</span>
+      <span class="hero-dot">·</span>
+      <span class="hero-tag">Python</span>
+      <span class="hero-tag">Google Drive API</span>
+      <span class="hero-tag">Bubble.io CDN</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-body">
+  <div class="impact-strip reveal">
+    <div class="impact-number">95%</div>
+    <div class="impact-label"><strong>Time reduction per asset.</strong> 2–3 days of manual work per legal case → a structured, correctly assembled legal package for every investor in minutes.</div>
+  </div>
+
+  <div class="prose">
+
+    <h2 class="reveal">The Problem</h2>
+    <p class="reveal">Whenever a legal case is filed against an investor at BetterInvest, the team is required to compile a complete documentation package for each investor involved. This means combining three items per investor: their discounting agreement, their signed page with the DigiO audit trail, and any supporting back pages.</p>
+    <p class="reveal">Across 100–150 investors per active legal case, this was entirely manual. The process involved individually downloading agreements, locating the correct signature page for each investor, sourcing audit trails, and then manually assembling the final PDF — each one done by hand. Two to three days per asset, every single time.</p>
+
+    <h2 class="reveal">The Solution — A Two-Phase Pipeline</h2>
+    <p class="reveal">I designed and built a two-phase Python automation pipeline to handle this end-to-end. Each phase handles a distinct part of the problem.</p>
+
+    <div class="phase-grid reveal">
+      <div class="phase-card">
+        <div class="phase-label">Phase 01</div>
+        <div class="phase-title">prepare.py — Organisation</div>
+        <div class="phase-desc">Downloads every discounting agreement from the Bubble.io CDN, extracts the investor name from the signature page via text parsing, creates a numbered and labelled Drive folder per investor, and uploads the corresponding signature page to the correct folder. Runs fully automatically — no manual intervention.</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Phase 02</div>
+        <div class="phase-title">merge.py — Final Assembly</div>
+        <div class="phase-desc">Once the team uploads the DigiO audit trail per investor into their folder, this script merges all components in the correct order — agreement pages, signed page, audit trail, back pages — and generates one consolidated output PDF per investor, ready for legal submission.</div>
+      </div>
+    </div>
+
+    <p class="reveal">The audit trail download step from DigiO remains manual due to reCAPTCHA restrictions that prevent browser automation. But the pipeline is designed around this constraint — the manual effort is minimal and unambiguous, and the rest of the workflow is fully automated.</p>
+
+    <h2 class="reveal">How It Works</h2>
+    <p class="reveal">The prepare.py script connects to the Bubble.io CDN to retrieve every discounting agreement associated with the active legal case. For each agreement PDF, it uses text parsing to identify the investor's name from the signature page. It then creates a Drive folder for that investor — named and numbered in sequence — and uploads the correct signature page automatically.</p>
+    <p class="reveal">Once prepare.py has run and the team has uploaded the DigiO audit trails into each investor's folder, merge.py takes over. It iterates through every investor folder, assembles the final document in the correct legal order, and outputs a single consolidated PDF per investor — labelled, organized, and ready to hand to the legal team without any additional sorting or formatting work.</p>
+
+    <div class="ornament reveal">* * *</div>
+
+    <h2 class="reveal">Tools Used</h2>
+    <div class="tool-row reveal">
+      <span class="tool-chip">Python</span>
+      <span class="tool-chip">Google Drive API</span>
+      <span class="tool-chip">Bubble.io CDN</span>
+      <span class="tool-chip">PDF Text Parsing</span>
+    </div>
+
+    <p class="reveal">An SOP was prepared and shared with the team to ensure the pipeline can be run independently without any technical knowledge. The entire process — from triggering prepare.py to receiving the final assembled PDFs — is documented step by step so any team member can run it.</p>
+
+    <div class="closing-block reveal">
+      <h2>From days to minutes — reliably</h2>
+      <p>What previously took two to three days of manual effort per asset now runs as a structured, repeatable pipeline. The output is a complete, correctly assembled legal documentation package for each investor, organized in Drive and ready for the legal team — with no additional formatting or sorting required. The constraint isn't time anymore. It's just the DigiO upload.</p>
+    </div>
+
+    <a href="../index.html#works-section" class="back-link reveal">← Back to My Works</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Aravind Kumar R</p>
+  <a href="../index.html">Portfolio →</a>
+</footer>
+
+<script>
+const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true, smoothTouch: false });
+(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+lenis.on('scroll', ({ scroll }) => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressFill').style.width = (scroll / h * 100) + '%';
+});
+window.addEventListener('load', () => {
+  document.querySelectorAll('.hero-animate').forEach((el, i) => setTimeout(() => el.classList.add('loaded'), 80 + i * 100));
+});
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
