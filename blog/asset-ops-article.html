@@ -7,7 +7,6 @@
   <meta name="description" content="What actually happens behind the scenes in fintech asset operations — financial models, legal docs, fund flows, and compliance."/>
   <link rel="icon" type="image/png" href="../images/logo.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <style>
     @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:400;}
@@ -45,10 +44,10 @@
     }
     .nav-link:hover{color:var(--black);background:#e8e8ed;}
 
-    /* HERO — Apple light green tint */
+    /* HERO — clean white, no green tint */
     .article-hero{
       padding:108px 24px 68px;
-      background:linear-gradient(150deg,#e8f7ef 0%,#f6fdf9 50%,#fff 100%);
+      background:#fff;
       border-bottom:1px solid var(--border);
       position:relative;overflow:hidden;
     }
@@ -71,10 +70,11 @@
       line-height:1.14;letter-spacing:-1px;
       color:var(--black);margin-bottom:22px;
     }
+    /* Lede — Inter, not Lora italic */
     .hero-lede{
-      font-family:'Lora',serif;font-style:italic;
-      font-size:18px;line-height:1.8;color:#4b5563;
-      border-left:3px solid var(--black);
+      font-family:'Inter',sans-serif;font-style:normal;
+      font-size:17px;line-height:1.82;color:var(--muted);
+      border-left:3px solid var(--border);
       padding-left:18px;margin-bottom:30px;
     }
     .hero-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);}
@@ -106,11 +106,12 @@
       content:'';display:block;width:28px;height:2px;
       background:var(--accent);border-radius:2px;margin-bottom:12px;
     }
+    /* Blockquote — Inter, no Lora italic */
     .prose blockquote{
       margin:36px 0;padding:20px 26px;
       border-left:3px solid var(--black);
-      font-family:'Lora',serif;font-style:italic;
-      font-size:18px;color:#374151;line-height:1.75;
+      font-family:'Inter',sans-serif;font-style:normal;
+      font-size:17px;color:#374151;line-height:1.82;
     }
     .prose ul{list-style:none;padding:0;margin:8px 0 28px;display:flex;flex-direction:column;gap:10px;}
     .prose li{font-size:17px;color:#374151;line-height:1.8;padding-left:20px;position:relative;}
@@ -119,7 +120,6 @@
     .ornament{display:flex;align-items:center;gap:12px;margin:48px 0;color:var(--border);font-size:13px;letter-spacing:4px;}
     .ornament::before,.ornament::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);}
 
-    /* Closing block */
     .closing-block{
       background:var(--black);
       border-radius:18px;padding:40px 44px;
@@ -287,25 +287,24 @@
 </footer>
 
 <script>
-const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smooth:true,smoothTouch:false});
-(function raf(t){lenis.raf(t);requestAnimationFrame(raf);})(0);
+const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true, smoothTouch: false });
+(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
 
-lenis.on('scroll',({scroll})=>{
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  document.getElementById('progressFill').style.width=(scroll/h*100)+'%';
-  document.getElementById('nav').classList.toggle('scrolled',scroll>10);
+lenis.on('scroll', ({ scroll }) => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressFill').style.width = (scroll / h * 100) + '%';
 });
 
-window.addEventListener('load',()=>{
-  document.querySelectorAll('.hero-animate').forEach((el,i)=>{
-    setTimeout(()=>el.classList.add('loaded'),80+i*100);
+window.addEventListener('load', () => {
+  document.querySelectorAll('.hero-animate').forEach((el, i) => {
+    setTimeout(() => el.classList.add('loaded'), 80 + i * 100);
   });
 });
 
-const io=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
-},{threshold:0.06,rootMargin:'0px 0px -24px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
