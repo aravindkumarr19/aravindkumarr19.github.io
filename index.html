@@ -859,7 +859,20 @@ html
 </footer>
 
 <script>
+// ✅ INIT LENIS (correct config)
+const lenis = new Lenis({
+  duration: 1.2,
+  smoothWheel: true,   // fixes trackpad
+  smoothTouch: false,  // prevents mobile issues
+  wheelMultiplier: 1,
+});
 
+// ✅ RAF LOOP (required)
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
 
 /* ── HERO LOAD ── */
 window.addEventListener('load',()=>{
