@@ -436,41 +436,131 @@
       .proj-grid,.idols-grid{grid-template-columns:1fr;}
       footer{padding:16px 20px;flex-direction:column;gap:6px;text-align:center;}
     }
-    @media(max-width:520px){
-      .hero-h1{font-size:38px;letter-spacing:-1.8px;}
-      .sec-title{font-size:24px;}
-    }
-  </style>
-</head>
-<body>
+@media(max-width:960px){
+  nav{padding:0 20px;}
+  .nav-center,.nav-right .nav-btn{display:none;}
+  .hamburger{display:flex;}
 
-<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  .page-wrap{padding:0 20px;}
 
-<nav id="nav">
-  <div class="nav-logo">Aravind Kumar R</div>
-  <ul class="nav-center">
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#works-section">My Works</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Interests</a></li>
-    <li><a href="#idols">My Idols</a></li>
-    <li><a href="blog/index.html">Writing</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="#contact" class="nav-btn">Get in Touch</a>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-  </div>
-</nav>
+  #hero{
+    padding:100px 20px 64px;
+    min-height:auto;
+  }
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#experience" onclick="closeMenu()">Experience</a>
-  <a href="#works-section" onclick="closeMenu()">My Works</a>
-  <a href="#about" onclick="closeMenu()">About</a>
-  <a href="#projects" onclick="closeMenu()">Interests</a>
-  <a href="#idols" onclick="closeMenu()">My Idols</a>
-  <a href="blog/index.html">Writing</a>
-  <a href="#contact" onclick="closeMenu()">Get in Touch</a>
-</div>
+  .hero-inner{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+
+  .hero-left{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .hero-h1{
+    order:1;
+  }
+
+  .hero-photo{
+    order:2;
+    display:flex;
+    justify-content:center;
+    margin-top:-6px;
+  }
+
+  .hero-photo img{
+    max-width:300px;
+    width:100%;
+    transform:none;
+  }
+
+  .hero-position{
+    order:3;
+  }
+
+  .hero-sub{
+    order:4;
+  }
+
+  .hero-actions{
+    order:5;
+  }
+
+  .hero-stats{
+    order:6;
+    grid-template-columns:1fr;
+  }
+
+  #what-i-do{padding:40px 20px;}
+
+  .wid-inner{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  .wid-col{
+    padding:0;
+    border-right:none;
+    border-bottom:1px solid var(--border);
+    padding-bottom:28px;
+  }
+
+  .wid-col:last-child{
+    border-bottom:none;
+    padding-bottom:0;
+  }
+
+  .section-card{
+    padding:32px 24px;
+  }
+
+  .about-grid,
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  #works-section{
+    padding:56px 0;
+  }
+
+  .works-wrap{
+    padding:0 20px;
+  }
+
+  .works-grid{
+    grid-template-columns:1fr;
+  }
+
+  .work-card.wide{
+    grid-column:span 1;
+  }
+
+  .proj-grid,
+  .idols-grid{
+    grid-template-columns:1fr;
+  }
+
+  footer{
+    padding:16px 20px;
+    flex-direction:column;
+    gap:6px;
+    text-align:center;
+  }
+}
+
+@media(max-width:520px){
+  .hero-h1{
+    font-size:38px;
+    letter-spacing:-1.8px;
+  }
+
+  .sec-title{
+    font-size:24px;
+  }
+}
 
 <!-- ── HERO ── -->
 <section id="hero">
