@@ -28,17 +28,14 @@
     }
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    /* REMOVED scroll-behavior:smooth to prevent conflict with Lenis */
     html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
     body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;overflow-x:hidden;}
     a{text-decoration:none;color:inherit;}
     img{display:block;max-width:100%;}
 
-    /* ── READING PROGRESS ── */
     .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:9999;background:transparent;pointer-events:none;}
     .progress-fill{height:100%;width:0;background:var(--accent);will-change:width;}
 
-    /* ── NAV ── */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:500;
       height:52px;
@@ -72,7 +69,6 @@
     .mobile-menu a:hover{color:var(--accent);}
     .mobile-menu a:last-child{border-bottom:none;}
 
-    /* ── HERO ── */
     #hero{
       min-height:100vh;
       padding:130px 48px 100px;
@@ -93,8 +89,8 @@
       pointer-events:none;
     }
     .hero-inner{
-      max-width:1200px;margin:auto;width:100%;
-      display:grid;grid-template-columns:1.05fr 0.95fr;
+      max-width:1100px;margin:auto;width:100%;
+      display:grid;grid-template-columns:1fr 1fr;
       gap:56px;align-items:start;position:relative;z-index:1;
     }
     .hero-h1{
@@ -135,20 +131,12 @@
       transition:background 0.2s,transform 0.2s;display:inline-block;
     }
     .btn-secondary:hover{background:#e8e8ed;transform:scale(1.04);}
-    .hero-photo{
-      position:relative;
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-      padding-top:10px;
+    .hero-photo{position:relative;justify-self:center;align-self:start;margin-top:0;}
+    .hero-photo img{
+      width:100%;max-width:520px;
+      border-radius:28px;
+      box-shadow:0 32px 72px rgba(0,0,0,0.12),0 4px 12px rgba(0,0,0,0.06);
     }
- .hero-photo img{
-  width:100%;
-  max-width:450px;
-  border-radius:28px;
-  box-shadow:0 32px 72px rgba(0,0,0,0.12),0 4px 12px rgba(0,0,0,0.06);
-  transform:translateY(-22px);
-}
     .hero-stats{
       display:grid;grid-template-columns:repeat(3,1fr);
       gap:10px;margin-top:44px;
@@ -164,7 +152,6 @@
     .stat-lbl{font-size:12px;color:var(--black);font-weight:600;margin-bottom:3px;}
     .stat-sub{font-size:11px;color:var(--muted);line-height:1.4;}
 
-    /* ── WHAT I DO STRIP ── */
     #what-i-do{
       background:var(--surface2);
       border-top:1px solid var(--border);
@@ -196,7 +183,6 @@
     }
     .wid-desc{font-size:13px;color:var(--muted);line-height:1.75;}
 
-    /* ── SHARED SECTION ── */
     .page-wrap{max-width:1100px;margin:0 auto;padding:0 48px;}
     section.page-section{padding:60px 0;}
     .section-card{
@@ -214,7 +200,6 @@
     .sec-sub{font-size:16px;color:var(--muted);line-height:1.75;max-width:520px;}
     .section-header{margin-bottom:40px;}
 
-    /* ── EXPERIENCE ── */
     .exp-list{display:flex;flex-direction:column;gap:14px;position:relative;z-index:1;}
     .exp-card{background:var(--surface);border-radius:14px;padding:28px 30px;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden;}
     .exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--border);transition:background 0.3s;border-radius:3px 0 0 3px;}
@@ -230,7 +215,6 @@
     .exp-pts li{font-size:15px;color:var(--ink2);padding-left:16px;position:relative;line-height:1.72;}
     .exp-pts li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0.5;}
 
-    /* ── MY WORKS — DARK FULL-WIDTH ── */
     #works-section{
       background:var(--black);
       padding:80px 0;
@@ -320,7 +304,6 @@
     }
     .work-card:hover .work-cta{color:var(--accent);gap:9px;}
 
-    /* ── ABOUT ── */
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;position:relative;z-index:1;}
     .about-body p{font-size:16px;color:var(--ink2);margin-bottom:14px;line-height:1.85;}
     .about-body strong{color:var(--black);font-weight:600;}
@@ -333,7 +316,6 @@
     .ic-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px;}
     .ic-value{font-size:14px;font-weight:500;color:var(--ink2);}
 
-    /* ── INTERESTS ── */
     .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;position:relative;z-index:1;}
     .proj-card{
       border-radius:16px;overflow:hidden;background:#fff;
@@ -354,7 +336,6 @@
     .proj-link{font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:4px;transition:gap 0.2s;}
     .proj-link:hover{gap:9px;}
 
-    /* ── IDOLS ── */
     .idols-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;z-index:1;}
     .idol-card{border-radius:20px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);text-decoration:none;color:inherit;display:block;background:#fff;}
     .idol-card:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,0.14);}
@@ -374,7 +355,6 @@
     .idol-read{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--accent);transition:gap 0.2s;}
     .idol-card:hover .idol-read{gap:10px;}
 
-    /* ── CONTACT ── */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;position:relative;z-index:1;}
     .contact-links{display:flex;flex-direction:column;gap:10px;}
     .c-link{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--surface);border-radius:14px;transition:all 0.25s cubic-bezier(0.16,1,0.3,1);}
@@ -395,7 +375,6 @@
     footer a{font-size:13px;color:var(--muted);transition:color 0.2s;}
     footer a:hover{color:var(--accent);}
 
-    /* ── REVEAL ANIMATIONS ── */
     .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
     .reveal.visible{opacity:1;transform:none;}
     .reveal-stagger>*{opacity:0;transform:translateY(20px);transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1);}
@@ -409,19 +388,15 @@
     .hero-animate{opacity:0;transform:translateY(18px);}
     .hero-animate.loaded{opacity:1;transform:none;transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
 
-    /* ── RESPONSIVE ── */
     @media(max-width:960px){
       nav{padding:0 20px;}
       .nav-center,.nav-right .nav-btn{display:none;}
       .hamburger{display:flex;}
       .page-wrap{padding:0 20px;}
       #hero{padding:100px 20px 64px;min-height:auto;}
-      .hero-inner{grid-template-columns:1fr;gap:40px;}
-      .hero-photo img{
-        max-width:340px;
-        margin:0 auto;
-        transform:none;
-      }
+      .hero-inner{grid-template-columns:1fr;gap:32px;}
+      .hero-photo{order:-1;margin-top:0;}
+      .hero-photo img{max-width:360px;margin:0 auto;}
       .hero-stats{grid-template-columns:1fr;}
       #what-i-do{padding:40px 20px;}
       .wid-inner{grid-template-columns:1fr;gap:32px;}
@@ -436,133 +411,42 @@
       .proj-grid,.idols-grid{grid-template-columns:1fr;}
       footer{padding:16px 20px;flex-direction:column;gap:6px;text-align:center;}
     }
-@media(max-width:960px){
-  nav{padding:0 20px;}
-  .nav-center,.nav-right .nav-btn{display:none;}
-  .hamburger{display:flex;}
+    @media(max-width:520px){
+      .hero-h1{font-size:38px;letter-spacing:-1.8px;}
+      .sec-title{font-size:24px;}
+    }
+  </style>
+</head>
+<body>
 
-  .page-wrap{padding:0 20px;}
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
-  #hero{
-    padding:100px 20px 64px;
-    min-height:auto;
-  }
+<nav id="nav">
+  <div class="nav-logo">Aravind Kumar R</div>
+  <ul class="nav-center">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#works-section">My Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Interests</a></li>
+    <li><a href="#idols">My Idols</a></li>
+    <li><a href="blog/index.html">Writing</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#contact" class="nav-btn">Get in Touch</a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
 
-  .hero-inner{
-    display:flex;
-    flex-direction:column;
-    gap:22px;
-  }
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#works-section" onclick="closeMenu()">My Works</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#projects" onclick="closeMenu()">Interests</a>
+  <a href="#idols" onclick="closeMenu()">My Idols</a>
+  <a href="blog/index.html">Writing</a>
+  <a href="#contact" onclick="closeMenu()">Get in Touch</a>
+</div>
 
-  .hero-left{
-    display:flex;
-    flex-direction:column;
-  }
-
-  .hero-h1{
-    order:1;
-  }
-
-  .hero-photo{
-    order:2;
-    display:flex;
-    justify-content:center;
-    margin-top:-6px;
-  }
-
-  .hero-photo img{
-    max-width:300px;
-    width:100%;
-    transform:none;
-  }
-
-  .hero-position{
-    order:3;
-  }
-
-  .hero-sub{
-    order:4;
-  }
-
-  .hero-actions{
-    order:5;
-  }
-
-  .hero-stats{
-    order:6;
-    grid-template-columns:1fr;
-  }
-
-  #what-i-do{padding:40px 20px;}
-
-  .wid-inner{
-    grid-template-columns:1fr;
-    gap:32px;
-  }
-
-  .wid-col{
-    padding:0;
-    border-right:none;
-    border-bottom:1px solid var(--border);
-    padding-bottom:28px;
-  }
-
-  .wid-col:last-child{
-    border-bottom:none;
-    padding-bottom:0;
-  }
-
-  .section-card{
-    padding:32px 24px;
-  }
-
-  .about-grid,
-  .contact-grid{
-    grid-template-columns:1fr;
-    gap:32px;
-  }
-
-  #works-section{
-    padding:56px 0;
-  }
-
-  .works-wrap{
-    padding:0 20px;
-  }
-
-  .works-grid{
-    grid-template-columns:1fr;
-  }
-
-  .work-card.wide{
-    grid-column:span 1;
-  }
-
-  .proj-grid,
-  .idols-grid{
-    grid-template-columns:1fr;
-  }
-
-  footer{
-    padding:16px 20px;
-    flex-direction:column;
-    gap:6px;
-    text-align:center;
-  }
-}
-
-@media(max-width:520px){
-  .hero-h1{
-    font-size:38px;
-    letter-spacing:-1.8px;
-  }
-
-  .sec-title{
-    font-size:24px;
-  }
-}
-
-<!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-left">
@@ -612,7 +496,6 @@
   </div>
 </section>
 
-<!-- ── WHAT I DO STRIP ── -->
 <div id="what-i-do">
   <div class="wid-inner reveal-stagger">
     <div class="wid-col">
@@ -634,8 +517,6 @@
 </div>
 
 <div class="page-wrap">
-
-  <!-- ── EXPERIENCE ── -->
   <section class="page-section" id="experience">
     <div class="section-card reveal">
       <div class="section-header">
@@ -676,10 +557,8 @@
       </div>
     </div>
   </section>
-
 </div>
 
-<!-- ── MY WORKS — DARK FULL-WIDTH ── -->
 <section id="works-section">
   <div class="works-wrap">
     <div class="works-header reveal">
@@ -689,7 +568,6 @@
     </div>
     <div class="works-grid reveal-stagger">
 
-      <!-- 1. Legal Case Documentation Pipeline -->
       <a href="blog/pipeline.html" class="work-card wide">
         <div class="work-visual pipeline">
           <svg viewBox="0 0 600 140" preserveAspectRatio="none">
@@ -714,7 +592,6 @@
         </div>
       </a>
 
-      <!-- 2. TDS Reconciler -->
       <a href="blog/tds-reconciler.html" class="work-card">
         <div class="work-visual tds">
           <svg viewBox="0 0 300 140" preserveAspectRatio="none">
@@ -736,7 +613,6 @@
         </div>
       </a>
 
-      <!-- 3. Agreement Alignment Checker -->
       <a href="blog/agreement-aligner.html" class="work-card">
         <div class="work-visual aligner">
           <svg viewBox="0 0 300 140" preserveAspectRatio="none">
@@ -762,7 +638,6 @@
         </div>
       </a>
 
-      <!-- 4. Asset Card Master Automation -->
       <a href="blog/asset-card.html" class="work-card">
         <div class="work-visual assetcard">
           <svg viewBox="0 0 300 140" preserveAspectRatio="none">
@@ -787,7 +662,6 @@
         </div>
       </a>
 
-      <!-- 5. ERPNext Implementation -->
       <a href="blog/erp.html" class="work-card wide">
         <div class="work-visual erp">
           <svg viewBox="0 0 600 140" preserveAspectRatio="none">
@@ -812,7 +686,6 @@
         </div>
       </a>
 
-      <!-- 6. Provisional Term Sheet -->
       <a href="blog/term-sheet.html" class="work-card">
         <div class="work-visual termsheet">
           <svg viewBox="0 0 300 140" preserveAspectRatio="none">
@@ -837,7 +710,6 @@
         </div>
       </a>
 
-      <!-- 7. TDS Investor List Verifier -->
       <a href="blog/investor-verifier.html" class="work-card">
         <div class="work-visual investor">
           <svg viewBox="0 0 300 140" preserveAspectRatio="none">
@@ -869,7 +741,6 @@
 
 <div class="page-wrap">
 
-  <!-- ── ABOUT ── -->
   <section class="page-section" id="about">
     <div class="section-card reveal">
       <div class="section-header">
@@ -902,7 +773,6 @@
     </div>
   </section>
 
-  <!-- ── INTERESTS ── -->
   <section class="page-section" id="projects">
     <div class="section-card reveal">
       <div class="section-header">
@@ -939,7 +809,6 @@
     </div>
   </section>
 
-  <!-- ── IDOLS ── -->
   <section class="page-section" id="idols">
     <div class="section-card reveal">
       <div class="section-header">
@@ -990,7 +859,6 @@
     </div>
   </section>
 
-  <!-- ── CONTACT ── -->
   <section class="page-section" id="contact">
     <div class="section-card reveal">
       <div class="section-header">
@@ -1034,7 +902,6 @@
 </footer>
 
 <script>
-/* ── LENIS SMOOTH SCROLL ── */
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -1049,7 +916,6 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-/* ── READING PROGRESS (Optimized) ── */
 let ticking = false;
 lenis.on('scroll', ({ scroll }) => {
   if (!ticking) {
@@ -1063,20 +929,18 @@ lenis.on('scroll', ({ scroll }) => {
   }
 });
 
-/* ── HERO LOAD ANIMATION ── */
 window.addEventListener('load', () => {
   const heroElements = document.querySelectorAll('.hero-animate');
   heroElements.forEach((el, i) => {
     setTimeout(() => el.classList.add('loaded'), 80 + (i * 100));
   });
-  
+
   setTimeout(() => {
     const stats = document.querySelector('.hero-stats');
     if (stats) stats.classList.add('visible');
   }, 480);
 });
 
-/* ── SCROLL REVEAL (Optimized with IntersectionObserver) ── */
 const observerOptions = {
   threshold: 0.07,
   rootMargin: '0px 0px -40px 0px'
@@ -1095,7 +959,6 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
   observer.observe(el);
 });
 
-/* ── HAMBURGER MENU ── */
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1109,12 +972,11 @@ function closeMenu() {
   mobileMenu.classList.remove('open');
 }
 
-/* ── SMOOTH ANCHOR SCROLLING WITH LENIS ── */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const targetId = this.getAttribute('href');
     const target = document.querySelector(targetId);
-    
+
     if (target) {
       e.preventDefault();
       lenis.scrollTo(target, {
