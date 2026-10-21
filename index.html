@@ -247,6 +247,13 @@
     }
     .work-sub{font-size:19px;color:var(--muted);line-height:1.65;max-width:640px;margin:0 auto 34px;}
     .work-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .work-actions{margin-top:36px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+    .work-more{
+      display:inline-block;background:var(--accent);color:#fff;
+      padding:12px 26px;border-radius:980px;font-size:15px;font-weight:500;
+      transition:background 0.2s,transform 0.2s,box-shadow 0.2s;
+    }
+    .work-more:hover{background:var(--accent2);transform:scale(1.04);box-shadow:0 8px 24px rgba(0,113,227,0.28);}
     .work-pill{
       font-size:13px;font-weight:500;color:var(--ink2);
       background:#fff;border-radius:980px;padding:8px 18px;
@@ -583,11 +590,14 @@
       <div class="work-tile">
         <img src="images/leo-logo.png" alt="Leo" class="work-logo"/>
         <h3 class="work-headline">BetterInvest’s AI chatbot, built in-house.</h3>
-        <p class="work-sub">It reads across the company’s complete financial data and LMS, so there’s no more opening five sheets and cross-checking trackers. Type a question in plain English and get a straight answer in seconds.</p>
+        <p class="work-sub">An AI analyst for structured-credit data. Ask about assets, collections, repayments and contracts in plain English. A deterministic query layer produces every number, and a grounding check blocks any figure the model invents.</p>
         <div class="work-pills">
           <span class="work-pill">In-house AI Chatbot</span>
-          <span class="work-pill">Financial Data</span>
-          <span class="work-pill">LMS</span>
+          <span class="work-pill">Assets &amp; Repayments</span>
+          <span class="work-pill">Contract Search</span>
+        </div>
+        <div class="work-actions">
+          <a href="blog/leo.html" class="work-more">Know more</a>
         </div>
       </div>
     </div>
