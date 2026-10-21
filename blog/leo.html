@@ -122,6 +122,32 @@
     .stack .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:34px;max-width:760px;margin-left:auto;margin-right:auto;}
     .tag{font-size:13px;font-weight:500;color:var(--ink2);background:var(--surface);border:1px solid var(--border);border-radius:980px;padding:8px 18px;}
 
+    /* Sample chats */
+    .chats{background:var(--surface);padding:110px 0;}
+    .chats-head{text-align:center;margin-bottom:56px;}
+    .chats-head .lead{max-width:520px;margin:14px auto 0;}
+    .chat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start;}
+    .chat-item figcaption{margin-top:16px;text-align:center;}
+    .chat-item figcaption b{display:block;font-family:'Nohemi',sans-serif;font-weight:500;font-size:16px;letter-spacing:-0.3px;color:var(--black);}
+    .chat-item figcaption span{font-size:13px;color:var(--muted);}
+    .win{background:#fff;border-radius:18px;border:1px solid var(--border);box-shadow:0 18px 48px rgba(0,0,0,0.08);overflow:hidden;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1),box-shadow 0.45s;}
+    .chat-item:hover .win{transform:translateY(-6px);box-shadow:0 26px 60px rgba(0,0,0,0.12);}
+    .win-bar{display:flex;align-items:center;gap:6px;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);}
+    .win-bar i{width:9px;height:9px;border-radius:50%;background:#d2d2d7;display:block;}
+    .win-title{margin-left:auto;margin-right:auto;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.3px;transform:translateX(-18px);}
+    .win-body{padding:18px 16px 20px;display:flex;flex-direction:column;gap:10px;min-height:340px;}
+    .m{font-size:13px;line-height:1.55;padding:10px 14px;border-radius:16px;max-width:92%;}
+    .m.u{align-self:flex-end;background:var(--leo);color:#fff;border-bottom-right-radius:5px;}
+    .m.a{align-self:flex-start;background:var(--surface);color:var(--ink2);border-bottom-left-radius:5px;}
+    .m.a b{color:var(--black);font-weight:600;}
+    .mini{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px;}
+    .mini td{padding:6px 0;border-top:1px solid var(--border);color:var(--ink2);}
+    .mini td:last-child{text-align:right;font-weight:600;color:var(--black);}
+    .quote{margin-top:8px;padding:8px 10px;border-left:3px solid var(--leo);background:#fff;border-radius:0 8px 8px 0;font-size:12px;color:var(--ink2);font-style:italic;}
+    .src{align-self:flex-start;display:flex;flex-wrap:wrap;gap:6px;margin-top:-2px;}
+    .src span{font-size:10.5px;font-weight:600;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:980px;padding:3px 10px;}
+    .chats-note{text-align:center;font-size:13px;color:var(--muted);margin-top:40px;}
+
     /* CTA */
     .cta{padding:0 0 110px;}
     .cta-card{background:var(--surface);border-radius:28px;padding:64px 40px;text-align:center;}
@@ -147,7 +173,9 @@
       .statement{padding:80px 0;}
       .problem-card{grid-template-columns:1fr;gap:24px;padding:40px 24px;border-radius:22px;}
       .arrow{display:none;}
-      .results,.how,.principles{padding:72px 0;}
+      .results,.how,.principles,.chats{padding:72px 0;}
+      .chat-grid{grid-template-columns:1fr;gap:34px;max-width:420px;margin:0 auto;}
+      .win-body{min-height:0;}
       .row{grid-template-columns:1fr;gap:10px;padding:26px 0;}
       .row-num{padding-top:0;}
       .p-item{grid-template-columns:1fr;gap:6px;}
@@ -325,6 +353,67 @@
       <span class="tag">Vercel (planned)</span>
       <span class="tag">Built with Claude Code</span>
     </div>
+  </div>
+</section>
+
+<section class="chats">
+  <div class="wrap">
+    <div class="chats-head reveal">
+      <span class="eyebrow">Sample chats</span>
+      <h2 class="h2">See Leo in conversation.</h2>
+      <p class="lead">Every answer comes back with its source and how fresh the data is.</p>
+    </div>
+    <div class="chat-grid reveal">
+
+      <figure class="chat-item">
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Leo</span></div>
+          <div class="win-body">
+            <div class="m u">What is pending for Project 63?</div>
+            <div class="m a"><b>₹1.20 Cr</b> is outstanding on Project 63 across 2 tranches. The next repayment of <b>₹60.0 L</b> is due on 15 Nov 2026.</div>
+            <div class="src"><span>Source · Repayment tracker</span><span>Refreshed today, 6:00 AM</span></div>
+            <div class="m u">And what was disbursed so far?</div>
+            <div class="m a">A total of <b>₹2.00 Cr</b> has been disbursed on Project 63.</div>
+          </div>
+        </div>
+        <figcaption><b>Plain-English lookup</b><span>Follow-ups keep the project in scope</span></figcaption>
+      </figure>
+
+      <figure class="chat-item">
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Leo</span></div>
+          <div class="win-body">
+            <div class="m u">Which assets are due in the next 30 days?</div>
+            <div class="m a">3 assets have repayments due by 20 Nov 2026:
+              <table class="mini">
+                <tr><td>Project 12</td><td>₹40.0 L</td></tr>
+                <tr><td>Project 41</td><td>₹25.0 L</td></tr>
+                <tr><td>Project 63</td><td>₹60.0 L</td></tr>
+              </table>
+            </div>
+            <div class="src"><span>Source · Repayment tracker</span><span>Refreshed today, 6:00 AM</span></div>
+            <div class="m a">Total due: <b>₹1.25 Cr</b>. Want this as an Excel export?</div>
+          </div>
+        </div>
+        <figcaption><b>Due-soon views</b><span>Tables, charts and Excel export</span></figcaption>
+      </figure>
+
+      <figure class="chat-item">
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Leo</span></div>
+          <div class="win-body">
+            <div class="m u">Find the payment clause in the Project 41 agreement.</div>
+            <div class="m a">Found in the <b>Discounting Agreement, page 7</b>:
+              <div class="quote">“Payment shall be released within 30 days of delivery acceptance.”</div>
+            </div>
+            <div class="src"><span>Source · Contract library</span><span>Matches a funded asset</span></div>
+          </div>
+        </div>
+        <figcaption><b>Contract search</b><span>Cites file, page and the exact passage</span></figcaption>
+      </figure>
+
+    </div>
+    <p class="chats-note reveal">Illustrative conversations with sample data.</p>
   </div>
 </section>
 
