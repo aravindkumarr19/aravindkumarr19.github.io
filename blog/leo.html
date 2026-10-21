@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Warren Buffett — My Idol · Aravind Kumar R</title>
-  <meta name="description" content="A personal tribute to Warren Buffett — patience, discipline, and what The Snowball taught me about long-term thinking."/>
+  <title>Leo — AI analyst for structured-credit data · Aravind Kumar R</title>
+  <meta name="description" content="Leo is an in-house AI analyst for structured-credit data. A deterministic query layer produces every number; the LLM only handles wording and explanations."/>
   <link rel="icon" type="image/png" href="../images/logo.png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <style>
     @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:400;}
@@ -14,28 +14,17 @@
     @font-face{font-family:'Nohemi';src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff');font-weight:600;}
 
     :root{
-      --black:#1d1d1f;--ink2:#3a3a3c;
-      --muted:#6e6e73;--border:#d2d2d7;
-      --surface:#f5f5f7;--accent:#0071e3;--accent2:#0077ed;
+      --black:#1d1d1f;--ink2:#3a3a3c;--muted:#6e6e73;--border:#d2d2d7;
+      --bg:#ffffff;--surface:#f5f5f7;--accent:#0071e3;--accent2:#0077ed;--leo:#1b16ff;
     }
-
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
     html{font-size:16px;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
     @media(min-width:961px){html{font-size:clamp(11px,1vw,15px);}}
-    body{font-family:'Inter',-apple-system,'Segoe UI',system-ui,sans-serif;background:#fff;color:var(--black);line-height:1.7;overflow-x:hidden;padding-top:3.25rem;}
+    body{font-family:'Inter',-apple-system,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--black);line-height:1.7;overflow-x:hidden;}
     a{text-decoration:none;color:inherit;}
     img{display:block;max-width:100%;}
 
-    /* Shared animation system (identical on every page) */
-    .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:9999;background:transparent;pointer-events:none;}
-    .progress-fill{height:100%;width:0;background:var(--accent);will-change:width;}
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
-    .reveal.visible{opacity:1;transform:none;}
-    .hero-animate{opacity:0;transform:translateY(18px);}
-    .hero-animate.loaded{opacity:1;transform:none;transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
-
-    /* NAV — same as site */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:500;height:3.25rem;
       display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;
@@ -43,233 +32,416 @@
       backdrop-filter:saturate(180%) blur(1.25rem);-webkit-backdrop-filter:saturate(180%) blur(1.25rem);
       border-bottom:1px solid rgba(0,0,0,0.08);
     }
-    .nav-logo{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:500;font-size:1rem;letter-spacing:-0.2px;}
-    .nav-links{display:flex;gap:0.5rem;}
-    .nav-link{font-size:0.8125rem;font-weight:500;color:var(--muted);padding:0.375rem 1rem;border-radius:980px;background:var(--surface);transition:all 0.2s;}
-    .nav-link:hover{color:var(--black);background:#e8e8ed;}
+    .nav-logo{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:500;font-size:1rem;letter-spacing:0px;}
+    .nav-back{font-size:0.8125rem;font-weight:500;color:var(--muted);transition:color 0.2s;}
+    .nav-back:hover{color:var(--black);}
 
-    /* HERO — dark cinematic, sized to match the site */
-    .hero{
-      min-height:60vh;
-      background:linear-gradient(160deg,#071a10 0%,#0f2d1a 50%,#14532d 100%);
-      display:flex;flex-direction:column;justify-content:flex-end;
-      padding:5rem 3rem 4.5rem;
-      position:relative;overflow:hidden;
-    }
+    .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:9999;background:transparent;pointer-events:none;}
+    .progress-fill{height:100%;width:0;background:var(--accent);will-change:width;}
+    .reveal{opacity:0;transform:translateY(1.75rem);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+    .reveal.visible{opacity:1;transform:none;}
+    .hero-animate{opacity:0;transform:translateY(1.125rem);}
+    .hero-animate.loaded{opacity:1;transform:none;transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+
+    .wrap{max-width:75rem;margin:0 auto;padding:0 3rem;}
+    .eyebrow{display:block;font-size:0.6875rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;}
+    .h2{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:400;font-size:clamp(1.875rem,4.2vw,3.25rem);letter-spacing:-0.3px;line-height:1.18;}
+    .lead{font-size:1.1875rem;color:var(--muted);line-height:1.7;}
+    .center{text-align:center;}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden;background:var(--surface);padding:9.375rem 0 6.25rem;text-align:center;}
     .hero::before{
-      content:'';position:absolute;top:-5rem;right:-5rem;
-      width:31rem;height:31rem;border-radius:50%;
-      background:radial-gradient(circle,rgba(26,122,74,0.2) 0%,transparent 65%);
+      content:'';position:absolute;top:-25%;left:50%;transform:translateX(-50%);
+      width:75%;height:100%;
+      background:radial-gradient(ellipse at center,rgba(27,22,255,0.08) 0%,transparent 68%);pointer-events:none;
     }
-    .hero::after{
-      content:'';position:absolute;bottom:-4rem;left:-4rem;
-      width:25rem;height:25rem;border-radius:50%;
-      background:radial-gradient(circle,rgba(200,168,98,0.1) 0%,transparent 65%);
-    }
-    .hero-inner{max-width:69rem;margin:0 auto;width:100%;position:relative;z-index:1;}
-    .hero-tag{
-      display:inline-block;
-      font-size:0.6875rem;font-weight:700;letter-spacing:0.15rem;text-transform:uppercase;
-      color:rgba(255,255,255,0.6);
-      background:rgba(255,255,255,0.07);
-      border:1px solid rgba(255,255,255,0.12);
-      padding:0.3125rem 0.875rem;border-radius:980px;margin-bottom:1.25rem;
-    }
-    .hero-title{
+    .hero>.wrap{position:relative;z-index:1;}
+    .hero-logo{height:4.75rem;width:auto;margin:0 auto 2.375rem;}
+    .hero h1{
       font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:400;
-      font-size:clamp(2.25rem,4.6vw,3.75rem);
-      color:#fff;line-height:1.18;letter-spacing:-0.5px;margin-bottom:1rem;
+      font-size:clamp(2.25rem,5vw,3.75rem);letter-spacing:-0.5px;line-height:1.18;
+      max-width:51.25rem;margin:0 auto 1.375rem;
     }
-    .hero-title em{font-style:normal;color:#c8a862;}
-    .hero-sub{font-size:1rem;color:rgba(255,255,255,0.6);line-height:1.75;max-width:32rem;margin-bottom:2rem;}
-    .hero-meta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
-    .meta-item{font-size:0.75rem;font-weight:500;color:rgba(255,255,255,0.45);}
-    .meta-item span{color:rgba(255,255,255,0.8);}
-    .meta-sep{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.25);flex-shrink:0;}
+    .hero .lead{max-width:41.25rem;margin:0 auto 2.125rem;}
+    .pills{display:flex;justify-content:center;gap:0.625rem;flex-wrap:wrap;}
+    .pill{font-size:0.8125rem;font-weight:500;color:var(--ink2);background:#fff;border-radius:61.25rem;padding:0.5rem 1.125rem;box-shadow:0 1px 0.1875rem rgba(0,0,0,0.06);}
 
-    /* STATS */
-    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin:3.25rem 0;}
-    .stat-box{background:var(--surface);border-radius:0.875rem;padding:1.25rem 1rem;text-align:center;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);}
-    .stat-box:hover{transform:translateY(-3px);}
-    .stat-num{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-size:1.75rem;line-height:1.18;color:var(--black);margin-bottom:0.375rem;letter-spacing:-0.2px;}
-    .stat-lbl{font-size:0.75rem;color:var(--muted);font-weight:500;}
-
-    /* ARTICLE BODY */
-    .article-wrap{max-width:75rem;margin:0 auto;padding:4.5rem 3rem 5.5rem;}
-
-    .prose p{font-size:1.0625rem;color:var(--ink2);line-height:1.85;margin-bottom:1.5rem;}
-    .prose p:first-child{font-size:1.125rem;color:var(--black);}
-    .prose strong{color:var(--black);font-weight:600;}
-
-    .prose h2{
+    /* Statement */
+    .statement{padding:7.5rem 0;text-align:center;}
+    .statement p.big{
       font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:400;
-      font-size:1.5rem;color:var(--black);
-      letter-spacing:-0.1px;line-height:1.25;
-      margin:3.25rem 0 1rem;
+      font-size:clamp(1.75rem,4vw,3.125rem);letter-spacing:-0.3px;line-height:1.18;
+      max-width:51.25rem;margin:0 auto 1.25rem;
     }
+    .statement .lead{max-width:37.5rem;margin:0 auto;}
 
-    .pull-quote{border-left:3px solid var(--black);padding:1.125rem 1.625rem;margin:2.5rem 0;}
-    .pull-quote p{
-      font-family:'Lora',serif;font-style:italic;
-      font-size:1.25rem;color:var(--black);line-height:1.6;margin:0;
-    }
+    /* Problem */
+    .problem{padding:0 0 6.875rem;}
+    .problem-card{background:var(--surface);border-radius:1.75rem;padding:4rem 3.5rem;display:grid;grid-template-columns:1fr 1.2fr;gap:3.5rem;align-items:center;}
+    .problem-card .h2{font-size:clamp(1.75rem,3.4vw,2.625rem);}
+    .problem-card p{font-size:1.0625rem;color:var(--muted);line-height:1.8;margin-bottom:0.875rem;}
+    .problem-card p:last-child{margin-bottom:0;}
+    .problem-card p strong{color:var(--black);font-weight:600;}
 
-    .ornament{display:flex;align-items:center;gap:0.75rem;margin:3rem 0;}
-    .ornament::before,.ornament::after{content:'';flex:1;height:1px;background:var(--border);}
-    .ornament-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;}
+    /* Flow */
+    .flow-sec{padding:0 0 6.875rem;}
+    .flow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0.625rem 0.5rem;margin-top:2.75rem;}
+    .node{font-size:0.8125rem;font-weight:600;padding:0.6875rem 1.125rem;border-radius:0.875rem;background:var(--surface);color:var(--ink2);border:1px solid var(--border);}
+    .node.key{background:var(--leo);color:#fff;border-color:var(--leo);}
+    .node.dim{background:#fff;border-style:dashed;color:var(--muted);}
+    .arrow{color:var(--border);font-size:1rem;}
+    .flow-note{text-align:center;font-size:0.875rem;color:var(--muted);margin-top:1.375rem;}
 
-    .article-img{margin:3rem 0;border-radius:1rem;overflow:hidden;box-shadow:0 0.5rem 2rem rgba(0,0,0,0.1);}
-    .article-img img{
-      width:100%;height:auto;display:block;
-      max-height:480px;object-fit:cover;object-position:center top;
-      transition:transform 0.5s ease;
-    }
-    .article-img:hover img{transform:scale(1.02);}
-    .article-img figcaption{padding:0.625rem 1rem;font-size:0.8125rem;color:var(--muted);background:var(--surface);font-style:italic;}
+    /* Results */
+    .results{background:var(--surface);padding:6.875rem 0;}
+    .results-head{text-align:center;margin-bottom:3.5rem;}
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.625rem,1fr));gap:0.875rem;}
+    .stat{background:#fff;border-radius:1.375rem;padding:2.125rem 1.5rem;text-align:center;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s;}
+    .stat:hover{transform:translateY(-0.3125rem);box-shadow:0 1rem 2.5rem rgba(0,0,0,0.07);}
+    .stat-num{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:500;font-size:2.75rem;letter-spacing:-0.3px;line-height:1.18;color:var(--leo);margin-bottom:0.625rem;}
+    .stat-lbl{font-size:0.8125rem;color:var(--muted);line-height:1.55;}
 
-    .prose>*{max-width:46rem;margin-left:auto;margin-right:auto;}
-    .trait-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin:2rem 0;}
-    .trait{font-size:0.8125rem;font-weight:500;padding:0.375rem 1rem;border-radius:980px;background:var(--surface);color:var(--ink2);border:1px solid var(--border);}
+    /* How it works */
+    .how{padding:6.875rem 0 6.25rem;}
+    .how-head{text-align:center;margin-bottom:3.75rem;}
+    .how-head .lead{max-width:33.75rem;margin:0.875rem auto 0;}
+    .row{display:grid;grid-template-columns:4rem 15.625rem 1fr;gap:1.75rem;padding:2.125rem 0;border-top:1px solid var(--border);align-items:start;}
+    .row:last-child{border-bottom:1px solid var(--border);}
+    .row-num{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-size:0.875rem;letter-spacing:2px;color:var(--leo);padding-top:0.3125rem;}
+    .row h3{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:500;font-size:1.375rem;letter-spacing:0px;line-height:1.25;}
+    .row h3 small{display:block;font-family:'Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-size:0.75rem;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:0.25rem;}
+    .row p{font-size:0.9688rem;color:var(--muted);line-height:1.8;}
+    .row p+p{margin-top:0.625rem;}
+    .row p b{color:var(--ink2);font-weight:600;}
 
-    .back-wrap{text-align:center;padding:3.5rem 0 0;}
-    .back-btn{
-      display:inline-flex;align-items:center;gap:0.5rem;
-      background:var(--accent);color:#fff;
-      padding:0.8125rem 1.625rem;border-radius:980px;
-      font-size:0.9375rem;font-weight:500;
-      transition:background 0.2s,transform 0.2s,box-shadow 0.2s;
-    }
-    .back-btn:hover{background:var(--accent2);transform:scale(1.04);box-shadow:0 0.5rem 1.5rem rgba(0,113,227,0.28);}
+    /* Principles */
+    .principles{background:var(--black);color:#f5f5f7;padding:6.875rem 0;position:relative;overflow:hidden;}
+    .principles::before{content:'';position:absolute;top:-30%;right:-10%;width:60vw;height:60vw;background:radial-gradient(ellipse at center,rgba(27,22,255,0.22) 0%,transparent 65%);pointer-events:none;}
+    .principles>.wrap{position:relative;z-index:1;}
+    .principles .eyebrow{color:#6b7bff;}
+    .principles .h2{color:#f5f5f7;margin-bottom:3.5rem;}
+    .p-list{display:flex;flex-direction:column;}
+    .p-item{padding:1.875rem 0;border-top:1px solid rgba(255,255,255,0.12);display:grid;grid-template-columns:4rem 1fr;gap:1.25rem;}
+    .p-item:last-child{border-bottom:1px solid rgba(255,255,255,0.12);}
+    .p-item span{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-size:0.875rem;letter-spacing:2px;color:#6b7bff;padding-top:0.5rem;}
+    .p-item p{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:400;font-size:clamp(1.375rem,3vw,2.125rem);letter-spacing:-0.2px;line-height:1.2;}
+
+    /* Stack */
+    .stack{padding:6.25rem 0 5.625rem;text-align:center;}
+    .stack .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:0.625rem;margin-top:2.125rem;max-width:47.5rem;margin-left:auto;margin-right:auto;}
+    .tag{font-size:0.8125rem;font-weight:500;color:var(--ink2);background:var(--surface);border:1px solid var(--border);border-radius:61.25rem;padding:0.5rem 1.125rem;}
+
+    /* Sample chats */
+    .chats{background:var(--surface);padding:6.875rem 0;}
+    .chats-head{text-align:center;margin-bottom:3.5rem;}
+    .chats-head .lead{max-width:32.5rem;margin:0.875rem auto 0;}
+    .chat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.125rem;align-items:start;}
+    .chat-item figcaption{margin-top:1rem;text-align:center;}
+    .chat-item figcaption b{display:block;font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:500;font-size:1rem;letter-spacing:0px;color:var(--black);}
+    .chat-item figcaption span{font-size:0.8125rem;color:var(--muted);}
+    .win{background:#fff;border-radius:1.125rem;border:1px solid var(--border);box-shadow:0 1.125rem 3rem rgba(0,0,0,0.08);overflow:hidden;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1),box-shadow 0.45s;}
+    .chat-item:hover .win{transform:translateY(-0.375rem);box-shadow:0 1.625rem 3.75rem rgba(0,0,0,0.12);}
+    .win-bar{display:flex;align-items:center;gap:0.375rem;padding:0.75rem 1rem;background:var(--surface);border-bottom:1px solid var(--border);}
+    .win-bar i{width:0.5625rem;height:0.5625rem;border-radius:50%;background:#d2d2d7;display:block;}
+    .win-title{margin-left:auto;margin-right:auto;font-size:0.6875rem;font-weight:600;color:var(--muted);letter-spacing:0.3px;transform:translateX(-1.125rem);}
+    .win-body{padding:1.125rem 1rem 1.25rem;display:flex;flex-direction:column;gap:0.625rem;min-height:21.25rem;}
+    .m{font-size:0.8125rem;line-height:1.55;padding:0.625rem 0.875rem;border-radius:1rem;max-width:92%;}
+    .m.u{align-self:flex-end;background:var(--leo);color:#fff;border-bottom-right-radius:0.3125rem;}
+    .m.a{align-self:flex-start;background:var(--surface);color:var(--ink2);border-bottom-left-radius:0.3125rem;}
+    .m.a b{color:var(--black);font-weight:600;}
+    .mini{width:100%;border-collapse:collapse;margin-top:0.5rem;font-size:0.75rem;}
+    .mini td{padding:0.375rem 0;border-top:1px solid var(--border);color:var(--ink2);}
+    .mini td:last-child{text-align:right;font-weight:600;color:var(--black);}
+    .quote{margin-top:0.5rem;padding:0.5rem 0.625rem;border-left:0.1875rem solid var(--leo);background:#fff;border-radius:0 0.5rem 0.5rem 0;font-size:0.75rem;color:var(--ink2);font-style:italic;}
+    .src{align-self:flex-start;display:flex;flex-wrap:wrap;gap:0.375rem;margin-top:-2px;}
+    .src span{font-size:0.6562rem;font-weight:600;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:61.25rem;padding:0.1875rem 0.625rem;}
+    .chats-note{text-align:center;font-size:0.8125rem;color:var(--muted);margin-top:2.5rem;}
+
+    /* CTA */
+    .cta{padding:0 0 6.875rem;}
+    .cta-card{background:var(--surface);border-radius:1.75rem;padding:4rem 2.5rem;text-align:center;}
+    .cta-card h2{font-family:'Nohemi','Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-weight:400;font-size:clamp(1.625rem,3.4vw,2.5rem);letter-spacing:-0.2px;margin-bottom:0.75rem;}
+    .cta-card p{font-size:1.0625rem;color:var(--muted);max-width:30rem;margin:0 auto 1.75rem;}
+    .btn{display:inline-block;background:var(--accent);color:#fff;padding:0.8125rem 1.625rem;border-radius:61.25rem;font-size:0.9375rem;font-weight:500;transition:background 0.2s,transform 0.2s;margin:0 0.3125rem;}
+    .btn:hover{background:var(--accent2);transform:scale(1.04);}
+    .btn.alt{background:#fff;color:var(--black);box-shadow:0 1px 0.1875rem rgba(0,0,0,0.08);}
+    .btn.alt:hover{background:#ebebf0;}
 
     footer{border-top:1px solid var(--border);padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;}
     footer p,footer a{font-size:0.8125rem;color:var(--muted);}
     footer a:hover{color:var(--accent);}
 
+
     @media(max-width:960px){
       nav{padding:0 1.25rem;}
-      .hero{padding:4rem 1.25rem 3.5rem;min-height:auto;}
-      .article-wrap{padding:3.25rem 1.25rem 4.5rem;}
-      .prose p{font-size:1rem;}
-      .pull-quote p{font-size:1.125rem;}
-      footer{padding:1rem 1.25rem;flex-direction:column;gap:0.375rem;text-align:center;}
+      .wrap{padding:0 1.25rem;}
+      .hero{padding:6.875rem 0 4.5rem;}
+      .hero-logo{height:3.5rem;}
+      .statement{padding:5rem 0;}
+      .problem-card{grid-template-columns:1fr;gap:1.5rem;padding:2.5rem 1.5rem;border-radius:1.375rem;}
+      .arrow{display:none;}
+      .results,.how,.principles,.chats{padding:4.5rem 0;}
+      .chat-grid{grid-template-columns:1fr;gap:2.125rem;max-width:26.25rem;margin:0 auto;}
+      .win-body{min-height:0;}
+      .row{grid-template-columns:1fr;gap:0.625rem;padding:1.625rem 0;}
+      .row-num{padding-top:0;}
+      .p-item{grid-template-columns:1fr;gap:0.375rem;}
+      .p-item span{padding-top:0;}
+      .lead{font-size:1rem;}
+      .cta-card{padding:3rem 1.5rem;border-radius:1.375rem;}
+      .btn{margin:0.3125rem;}
+      footer{padding:1rem 1.25rem;flex-direction:column;gap:0.375rem;}
     }
-    @media(max-width:600px){.stats-row{grid-template-columns:1fr 1fr;}}
   </style>
-  <noscript><style>.reveal,.hero-animate{opacity:1!important;transform:none!important;}</style></noscript>
+<noscript><style>.reveal,.reveal-stagger>*,.hero-animate{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
 <body>
 
 <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
 <nav id="nav">
-  <div class="nav-logo">Aravind Kumar R</div>
-  <div class="nav-links">
-    <a href="../index.html#idols" class="nav-link">← My Idols</a>
-    <a href="../index.html" class="nav-link">Portfolio</a>
-  </div>
+  <a href="../index.html" class="nav-logo">Aravind Kumar R</a>
+  <a href="../index.html#works-section" class="nav-back">← All works</a>
 </nav>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-tag hero-animate">📈 Professional Idol · Investing</div>
-    <h1 class="hero-title hero-animate" style="transition-delay:0.08s;">
-      Warren<br><em>Buffett</em>
-    </h1>
-    <p class="hero-sub hero-animate" style="transition-delay:0.14s;">The man who turned patience into a philosophy and discipline into billions — and what reading his story changed in how I think about money and life.</p>
-    <div class="hero-meta hero-animate" style="transition-delay:0.20s;">
-      <span class="meta-item">By <span>Aravind Kumar R</span></span>
-      <span class="meta-sep"></span>
-      <span class="meta-item"><span>Finance · Personal</span></span>
-      <span class="meta-sep"></span>
-      <span class="meta-item"><span>2026</span></span>
+<header class="hero">
+  <div class="wrap">
+    <img src="../images/leo-logo.png" alt="Leo" class="hero-logo hero-animate"/>
+    <h1 class="hero-animate" style="transition-delay:0.08s;">BetterInvest’s AI chatbot, built in-house.</h1>
+    <p class="lead hero-animate" style="transition-delay:0.14s;">An AI analyst for structured-credit data. Ask about assets, collections, repayments and contracts in plain English. Every number comes from a deterministic query, never from the model.</p>
+    <div class="pills hero-animate" style="transition-delay:0.20s;">
+      <span class="pill">In-house AI Chatbot</span>
+      <span class="pill">Assets &amp; Repayments</span>
+      <span class="pill">Contract Search</span>
     </div>
   </div>
-</div>
+</header>
 
-<div class="article-wrap">
-  <div class="prose">
-
-    <p class="reveal">My admiration for Warren Buffett really began after I read <strong>The Snowball</strong>. Before that, I just knew him as one of the richest and most successful investors in the world. But the book made him feel real to me — it showed his journey, his mistakes, his thinking, and how he built everything <strong>step by step.</strong> It was not the wealth that impressed me. It was the method.</p>
-
-    <p class="reveal">What stayed with me the most was his mindset. He doesn't chase trends or get carried away by noise. He takes his time, understands things deeply, and makes decisions with conviction. That kind of patience is rare, and honestly, something I'm still trying to build within myself.</p>
-
-    <figure class="article-img reveal">
-      <img src="../images/buffett-article-1.jpg" alt="Warren Buffett" onerror="this.parentElement.style.display='none'"/>
-      <figcaption>The Oracle of Omaha — whose most powerful asset was never capital, but temperament.</figcaption>
-    </figure>
-
-    <div class="stats-row reveal">
-      <div class="stat-box">
-        <div class="stat-num">94</div>
-        <div class="stat-lbl">Years — still compounding</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">60+</div>
-        <div class="stat-lbl">Years running Berkshire</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">~20%</div>
-        <div class="stat-lbl">Avg. annual return since 1965</div>
-      </div>
-    </div>
-
-    <h2 class="reveal">The principle that changed my thinking</h2>
-
-    <p class="reveal">Reading about how he stuck to his principles even when others doubted him made me reflect on how important it is to <strong>trust your own thinking.</strong> In finance, especially, it's easy to get influenced by what everyone else is doing. Markets panic. Crowds chase momentum. Buffett's approach reminds me to slow down, think clearly, and focus on long-term value rather than short-term excitement.</p>
-
-    <div class="pull-quote reveal">
-      <p>Price is what you pay. Value is what you get. The distinction most people never pause to make.</p>
-    </div>
-
-    <h2 class="reveal">Simplicity as a competitive edge</h2>
-
-    <p class="reveal">Another thing that really inspires me is how <strong>simple he keeps his life.</strong> There's no unnecessary complexity — just clarity in thought and action. He still lives in the same house in Omaha he bought in 1958. He reads for hours every day. He avoids what he doesn't understand. It made me realize that success doesn't have to look flashy. Sometimes, it's just about doing the same things right over a long period of time.</p>
-
-    <figure class="article-img reveal">
-      <img src="../images/buffett-article-2.jpg" alt="Warren Buffett" onerror="this.parentElement.style.display='none'"/>
-      <figcaption>Decades of reading, thinking, and compounding — the real Berkshire model.</figcaption>
-    </figure>
-
-    <h2 class="reveal">What The Snowball actually taught me</h2>
-
-    <p class="reveal">The Snowball is not just a biography. It's a study in how a life gets built. Buffett's early years — buying his first stock at 11, delivering newspapers, doing taxes for neighbors as a teenager — reveal that the compounding wasn't just financial. It was also intellectual. He was always reading, always learning, always upgrading his mental models. The wealth was a byproduct of the thinking.</p>
-
-    <p class="reveal">What hit me hardest was his partnership with Charlie Munger, who pushed Buffett toward buying <strong>wonderful companies at fair prices.</strong> That evolution — being willing to upgrade your own thinking when confronted with better information — is something I want to carry in every phase of my own work.</p>
-
-    <div class="ornament reveal"><div class="ornament-dot"></div></div>
-
-    <h2 class="reveal">How it shows up in my own work</h2>
-
-    <p class="reveal">Even in my own journey in asset operations and finance, I often find myself going back to what I learned from his story. When reviewing film investment deals at BetterInvest, I think about underlying value — not just the projected return, but the quality of the collateral, the integrity of the structure, the durability of the cash flow.</p>
-
-    <p class="reveal">Buffett has a concept he calls the "inner scorecard" — measuring yourself by your own standards rather than by what others think of you. That framing has helped me stay focused on building genuine skills over optimizing appearances.</p>
-
-    <figure class="article-img reveal">
-      <img src="../images/buffett-article-3.jpg" alt="Warren Buffett" onerror="this.parentElement.style.display='none'"/>
-      <figcaption>The snowball keeps rolling — if you find the right hill and have the patience to let it.</figcaption>
-    </figure>
-
-    <p class="reveal">For me, Buffett isn't just an idol. He's a <strong>constant reminder that the right mindset matters more than quick results.</strong> Be patient. Stay consistent. Don't compromise on fundamentals. Think in decades, not quarters. And never stop reading.</p>
-
-    <div class="trait-row reveal">
-      <span class="trait">Patience</span>
-      <span class="trait">Discipline</span>
-      <span class="trait">Value Thinking</span>
-      <span class="trait">Simplicity</span>
-      <span class="trait">Inner Scorecard</span>
-      <span class="trait">Long-Term Vision</span>
-    </div>
-
-    <div class="back-wrap reveal">
-      <a href="../index.html#idols" class="back-btn">← Back to My Idols</a>
-    </div>
-
+<section class="statement">
+  <div class="wrap reveal">
+    <p class="big">The LLM never produces a number.</p>
+    <p class="lead">A deterministic query layer produces every figure. The model only handles unclear wording and explanations, and a grounding check blocks any figure it invents.</p>
   </div>
-</div>
+</section>
+
+<section class="problem">
+  <div class="wrap">
+    <div class="problem-card reveal">
+      <div>
+        <span class="eyebrow">The problem</span>
+        <h2 class="h2">One question. Several sheets.</h2>
+      </div>
+      <div>
+        <p>The company’s data lives in Google Sheets spread across teams. Answering a simple question like <strong>“what is pending for this project?”</strong> meant opening several sheets, matching inconsistent names and adding up by hand.</p>
+        <p>That is slow and error-prone. Leo reads those sheets on a schedule and answers from a single database, with the <strong>source and data freshness on every answer</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow-sec">
+  <div class="wrap reveal">
+    <div class="center">
+      <span class="eyebrow">Architecture</span>
+      <h2 class="h2">From sheets to a grounded answer.</h2>
+    </div>
+    <div class="flow">
+      <span class="node">Google Sheets &amp; Drive</span><span class="arrow">→</span>
+      <span class="node">Ingestion</span><span class="arrow">→</span>
+      <span class="node">PostgreSQL</span><span class="arrow">→</span>
+      <span class="node key">Deterministic query layer</span><span class="arrow">→</span>
+      <span class="node dim">LLM · wording only</span><span class="arrow">→</span>
+      <span class="node">Grounding check</span><span class="arrow">→</span>
+      <span class="node">Answer + source + freshness</span>
+    </div>
+    <p class="flow-note">Common questions skip the LLM entirely and are answered straight from the query layer.</p>
+  </div>
+</section>
+
+<section class="results">
+  <div class="wrap">
+    <div class="results-head reveal">
+      <span class="eyebrow">Results so far · pilot stage</span>
+      <h2 class="h2">Accurate, fast and cheap to run.</h2>
+    </div>
+    <div class="stat-grid reveal">
+      <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">live data sources</div></div>
+      <div class="stat"><div class="stat-num">~1,700</div><div class="stat-lbl">assets in one queryable store</div></div>
+      <div class="stat"><div class="stat-num">15/15</div><div class="stat-lbl">validation questions matched ground truth</div></div>
+      <div class="stat"><div class="stat-num">173</div><div class="stat-lbl">data-quality fixes made at source</div></div>
+      <div class="stat"><div class="stat-num">&lt;1s</div><div class="stat-lbl">for most answers</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <div class="how-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h2">Seven layers, built for trust.</h2>
+      <p class="lead">Each layer exists to keep the numbers right.</p>
+    </div>
+    <div class="reveal">
+      <div class="row">
+        <span class="row-num">01</span>
+        <h3>Ingestion<small>ELT pipeline</small></h3>
+        <div>
+          <p>A registry-driven loader pulls sheets through the Google Sheets and Drive APIs with read-only service-account access and writes to PostgreSQL. It checks a header contract before loading and keeps the last good data when a check fails.</p>
+          <p>Loads are idempotent, with row-level change history, overrides, duplicate and test-row flags, and daily refresh with freshness tracking. One source has <b>51 tabs in 8 different header layouts</b>, which the loader maps by column name.</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-num">02</span>
+        <h3>Entity resolution</h3>
+        <p>Clients, projects and assets are matched with aliases and fuzzy matching, plus guardrails so “Project 63” is never silently swapped for “Project 62”.</p>
+      </div>
+      <div class="row">
+        <span class="row-num">03</span>
+        <h3>Query layer<small>Deterministic</small></h3>
+        <div>
+          <p>A deterministic router classifies questions and runs parameterised lookups: totals, profiles, comparisons, group-by, overdue and due-soon views. Common questions never reach the LLM, which keeps most answers under a second and the cost near zero.</p>
+          <p>Parameterised lookups were chosen over free text-to-SQL for <b>safety and accuracy</b>.</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-num">04</span>
+        <h3>LLM layer<small>Tool-calling</small></h3>
+        <p>For free-text questions, a tool-calling LLM picks the lookup and explains the result. It launched on an open model, with a move to Claude Haiku and Sonnet planned. Model tiering, token budgets, caching and reasoning-effort limits keep cost predictable.</p>
+      </div>
+      <div class="row">
+        <span class="row-num">05</span>
+        <h3>Hallucination control</h3>
+        <p>A numeric grounding check compares every figure in the model’s text with the lookup result and replaces any figure it can’t find. <b>The model never produces a number.</b></p>
+      </div>
+      <div class="row">
+        <span class="row-num">06</span>
+        <h3>Retrieval over contracts<small>Full-text search</small></h3>
+        <div>
+          <p>About <b>6,600 contract files</b> are indexed with PostgreSQL full-text search (tsvector with ranked retrieval) and trigram similarity for misspellings. Answers cite the file, the page and a verbatim passage, and say whether a contract matches a funded asset.</p>
+          <p>Next phase: OCR for scans and an LLM generation step with citations (RAG). Embeddings could be added for hybrid retrieval.</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-num">07</span>
+        <h3>Product &amp; security</h3>
+        <div>
+          <p>Conversation scope carries across follow-ups. Charts, Excel export, voice input and pinned client pages all run without any LLM call.</p>
+          <p>Access is admin-approved with role gating for sensitive modules, a per-user daily cap, and an audit log that stores no data. A status page shows the freshness and health of every source.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="principles">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">What I learned</span>
+      <h2 class="h2">Three rules I’d build by again.</h2>
+    </div>
+    <div class="p-list reveal">
+      <div class="p-item"><span>01</span><p>Keep the LLM out of the numbers.</p></div>
+      <div class="p-item"><span>02</span><p>Put data contracts at every boundary.</p></div>
+      <div class="p-item"><span>03</span><p>Make refresh failures visible and safe.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stack">
+  <div class="wrap reveal">
+    <span class="eyebrow">Stack</span>
+    <h2 class="h2">What it’s built with.</h2>
+    <div class="tags">
+      <span class="tag">Next.js</span>
+      <span class="tag">React</span>
+      <span class="tag">PostgreSQL · Supabase</span>
+      <span class="tag">Google Sheets &amp; Drive APIs</span>
+      <span class="tag">Tool-calling LLMs</span>
+      <span class="tag">Groq</span>
+      <span class="tag">Claude Haiku &amp; Sonnet (planned)</span>
+      <span class="tag">Tavily search</span>
+      <span class="tag">Vercel (planned)</span>
+      <span class="tag">Built with Claude Code</span>
+    </div>
+  </div>
+</section>
+
+<section class="chats">
+  <div class="wrap">
+    <div class="chats-head reveal">
+      <span class="eyebrow">Sample chats</span>
+      <h2 class="h2">See Leo in conversation.</h2>
+      <p class="lead">Every answer comes back with its source and how fresh the data is.</p>
+    </div>
+    <div class="chat-grid reveal">
+
+      <figure class="chat-item">
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Leo</span></div>
+          <div class="win-body">
+            <div class="m u">What is pending for Project 63?</div>
+            <div class="m a"><b>₹1.20 Cr</b> is outstanding on Project 63 across 2 tranches. The next repayment of <b>₹60.0 L</b> is due on 15 Nov 2026.</div>
+            <div class="src"><span>Source · Repayment tracker</span><span>Refreshed today, 6:00 AM</span></div>
+            <div class="m u">And what was disbursed so far?</div>
+            <div class="m a">A total of <b>₹2.00 Cr</b> has been disbursed on Project 63.</div>
+          </div>
+        </div>
+        <figcaption><b>Plain-English lookup</b><span>Follow-ups keep the project in scope</span></figcaption>
+      </figure>
+
+      <figure class="chat-item">
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Leo</span></div>
+          <div class="win-body">
+            <div class="m u">Which assets are due in the next 30 days?</div>
+            <div class="m a">3 assets have repayments due by 20 Nov 2026:
+              <table class="mini">
+                <tr><td>Project 12</td><td>₹40.0 L</td></tr>
+                <tr><td>Project 41</td><td>₹25.0 L</td></tr>
+                <tr><td>Project 63</td><td>₹60.0 L</td></tr>
+              </table>
+            </div>
+            <div class="src"><span>Source · Repayment tracker</span><span>Refreshed today, 6:00 AM</span></div>
+            <div class="m a">Total due: <b>₹1.25 Cr</b>. Want this as an Excel export?</div>
+          </div>
+        </div>
+        <figcaption><b>Due-soon views</b><span>Tables, charts and Excel export</span></figcaption>
+      </figure>
+
+      <figure class="chat-item">
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Leo</span></div>
+          <div class="win-body">
+            <div class="m u">Find the payment clause in the Project 41 agreement.</div>
+            <div class="m a">Found in the <b>Discounting Agreement, page 7</b>:
+              <div class="quote">“Payment shall be released within 30 days of delivery acceptance.”</div>
+            </div>
+            <div class="src"><span>Source · Contract library</span><span>Matches a funded asset</span></div>
+          </div>
+        </div>
+        <figcaption><b>Contract search</b><span>Cites file, page and the exact passage</span></figcaption>
+      </figure>
+
+    </div>
+    <p class="chats-note reveal">Illustrative conversations with sample data.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <h2>Want to know more about Leo?</h2>
+      <p>Leo is an internal BetterInvest tool. Get in touch and I’ll happily walk you through it.</p>
+      <a href="mailto:aravindkumarr19@gmail.com?subject=Leo%20AI%20chatbot" class="btn">Get in touch</a>
+      <a href="../index.html#works-section" class="btn alt">Back to works</a>
+    </div>
+  </div>
+</section>
 
 <footer>
   <p>© 2026 Aravind Kumar R</p>
-  <a href="../index.html">Portfolio →</a>
+  <a href="../index.html">Home →</a>
 </footer>
 
 <script>
@@ -305,6 +477,11 @@ window.addEventListener('load', () => {
   heroElements.forEach((el, i) => {
     setTimeout(() => el.classList.add('loaded'), 80 + (i * 100));
   });
+
+  setTimeout(() => {
+    const stats = document.querySelector('.hero-stats');
+    if (stats) stats.classList.add('visible');
+  }, 480);
 });
 
 const observerOptions = {
