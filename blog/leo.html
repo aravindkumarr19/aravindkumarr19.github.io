@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leo — AI analyst for structured-credit data · Aravind Kumar R</title>
+  <meta name="description" content="Leo is an in-house AI analyst for structured-credit data. A deterministic query layer produces every number; the LLM only handles wording and explanations."/>
+  <link rel="icon" type="image/png" href="../images/logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:400;}
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-Medium-BF6438cc57ddecd.woff') format('woff');font-weight:500;}
+    @font-face{font-family:'Nohemi';src:url('../Nohemi-SemiBold-BF6438cc57db2ff.woff') format('woff');font-weight:600;}
+
+    :root{
+      --black:#1d1d1f;--ink2:#3a3a3c;--muted:#6e6e73;--border:#d2d2d7;
+      --bg:#ffffff;--surface:#f5f5f7;--accent:#0071e3;--accent2:#0077ed;--leo:#1b16ff;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--black);line-height:1.7;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    img{display:block;max-width:100%;}
+
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:500;height:52px;
+      display:flex;align-items:center;justify-content:space-between;padding:0 40px;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+      border-bottom:1px solid rgba(0,0,0,0.08);
+    }
+    .nav-logo{font-family:'Nohemi',sans-serif;font-weight:500;font-size:16px;letter-spacing:-0.3px;}
+    .nav-back{font-size:13px;font-weight:500;color:var(--muted);transition:color 0.2s;}
+    .nav-back:hover{color:var(--black);}
+
+    .wrap{max-width:1000px;margin:0 auto;padding:0 40px;}
+    .eyebrow{display:block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+    .h2{font-family:'Nohemi',sans-serif;font-weight:400;font-size:clamp(30px,4.2vw,52px);letter-spacing:-1.6px;line-height:1.08;}
+    .lead{font-size:19px;color:var(--muted);line-height:1.7;}
+    .center{text-align:center;}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden;background:var(--surface);padding:150px 0 100px;text-align:center;}
+    .hero::before{
+      content:'';position:absolute;top:-25%;left:50%;transform:translateX(-50%);
+      width:75%;height:100%;
+      background:radial-gradient(ellipse at center,rgba(27,22,255,0.08) 0%,transparent 68%);pointer-events:none;
+    }
+    .hero>.wrap{position:relative;z-index:1;}
+    .hero-logo{height:76px;width:auto;margin:0 auto 38px;}
+    .hero h1{
+      font-family:'Nohemi',sans-serif;font-weight:400;
+      font-size:clamp(36px,5.6vw,68px);letter-spacing:-2.4px;line-height:1.05;
+      max-width:820px;margin:0 auto 22px;
+    }
+    .hero .lead{max-width:660px;margin:0 auto 34px;}
+    .pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .pill{font-size:13px;font-weight:500;color:var(--ink2);background:#fff;border-radius:980px;padding:8px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+
+    /* Statement */
+    .statement{padding:120px 0;text-align:center;}
+    .statement p.big{
+      font-family:'Nohemi',sans-serif;font-weight:400;
+      font-size:clamp(28px,4vw,50px);letter-spacing:-1.4px;line-height:1.15;
+      max-width:820px;margin:0 auto 20px;
+    }
+    .statement .lead{max-width:600px;margin:0 auto;}
+
+    /* Problem */
+    .problem{padding:0 0 110px;}
+    .problem-card{background:var(--surface);border-radius:28px;padding:64px 56px;display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:center;}
+    .problem-card .h2{font-size:clamp(28px,3.4vw,42px);}
+    .problem-card p{font-size:17px;color:var(--muted);line-height:1.8;margin-bottom:14px;}
+    .problem-card p:last-child{margin-bottom:0;}
+    .problem-card p strong{color:var(--black);font-weight:600;}
+
+    /* Flow */
+    .flow-sec{padding:0 0 110px;}
+    .flow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 8px;margin-top:44px;}
+    .node{font-size:13px;font-weight:600;padding:11px 18px;border-radius:14px;background:var(--surface);color:var(--ink2);border:1px solid var(--border);}
+    .node.key{background:var(--leo);color:#fff;border-color:var(--leo);}
+    .node.dim{background:#fff;border-style:dashed;color:var(--muted);}
+    .arrow{color:var(--border);font-size:16px;}
+    .flow-note{text-align:center;font-size:14px;color:var(--muted);margin-top:22px;}
+
+    /* Results */
+    .results{background:var(--surface);padding:110px 0;}
+    .results-head{text-align:center;margin-bottom:56px;}
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;}
+    .stat{background:#fff;border-radius:22px;padding:34px 24px;text-align:center;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s;}
+    .stat:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,0.07);}
+    .stat-num{font-family:'Nohemi',sans-serif;font-weight:500;font-size:44px;letter-spacing:-1.6px;line-height:1;color:var(--leo);margin-bottom:10px;}
+    .stat-lbl{font-size:13px;color:var(--muted);line-height:1.55;}
+
+    /* How it works */
+    .how{padding:110px 0 100px;}
+    .how-head{text-align:center;margin-bottom:60px;}
+    .how-head .lead{max-width:540px;margin:14px auto 0;}
+    .row{display:grid;grid-template-columns:64px 250px 1fr;gap:28px;padding:34px 0;border-top:1px solid var(--border);align-items:start;}
+    .row:last-child{border-bottom:1px solid var(--border);}
+    .row-num{font-family:'Nohemi',sans-serif;font-size:14px;letter-spacing:2px;color:var(--leo);padding-top:5px;}
+    .row h3{font-family:'Nohemi',sans-serif;font-weight:500;font-size:22px;letter-spacing:-0.5px;line-height:1.25;}
+    .row h3 small{display:block;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:4px;}
+    .row p{font-size:15.5px;color:var(--muted);line-height:1.8;}
+    .row p+p{margin-top:10px;}
+    .row p b{color:var(--ink2);font-weight:600;}
+
+    /* Principles */
+    .principles{background:var(--black);color:#f5f5f7;padding:110px 0;position:relative;overflow:hidden;}
+    .principles::before{content:'';position:absolute;top:-30%;right:-10%;width:60vw;height:60vw;background:radial-gradient(ellipse at center,rgba(27,22,255,0.22) 0%,transparent 65%);pointer-events:none;}
+    .principles>.wrap{position:relative;z-index:1;}
+    .principles .eyebrow{color:#6b7bff;}
+    .principles .h2{color:#f5f5f7;margin-bottom:56px;}
+    .p-list{display:flex;flex-direction:column;}
+    .p-item{padding:30px 0;border-top:1px solid rgba(255,255,255,0.12);display:grid;grid-template-columns:64px 1fr;gap:20px;}
+    .p-item:last-child{border-bottom:1px solid rgba(255,255,255,0.12);}
+    .p-item span{font-family:'Nohemi',sans-serif;font-size:14px;letter-spacing:2px;color:#6b7bff;padding-top:8px;}
+    .p-item p{font-family:'Nohemi',sans-serif;font-weight:400;font-size:clamp(22px,3vw,34px);letter-spacing:-0.9px;line-height:1.2;}
+
+    /* Stack */
+    .stack{padding:100px 0 90px;text-align:center;}
+    .stack .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:34px;max-width:760px;margin-left:auto;margin-right:auto;}
+    .tag{font-size:13px;font-weight:500;color:var(--ink2);background:var(--surface);border:1px solid var(--border);border-radius:980px;padding:8px 18px;}
+
+    /* CTA */
+    .cta{padding:0 0 110px;}
+    .cta-card{background:var(--surface);border-radius:28px;padding:64px 40px;text-align:center;}
+    .cta-card h2{font-family:'Nohemi',sans-serif;font-weight:400;font-size:clamp(26px,3.4vw,40px);letter-spacing:-1px;margin-bottom:12px;}
+    .cta-card p{font-size:17px;color:var(--muted);max-width:480px;margin:0 auto 28px;}
+    .btn{display:inline-block;background:var(--accent);color:#fff;padding:13px 26px;border-radius:980px;font-size:15px;font-weight:500;transition:background 0.2s,transform 0.2s;margin:0 5px;}
+    .btn:hover{background:var(--accent2);transform:scale(1.04);}
+    .btn.alt{background:#fff;color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+    .btn.alt:hover{background:#ebebf0;}
+
+    footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;justify-content:space-between;align-items:center;}
+    footer p,footer a{font-size:13px;color:var(--muted);}
+    footer a:hover{color:var(--accent);}
+
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+    .reveal.visible{opacity:1;transform:none;}
+
+    @media(max-width:860px){
+      nav{padding:0 20px;}
+      .wrap{padding:0 20px;}
+      .hero{padding:110px 0 72px;}
+      .hero-logo{height:56px;}
+      .statement{padding:80px 0;}
+      .problem-card{grid-template-columns:1fr;gap:24px;padding:40px 24px;border-radius:22px;}
+      .arrow{display:none;}
+      .results,.how,.principles{padding:72px 0;}
+      .row{grid-template-columns:1fr;gap:10px;padding:26px 0;}
+      .row-num{padding-top:0;}
+      .p-item{grid-template-columns:1fr;gap:6px;}
+      .p-item span{padding-top:0;}
+      .lead{font-size:16px;}
+      .cta-card{padding:48px 24px;border-radius:22px;}
+      .btn{margin:5px;}
+      footer{padding:16px 20px;flex-direction:column;gap:6px;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Aravind Kumar R</a>
+  <a href="../index.html#works-section" class="nav-back">← All works</a>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <img src="../images/leo-logo.png" alt="Leo" class="hero-logo"/>
+    <h1>BetterInvest’s AI chatbot, built in-house.</h1>
+    <p class="lead">An AI analyst for structured-credit data. Ask about assets, collections, repayments and contracts in plain English. Every number comes from a deterministic query, never from the model.</p>
+    <div class="pills">
+      <span class="pill">In-house AI Chatbot</span>
+      <span class="pill">Assets &amp; Repayments</span>
+      <span class="pill">Contract Search</span>
+    </div>
+  </div>
+</header>
+
+<section class="statement">
+  <div class="wrap reveal">
+    <p class="big">The LLM never produces a number.</p>
+    <p class="lead">A deterministic query layer produces every figure. The model only handles unclear wording and explanations, and a grounding check blocks any figure it invents.</p>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="wrap">
+    <div class="problem-card reveal">
+      <div>
+        <span class="eyebrow">The problem</span>
+        <h2 class="h2">One question. Several sheets.</h2>
+      </div>
+      <div>
+        <p>The company’s data lives in Google Sheets spread across teams. Answering a simple question like <strong>“what is pending for this project?”</strong> meant opening several sheets, matching inconsistent names and adding up by hand.</p>
+        <p>That is slow and error-prone. Leo reads those sheets on a schedule and answers from a single database, with the <strong>source and data freshness on every answer</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow-sec">
+  <div class="wrap reveal">
+    <div class="center">
+      <span class="eyebrow">Architecture</span>
+      <h2 class="h2">From sheets to a grounded answer.</h2>
+    </div>
+    <div class="flow">
+      <span class="node">Google Sheets &amp; Drive</span><span class="arrow">→</span>
+      <span class="node">Ingestion</span><span class="arrow">→</span>
+      <span class="node">PostgreSQL</span><span class="arrow">→</span>
+      <span class="node key">Deterministic query layer</span><span class="arrow">→</span>
+      <span class="node dim">LLM · wording only</span><span class="arrow">→</span>
+      <span class="node">Grounding check</span><span class="arrow">→</span>
+      <span class="node">Answer + source + freshness</span>
+    </div>
+    <p class="flow-note">Common questions skip the LLM entirely and are answered straight from the query layer.</p>
+  </div>
+</section>
+
+<section class="results">
+  <div class="wrap">
+    <div class="results-head reveal">
+      <span class="eyebrow">Results so far · pilot stage</span>
+      <h2 class="h2">Accurate, fast and cheap to run.</h2>
+    </div>
+    <div class="stat-grid reveal">
+      <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">live data sources</div></div>
+      <div class="stat"><div class="stat-num">~1,700</div><div class="stat-lbl">assets in one queryable store</div></div>
+      <div class="stat"><div class="stat-num">15/15</div><div class="stat-lbl">validation questions matched ground truth</div></div>
+      <div class="stat"><div class="stat-num">173</div><div class="stat-lbl">data-quality fixes made at source</div></div>
+      <div class="stat"><div class="stat-num">&lt;1s</div><div class="stat-lbl">for most answers</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <div class="how-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h2">Seven layers, built for trust.</h2>
+      <p class="lead">Each layer exists to keep the numbers right.</p>
+    </div>
+    <div class="reveal">
+      <div class="row">
+        <span class="row-num">01</span>
+        <h3>Ingestion<small>ELT pipeline</small></h3>
+        <div>
+          <p>A registry-driven loader pulls sheets through the Google Sheets and Drive APIs with read-only service-account access and writes to PostgreSQL. It checks a header contract before loading and keeps the last good data when a check fails.</p>
+          <p>Loads are idempotent, with row-level change history, overrides, duplicate and test-row flags, and daily refresh with freshness tracking. One source has <b>51 tabs in 8 different header layouts</b>, which the loader maps by column name.</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-num">02</span>
+        <h3>Entity resolution</h3>
+        <p>Clients, projects and assets are matched with aliases and fuzzy matching, plus guardrails so “Project 63” is never silently swapped for “Project 62”.</p>
+      </div>
+      <div class="row">
+        <span class="row-num">03</span>
+        <h3>Query layer<small>Deterministic</small></h3>
+        <div>
+          <p>A deterministic router classifies questions and runs parameterised lookups: totals, profiles, comparisons, group-by, overdue and due-soon views. Common questions never reach the LLM, which keeps most answers under a second and the cost near zero.</p>
+          <p>Parameterised lookups were chosen over free text-to-SQL for <b>safety and accuracy</b>.</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-num">04</span>
+        <h3>LLM layer<small>Tool-calling</small></h3>
+        <p>For free-text questions, a tool-calling LLM picks the lookup and explains the result. It launched on an open model, with a move to Claude Haiku and Sonnet planned. Model tiering, token budgets, caching and reasoning-effort limits keep cost predictable.</p>
+      </div>
+      <div class="row">
+        <span class="row-num">05</span>
+        <h3>Hallucination control</h3>
+        <p>A numeric grounding check compares every figure in the model’s text with the lookup result and replaces any figure it can’t find. <b>The model never produces a number.</b></p>
+      </div>
+      <div class="row">
+        <span class="row-num">06</span>
+        <h3>Retrieval over contracts<small>Full-text search</small></h3>
+        <div>
+          <p>About <b>6,600 contract files</b> are indexed with PostgreSQL full-text search (tsvector with ranked retrieval) and trigram similarity for misspellings. Answers cite the file, the page and a verbatim passage, and say whether a contract matches a funded asset.</p>
+          <p>Next phase: OCR for scans and an LLM generation step with citations (RAG). Embeddings could be added for hybrid retrieval.</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-num">07</span>
+        <h3>Product &amp; security</h3>
+        <div>
+          <p>Conversation scope carries across follow-ups. Charts, Excel export, voice input and pinned client pages all run without any LLM call.</p>
+          <p>Access is admin-approved with role gating for sensitive modules, a per-user daily cap, and an audit log that stores no data. A status page shows the freshness and health of every source.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="principles">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">What I learned</span>
+      <h2 class="h2">Three rules I’d build by again.</h2>
+    </div>
+    <div class="p-list reveal">
+      <div class="p-item"><span>01</span><p>Keep the LLM out of the numbers.</p></div>
+      <div class="p-item"><span>02</span><p>Put data contracts at every boundary.</p></div>
+      <div class="p-item"><span>03</span><p>Make refresh failures visible and safe.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stack">
+  <div class="wrap reveal">
+    <span class="eyebrow">Stack</span>
+    <h2 class="h2">What it’s built with.</h2>
+    <div class="tags">
+      <span class="tag">Next.js</span>
+      <span class="tag">React</span>
+      <span class="tag">PostgreSQL · Supabase</span>
+      <span class="tag">Google Sheets &amp; Drive APIs</span>
+      <span class="tag">Tool-calling LLMs</span>
+      <span class="tag">Groq</span>
+      <span class="tag">Claude Haiku &amp; Sonnet (planned)</span>
+      <span class="tag">Tavily search</span>
+      <span class="tag">Vercel (planned)</span>
+      <span class="tag">Built with Claude Code</span>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <h2>Want to know more about Leo?</h2>
+      <p>Leo is an internal BetterInvest tool. Get in touch and I’ll happily walk you through it.</p>
+      <a href="mailto:aravindkumarr19@gmail.com?subject=Leo%20AI%20chatbot" class="btn">Get in touch</a>
+      <a href="../index.html#works-section" class="btn alt">Back to works</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Aravind Kumar R</p>
+  <a href="../index.html">Home →</a>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
