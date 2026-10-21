@@ -218,94 +218,47 @@
     .exp-pts li{font-size:15px;color:var(--ink2);padding-left:16px;position:relative;line-height:1.72;}
     .exp-pts li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0.5;}
 
-    #works-section{
-      background:var(--black);
-      padding:80px 0;
+    #works-section{background:var(--bg);padding:110px 0 100px;}
+    .works-wrap{max-width:1100px;margin:0 auto;padding:0 48px;}
+    .works-header{text-align:center;margin:0 auto 56px;max-width:680px;}
+    .works-header .sec-title{font-size:clamp(34px,4.6vw,56px);letter-spacing:-1.8px;line-height:1.06;}
+    .works-header .sec-sub{margin:0 auto;font-size:19px;max-width:520px;}
+
+    .work-tile{
       position:relative;overflow:hidden;
+      background:var(--surface);border-radius:28px;
+      padding:84px 48px 76px;text-align:center;
+      display:block;
+      transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),box-shadow 0.5s;
     }
-    #works-section::before{
-      content:'';position:absolute;top:-20%;right:-10%;
-      width:60vw;height:60vw;
-      background:radial-gradient(ellipse at center,rgba(0,113,227,0.12) 0%,transparent 65%);
+    .work-tile:hover{transform:scale(1.012);box-shadow:0 24px 64px rgba(0,0,0,0.08);}
+    .work-tile::before{
+      content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);
+      width:70%;height:90%;
+      background:radial-gradient(ellipse at center,rgba(27,22,255,0.07) 0%,transparent 68%);
       pointer-events:none;
     }
-    #works-section::after{
-      content:'';position:absolute;bottom:-20%;left:-10%;
-      width:45vw;height:45vw;
-      background:radial-gradient(ellipse at center,rgba(0,113,227,0.08) 0%,transparent 70%);
-      pointer-events:none;
+    .work-tile>*{position:relative;z-index:1;}
+    .work-status{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;font-weight:600;letter-spacing:0.4px;
+      color:var(--accent);margin-bottom:34px;
     }
-    .works-wrap{max-width:1100px;margin:0 auto;padding:0 48px;position:relative;z-index:1;}
-    .works-header{margin-bottom:48px;}
-    .works-header .eyebrow{color:rgba(0,113,227,0.9);}
-    .works-header .sec-title{color:#f5f5f7;}
-    .works-header .sec-sub{color:rgba(255,255,255,0.45);}
-
-    .works-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
+    .work-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .work-logo{height:68px;width:auto;margin:0 auto 30px;}
+    .work-headline{
+      font-family:'Nohemi',sans-serif;font-weight:400;
+      font-size:clamp(30px,4vw,48px);letter-spacing:-1.4px;line-height:1.1;
+      color:var(--black);max-width:720px;margin:0 auto 18px;
     }
-    .work-card{
-      border-radius:18px;overflow:hidden;
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.08);
-      transition:all 0.38s cubic-bezier(0.16,1,0.3,1);
-      text-decoration:none;color:inherit;
-      display:flex;flex-direction:column;
-      position:relative;
+    .work-sub{font-size:19px;color:var(--muted);line-height:1.65;max-width:600px;margin:0 auto 34px;}
+    .work-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .work-pill{
+      font-size:13px;font-weight:500;color:var(--ink2);
+      background:#fff;border-radius:980px;padding:8px 18px;
+      box-shadow:0 1px 3px rgba(0,0,0,0.06);
     }
-    .work-card:hover{
-      background:rgba(255,255,255,0.07);
-      border-color:rgba(0,113,227,0.45);
-      transform:translateY(-6px);
-      box-shadow:0 24px 56px rgba(0,0,0,0.4);
-    }
-    .work-card.wide{grid-column:span 2;}
-
-    .work-visual{
-      height:140px;
-      position:relative;
-      overflow:hidden;
-      display:flex;align-items:center;justify-content:center;
-      flex-shrink:0;
-    }
-    .work-visual.pipeline{background:linear-gradient(135deg,#0a1628 0%,#0e2142 50%,#0a1628 100%);}
-    .work-visual.tds{background:linear-gradient(135deg,#0d1a0d 0%,#0f2d1a 50%,#071510 100%);}
-    .work-visual.aligner{background:linear-gradient(135deg,#1a0d0d 0%,#2d1414 50%,#150707 100%);}
-    .work-visual.assetcard{background:linear-gradient(135deg,#1a1a0d 0%,#2d2a10 50%,#15140a 100%);}
-    .work-visual.erp{background:linear-gradient(135deg,#0d0d1a 0%,#14152e 50%,#070710 100%);}
-    .work-visual.termsheet{background:linear-gradient(135deg,#0d1a1a 0%,#0f2a2a 50%,#071515 100%);}
-    .work-visual.investor{background:linear-gradient(135deg,#1a0d1a 0%,#2a1030 50%,#12071a 100%);}
-
-    .work-visual svg{width:100%;height:100%;position:absolute;inset:0;opacity:0.5;}
-    .work-visual-label{
-      position:absolute;bottom:12px;left:16px;
-      font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-      color:rgba(255,255,255,0.5);
-      background:rgba(0,0,0,0.3);backdrop-filter:blur(8px);
-      padding:3px 10px;border-radius:980px;
-      border:1px solid rgba(255,255,255,0.1);
-    }
-
-    .work-body{padding:22px 22px 24px;flex:1;display:flex;flex-direction:column;}
-    .work-tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
-    .work-tag{font-size:10px;font-weight:700;padding:2px 9px;border-radius:980px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.1);}
-    .work-title{font-family:'Nohemi',sans-serif;font-weight:500;font-size:15px;color:#f5f5f7;margin-bottom:8px;line-height:1.3;}
-    .work-desc{font-size:13px;color:rgba(255,255,255,0.48);line-height:1.7;margin-bottom:14px;flex:1;}
-    .work-impact{
-      font-size:11.5px;font-weight:700;
-      color:var(--accent);letter-spacing:0.2px;
-      display:inline-flex;align-items:center;gap:5px;
-      margin-bottom:12px;
-    }
-    .work-impact::before{content:'↓';font-size:10px;}
-    .work-cta{
-      display:inline-flex;align-items:center;gap:5px;
-      font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);
-      transition:color 0.2s,gap 0.2s;margin-top:auto;
-    }
-    .work-card:hover .work-cta{color:var(--accent);gap:9px;}
 
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;position:relative;z-index:1;}
     .about-body p{font-size:16px;color:var(--ink2);margin-bottom:14px;line-height:1.85;}
@@ -407,10 +360,11 @@
       .wid-col:last-child{border-bottom:none;padding-bottom:0;}
       .section-card{padding:32px 24px;}
       .about-grid,.contact-grid{grid-template-columns:1fr;gap:32px;}
-      #works-section{padding:56px 0;}
+      #works-section{padding:64px 0;}
       .works-wrap{padding:0 20px;}
-      .works-grid{grid-template-columns:1fr;}
-      .work-card.wide{grid-column:span 1;}
+      .work-tile{padding:56px 24px 52px;border-radius:22px;}
+      .work-logo{height:52px;}
+      .work-sub,.works-header .sec-sub{font-size:16px;}
       .proj-grid,.idols-grid{grid-template-columns:1fr;}
       footer{padding:16px 20px;flex-direction:column;gap:6px;text-align:center;}
     }
@@ -629,178 +583,21 @@
   <div class="works-wrap">
     <div class="works-header reveal">
       <span class="eyebrow">My Works</span>
-      <h2 class="sec-title">Finance Systems and Deal Infrastructure</h2>
-      <p class="sec-sub">Systems built to support deal execution, compliance, and financial operations at scale. Each one eliminated a genuine operational pain point.</p>
+      <h2 class="sec-title">Built for BetterInvest.</h2>
+      <p class="sec-sub">Systems I design and ship for deal execution and financial operations.</p>
     </div>
-    <div class="works-grid reveal-stagger">
-
-      <a href="blog/pipeline.html" class="work-card wide">
-        <div class="work-visual pipeline">
-          <svg viewBox="0 0 600 140" preserveAspectRatio="none">
-            <rect x="20" y="50" width="80" height="40" rx="8" fill="rgba(0,113,227,0.15)" stroke="rgba(0,113,227,0.3)" stroke-width="1"/>
-            <rect x="140" y="30" width="80" height="80" rx="8" fill="rgba(0,113,227,0.1)" stroke="rgba(0,113,227,0.2)" stroke-width="1"/>
-            <rect x="260" y="20" width="80" height="100" rx="8" fill="rgba(0,113,227,0.2)" stroke="rgba(0,113,227,0.35)" stroke-width="1"/>
-            <rect x="380" y="40" width="80" height="60" rx="8" fill="rgba(0,113,227,0.12)" stroke="rgba(0,113,227,0.25)" stroke-width="1"/>
-            <rect x="490" y="10" width="80" height="120" rx="8" fill="rgba(0,113,227,0.3)" stroke="rgba(0,113,227,0.5)" stroke-width="1.5"/>
-            <line x1="100" y1="70" x2="140" y2="70" stroke="rgba(0,113,227,0.4)" stroke-width="1" stroke-dasharray="4 3"/>
-            <line x1="220" y1="70" x2="260" y2="70" stroke="rgba(0,113,227,0.4)" stroke-width="1" stroke-dasharray="4 3"/>
-            <line x1="340" y1="70" x2="380" y2="70" stroke="rgba(0,113,227,0.4)" stroke-width="1" stroke-dasharray="4 3"/>
-            <line x1="460" y1="70" x2="490" y2="70" stroke="rgba(0,113,227,0.4)" stroke-width="1" stroke-dasharray="4 3"/>
-          </svg>
-          <span class="work-visual-label">Python · Google Drive API</span>
+    <div class="reveal">
+      <div class="work-tile">
+        <span class="work-status">Now building</span>
+        <img src="images/leo-logo.png" alt="Leo" class="work-logo"/>
+        <h3 class="work-headline">One AI assistant across all of BetterInvest’s financial data.</h3>
+        <p class="work-sub">Leo is an AI chatbot being built for BetterInvest, connected to the company’s entire financial data and its LMS.</p>
+        <div class="work-pills">
+          <span class="work-pill">AI Chatbot</span>
+          <span class="work-pill">Financial Data</span>
+          <span class="work-pill">LMS</span>
         </div>
-        <div class="work-body">
-          <div class="work-tag-row"><span class="work-tag">Legal Docs</span><span class="work-tag">PDF Automation</span><span class="work-tag">Python</span></div>
-          <div class="work-title">Legal Case Documentation Pipeline</div>
-          <div class="work-desc">Two-phase Python automation (prepare.py + merge.py) that downloads discounting agreements from Bubble.io CDN, extracts investor names via text parsing, organises Drive folders per investor, and assembles complete legal PDF packages ready for submission.</div>
-          <div class="work-impact">2–3 days of manual work per asset → minutes</div>
-          <span class="work-cta">Read full breakdown →</span>
-        </div>
-      </a>
-
-      <a href="blog/tds-reconciler.html" class="work-card">
-        <div class="work-visual tds">
-          <svg viewBox="0 0 300 140" preserveAspectRatio="none">
-            <circle cx="80" cy="70" r="40" fill="none" stroke="rgba(52,199,89,0.2)" stroke-width="1.5"/>
-            <circle cx="80" cy="70" r="25" fill="rgba(52,199,89,0.08)" stroke="rgba(52,199,89,0.3)" stroke-width="1"/>
-            <circle cx="220" cy="70" r="40" fill="none" stroke="rgba(52,199,89,0.2)" stroke-width="1.5"/>
-            <circle cx="220" cy="70" r="25" fill="rgba(52,199,89,0.08)" stroke="rgba(52,199,89,0.3)" stroke-width="1"/>
-            <line x1="105" y1="70" x2="195" y2="70" stroke="rgba(52,199,89,0.35)" stroke-width="1.5"/>
-            <text x="150" y="68" text-anchor="middle" fill="rgba(52,199,89,0.5)" font-size="8" font-family="monospace">match</text>
-          </svg>
-          <span class="work-visual-label">Python · Excel</span>
-        </div>
-        <div class="work-body">
-          <div class="work-tag-row"><span class="work-tag">TDS</span><span class="work-tag">Compliance</span><span class="work-tag">Python</span></div>
-          <div class="work-title">TDS Reconciliation System</div>
-          <div class="work-desc">Bulk-extracts PAN numbers and TDS values from 2,000+ Form 16A PDFs and cross-matches against internal TDS master records, generating a clean reconciliation summary.</div>
-          <div class="work-impact">~90–95% reduction in reconciliation time</div>
-          <span class="work-cta">Read full breakdown →</span>
-        </div>
-      </a>
-
-      <a href="blog/agreement-aligner.html" class="work-card">
-        <div class="work-visual aligner">
-          <svg viewBox="0 0 300 140" preserveAspectRatio="none">
-            <rect x="60" y="20" width="80" height="100" rx="6" fill="rgba(255,59,48,0.06)" stroke="rgba(255,59,48,0.2)" stroke-width="1"/>
-            <line x1="70" y1="40" x2="130" y2="40" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <line x1="70" y1="55" x2="120" y2="55" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-            <line x1="70" y1="70" x2="110" y2="70" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-            <rect x="80" y="90" width="40" height="18" rx="3" fill="rgba(255,59,48,0.15)" stroke="rgba(255,59,48,0.35)" stroke-width="1"/>
-            <rect x="170" y="20" width="80" height="100" rx="6" fill="rgba(52,199,89,0.06)" stroke="rgba(52,199,89,0.2)" stroke-width="1"/>
-            <line x1="180" y1="40" x2="240" y2="40" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <line x1="180" y1="55" x2="230" y2="55" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-            <line x1="180" y1="70" x2="220" y2="70" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-            <rect x="190" y="90" width="40" height="18" rx="3" fill="rgba(52,199,89,0.15)" stroke="rgba(52,199,89,0.35)" stroke-width="1"/>
-          </svg>
-          <span class="work-visual-label">Python · Coordinates</span>
-        </div>
-        <div class="work-body">
-          <div class="work-tag-row"><span class="work-tag">Agreement Ops</span><span class="work-tag">Python</span></div>
-          <div class="work-title">Agreement Verification System</div>
-          <div class="work-desc">Coordinate-based Python tool that verifies signing page placement across Discounting Agreements, Guarantee Agreements, Indemnity Bonds, and Term Sheets before execution.</div>
-          <div class="work-impact">Eliminated manual rechecks pre-execution</div>
-          <span class="work-cta">Read full breakdown →</span>
-        </div>
-      </a>
-
-      <a href="blog/asset-card.html" class="work-card">
-        <div class="work-visual assetcard">
-          <svg viewBox="0 0 300 140" preserveAspectRatio="none">
-            <rect x="30" y="30" width="100" height="80" rx="8" fill="rgba(255,214,10,0.06)" stroke="rgba(255,214,10,0.2)" stroke-width="1"/>
-            <line x1="40" y1="50" x2="120" y2="50" stroke="rgba(255,214,10,0.15)" stroke-width="1"/>
-            <line x1="40" y1="65" x2="110" y2="65" stroke="rgba(255,214,10,0.1)" stroke-width="1"/>
-            <line x1="40" y1="80" x2="100" y2="80" stroke="rgba(255,214,10,0.1)" stroke-width="1"/>
-            <path d="M150 70 L175 70" stroke="rgba(255,214,10,0.4)" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arr)"/>
-            <rect x="180" y="30" width="100" height="80" rx="8" fill="rgba(255,214,10,0.1)" stroke="rgba(255,214,10,0.3)" stroke-width="1"/>
-            <line x1="190" y1="50" x2="270" y2="50" stroke="rgba(255,214,10,0.2)" stroke-width="1.5"/>
-            <line x1="190" y1="65" x2="260" y2="65" stroke="rgba(255,214,10,0.15)" stroke-width="1"/>
-            <line x1="190" y1="80" x2="250" y2="80" stroke="rgba(255,214,10,0.15)" stroke-width="1"/>
-          </svg>
-          <span class="work-visual-label">Google Apps Script</span>
-        </div>
-        <div class="work-body">
-          <div class="work-tag-row"><span class="work-tag">Data Entry</span><span class="work-tag">Apps Script</span></div>
-          <div class="work-title">Asset Card Master Automation</div>
-          <div class="work-desc">Apps Script pushing verified Fin Model data into the Asset Card Master with duplicate detection, sequential numbering, and bold-tag logic for manual-field highlighting.</div>
-          <div class="work-impact">Eliminated duplicate data entry across deal cards</div>
-          <span class="work-cta">Read full breakdown →</span>
-        </div>
-      </a>
-
-      <a href="blog/erp.html" class="work-card wide">
-        <div class="work-visual erp">
-          <svg viewBox="0 0 600 140" preserveAspectRatio="none">
-            <rect x="20" y="25" width="120" height="90" rx="8" fill="rgba(94,92,230,0.08)" stroke="rgba(94,92,230,0.2)" stroke-width="1"/>
-            <text x="80" y="75" text-anchor="middle" fill="rgba(94,92,230,0.4)" font-size="9" font-family="sans-serif">Google Sheets</text>
-            <path d="M155 70 C185 70 215 70 245 70" stroke="rgba(94,92,230,0.4)" stroke-width="1.5" stroke-dasharray="5 3" fill="none"/>
-            <rect x="245" y="10" width="130" height="120" rx="10" fill="rgba(94,92,230,0.14)" stroke="rgba(94,92,230,0.35)" stroke-width="1.5"/>
-            <text x="310" y="65" text-anchor="middle" fill="rgba(94,92,230,0.65)" font-size="10" font-family="sans-serif">ERPNext</text>
-            <text x="310" y="82" text-anchor="middle" fill="rgba(94,92,230,0.35)" font-size="8" font-family="sans-serif">Central Database</text>
-            <path d="M390 70 C420 70 450 70 470 70" stroke="rgba(94,92,230,0.4)" stroke-width="1.5" stroke-dasharray="5 3" fill="none"/>
-            <rect x="470" y="35" width="100" height="70" rx="8" fill="rgba(94,92,230,0.06)" stroke="rgba(94,92,230,0.18)" stroke-width="1"/>
-            <text x="520" y="75" text-anchor="middle" fill="rgba(94,92,230,0.35)" font-size="8" font-family="sans-serif">Structured Data</text>
-          </svg>
-          <span class="work-visual-label">ERPNext · System Design</span>
-        </div>
-        <div class="work-body">
-          <div class="work-tag-row"><span class="work-tag">Infrastructure</span><span class="work-tag">ERPNext</span><span class="work-tag">System Design</span></div>
-          <div class="work-title">ERPNext Implementation</div>
-          <div class="work-desc">Designed and implemented ERPNext running in parallel with Google Sheets. Sheets remains the working interface while ERPNext serves as the central structured database, replacing scattered sheets and email threads. Ensures data continuity when employee accounts change.</div>
-          <div class="work-impact">Scattered sheets &amp; email threads → structured institutional data</div>
-          <span class="work-cta">Read full breakdown →</span>
-        </div>
-      </a>
-
-      <a href="blog/term-sheet.html" class="work-card">
-        <div class="work-visual termsheet">
-          <svg viewBox="0 0 300 140" preserveAspectRatio="none">
-            <rect x="30" y="15" width="100" height="110" rx="8" fill="rgba(0,210,190,0.06)" stroke="rgba(0,210,190,0.18)" stroke-width="1"/>
-            <line x1="45" y1="35" x2="120" y2="35" stroke="rgba(0,210,190,0.2)" stroke-width="1"/>
-            <line x1="45" y1="50" x2="115" y2="50" stroke="rgba(0,210,190,0.12)" stroke-width="1"/>
-            <line x1="45" y1="65" x2="105" y2="65" stroke="rgba(0,210,190,0.12)" stroke-width="1"/>
-            <line x1="45" y1="80" x2="110" y2="80" stroke="rgba(0,210,190,0.12)" stroke-width="1"/>
-            <rect x="42" y="95" width="56" height="18" rx="4" fill="rgba(0,210,190,0.15)" stroke="rgba(0,210,190,0.3)" stroke-width="1"/>
-            <path d="M145 70 L175 55 M145 70 L175 85" stroke="rgba(0,210,190,0.3)" stroke-width="1" stroke-dasharray="3 2"/>
-            <rect x="178" y="20" width="90" height="40" rx="6" fill="rgba(0,210,190,0.08)" stroke="rgba(0,210,190,0.2)" stroke-width="1"/>
-            <rect x="178" y="80" width="90" height="40" rx="6" fill="rgba(0,210,190,0.08)" stroke="rgba(0,210,190,0.2)" stroke-width="1"/>
-          </svg>
-          <span class="work-visual-label">Google Apps Script</span>
-        </div>
-        <div class="work-body">
-          <div class="work-tag-row"><span class="work-tag">Term Sheets</span><span class="work-tag">Apps Script</span></div>
-          <div class="work-title">Term Sheet Generation System</div>
-          <div class="work-desc">Automation that generates multiple internal provisional term sheets in one go from a structured Google Sheet, auto-routes documents to a master Drive folder, and returns direct links.</div>
-          <div class="work-impact">Manual drafting eliminated for repeat-format documents</div>
-          <span class="work-cta">Read full breakdown →</span>
-        </div>
-      </a>
-
-      <a href="blog/investor-verifier.html" class="work-card">
-        <div class="work-visual investor">
-          <svg viewBox="0 0 300 140" preserveAspectRatio="none">
-            <rect x="20" y="20" width="110" height="100" rx="8" fill="rgba(191,90,242,0.06)" stroke="rgba(191,90,242,0.18)" stroke-width="1"/>
-            <line x1="30" y1="40" x2="120" y2="40" stroke="rgba(191,90,242,0.15)" stroke-width="1"/>
-            <line x1="30" y1="58" x2="115" y2="58" stroke="rgba(191,90,242,0.1)" stroke-width="1"/>
-            <line x1="30" y1="76" x2="110" y2="76" stroke="rgba(191,90,242,0.1)" stroke-width="1"/>
-            <line x1="30" y1="94" x2="118" y2="94" stroke="rgba(191,90,242,0.1)" stroke-width="1"/>
-            <path d="M148 70 L175 70" stroke="rgba(191,90,242,0.3)" stroke-width="1.5"/>
-            <circle cx="210" cy="70" r="35" fill="rgba(191,90,242,0.08)" stroke="rgba(191,90,242,0.25)" stroke-width="1"/>
-            <text x="210" y="73" text-anchor="middle" fill="rgba(191,90,242,0.45)" font-size="8" font-family="sans-serif">Verify</text>
-            <path d="M220 50 L240 38" stroke="rgba(52,199,89,0.4)" stroke-width="1.5"/>
-            <text x="250" y="38" fill="rgba(52,199,89,0.6)" font-size="9" font-family="sans-serif">✓</text>
-          </svg>
-          <span class="work-visual-label">Google Apps Script</span>
-        </div>
-        <div class="work-body">
-          <div class="work-tag-row"><span class="work-tag">Compliance</span><span class="work-tag">Verification</span></div>
-          <div class="work-title">TDS Investor List Verifier</div>
-          <div class="work-desc">Validates shared investor lists against the Deal Closure Tracker, cross-checking investor names, PAN details, and asset mappings before filing or reconciliation begins.</div>
-          <div class="work-impact">Verification layer before every compliance filing</div>
-          <span class="work-cta">Read full breakdown →</span>
-        </div>
-      </a>
-
+      </div>
     </div>
   </div>
 </section>
