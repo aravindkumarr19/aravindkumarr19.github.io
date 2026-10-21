@@ -239,20 +239,13 @@
       pointer-events:none;
     }
     .work-tile>*{position:relative;z-index:1;}
-    .work-status{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:12px;font-weight:600;letter-spacing:0.4px;
-      color:var(--accent);margin-bottom:34px;
-    }
-    .work-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite;}
-    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
-    .work-logo{height:68px;width:auto;margin:0 auto 30px;}
+    .work-logo{height:68px;width:auto;margin:0 auto 34px;}
     .work-headline{
       font-family:'Nohemi',sans-serif;font-weight:400;
       font-size:clamp(30px,4vw,48px);letter-spacing:-1.4px;line-height:1.1;
       color:var(--black);max-width:720px;margin:0 auto 18px;
     }
-    .work-sub{font-size:19px;color:var(--muted);line-height:1.65;max-width:600px;margin:0 auto 34px;}
+    .work-sub{font-size:19px;color:var(--muted);line-height:1.65;max-width:640px;margin:0 auto 34px;}
     .work-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
     .work-pill{
       font-size:13px;font-weight:500;color:var(--ink2);
@@ -588,12 +581,11 @@
     </div>
     <div class="reveal">
       <div class="work-tile">
-        <span class="work-status">Now building</span>
         <img src="images/leo-logo.png" alt="Leo" class="work-logo"/>
-        <h3 class="work-headline">One AI assistant across all of BetterInvest’s financial data.</h3>
-        <p class="work-sub">Leo is an AI chatbot being built for BetterInvest, connected to the company’s entire financial data and its LMS.</p>
+        <h3 class="work-headline">Meet Leo.</h3>
+        <p class="work-sub">BetterInvest’s internal AI chatbot. Leo sits on top of the company’s complete financial data and LMS, so a question that once meant opening five sheets and cross-checking trackers becomes a single sentence. Ask in plain English, get a straight answer, and spend the saved hours on the deals that need you.</p>
         <div class="work-pills">
-          <span class="work-pill">AI Chatbot</span>
+          <span class="work-pill">Internal AI Chatbot</span>
           <span class="work-pill">Financial Data</span>
           <span class="work-pill">LMS</span>
         </div>
